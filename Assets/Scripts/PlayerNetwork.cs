@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 
 public class PlayerNetwork : NetworkBehaviour
 {
+    [SerializeField] private Transform spawnedObjectPrefab;
+    private Transform spawnedObjectTransform;
+    
     // Must be used in conjunction with the NetworkBehaviour Parent
     // NetwrokVariable may only contain value types or custom types
     // NetworkVariable must be initialised on definition or as soon as the object is created
@@ -46,9 +49,20 @@ public class PlayerNetwork : NetworkBehaviour
         // Used for testing purposes of the NetworkVariable
         if (Input.GetKeyDown(KeyCode.T))
         {
-            TestClientRpc(new ClientRpcParams{Send = new ClientRpcSendParams{TargetClientIds = new List<ulong>(1)}});
+            spawnedObjectTransform = Instantiate(spawnedObjectPrefab);
+            spawnedObjectTransform.GetComponent<NetworkObject>().Spawn(true);
+            // Transform spawnObjectTransform = Instantiate(spawnedObjectPrefab);
+            //spawnObjectTransform.GetComponent<NetworkObject>().Spawn(true);
+            
+            // TestClientRpc(new ClientRpcParams{Send = new ClientRpcSendParams{TargetClientIds = new List<ulong>(1)}});
             // TestServerRpc();
             // randomNumber.Value = new MyCustomData{_int = 10, _bool = false, message = "Testing strings"};
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            // spawnedObjectTransform.GetComponent<NetworkObject>().Despawn(true);
+            Destroy(spawnedObjectTransform.gameObject);
         }
         
         // Simple movement code to test networking
