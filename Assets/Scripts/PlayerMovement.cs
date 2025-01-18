@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,17 +10,22 @@ public class PlayerMovement : MonoBehaviour
     Camera mainCamera;
     Animator animator;
     [SerializeField] [Tooltip("If this player is the Tamer, check this box.")]bool isTamer;
-    [SerializeField] [Tooltip("The base speed of this player's movement. Default: 8")] public float movementSpeed = 8;
+    [SerializeField] [Tooltip("The base speed of this player's movement. \nDefault: 8")] public float movementSpeed = 8;
     Vector3 targetDirection;
-    [SerializeField] [Tooltip("How fast the player will rotate towards their target direction. Default: 450")] public float rotationSpeed = 450;
-    [SerializeField] [Tooltip("**Value only required for non-Tamer Player** Sets the sensitivity requirement before the player rotates player rotation. Default: 0.1")] float gamepadSensitivity = 0.1f;
+
+    [SerializeField] [Tooltip("Check this box to rotate this player towards the mouse position, instead of the walking direction")] bool rotateToMouse;
+    [SerializeField] [Tooltip("How fast the player will rotate towards their target direction. \nDefault: 750 for walking direction, 2000 for mouse position")] public float rotationSpeed = 750;
+    [SerializeField] [Tooltip("**Value only required for non-Tamer Player** Sets the sensitivity requirement before the player rotates player rotation. \nDefault: 0.1")] float gamepadSensitivity = 0.1f;
+    
     [Header("Dash")] 
-    public bool isDashing; //check if the player is dashing, grant damage reduction or something maybe.
-    [SerializeField] [Tooltip("The base speed of this player's dash. Default: 30")] public float dashSpeed = 30;
-    [SerializeField] [Tooltip("How long the dash lasts. Default: 0.15")] public float dashDuration = 0.15f;
-    [SerializeField] [Tooltip("How long the player must wait before they can dash again. Default: 4")] public float dashCooldown = 4;
+    [HideInInspector] public bool isDashing; //check if the player is dashing, grant damage reduction or something maybe.
+    [SerializeField] [Tooltip("The base speed of this player's dash. \nDefault: 20")] public float dashSpeed = 20;
+    [SerializeField] [Tooltip("How long the dash lasts. \nDefault: 0.15")] public float dashDuration = 0.15f;
+    [SerializeField] [Tooltip("How long the player must wait before they can dash again. \nDefault: 4")] public float dashCooldown = 4;
+    [SerializeField] [Tooltip("How many charges can this player perform. \nDefault: 1")] public int maxDashes = 1;
+    [HideInInspector] public int availableDashes;
     float currentDashDuration;
-    float lastDashTime;
+    float currentDashCooldown;
     
     void Awake()
     {
@@ -27,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
         isDashing = false;
         animator = GetComponent<Animator>();
+        availableDashes = maxDashes;
     }
 
     void Update()
@@ -53,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //is invoked by Player Input.
+    //is invoked by Player Input to move the player.
     public void OnMove(InputAction.CallbackContext context)
     {
         //get the players input values
@@ -61,60 +68,84 @@ public class PlayerMovement : MonoBehaviour
         move = new Vector3(movement.x, 0, movement.y);
     }
 
-    //is invoked by Player Input to move the player.
+    //is invoked by Player Input to rotate the player with the right stick on gamepad.
     public void OnLook(InputAction.CallbackContext context)
     {
-        if(isTamer) return;
-        
+        if(isTamer || move != Vector3.zero) return;
+        print("look here");
         //get the players input values
         Vector2 direction = context.ReadValue<Vector2>();
         targetDirection = new Vector3(direction.x, 0, direction.y);
-        
         // sensitivity check for gamepad if needed
-        if (targetDirection.magnitude > gamepadSensitivity)
-            targetDirection.Normalize();
+        
     }
     
     
     void RotatePlayer()
     {
-        // rotate player depending on if they are "tamer" or not
-        if (isTamer)
+        // initialize the rotation only when input from movement.
+        if (move != Vector3.zero)
         {
-            RotateKBM();
+            Rotate(move);
         }
-        // if the player is not "tamer", the OnLook function will be invoked by Player Input
-        
-        //initialize the rotation only when input.
-        if (targetDirection == Vector3.zero) return;
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+        // when the player is not moving, the player rotates towards the mouse position.
+        else if (rotateToMouse && isTamer)
+        { 
+            RotateTowardsMousePosition();
+        }
+        else if (!isTamer)
+        {
+            if (targetDirection.magnitude > gamepadSensitivity)
+                Rotate(targetDirection);
+        }
+    }
+
+    void Rotate(Vector3 direction)
+    {
+        if(direction == Vector3.zero) return;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
-    void RotateKBM()
+
+    void RotateTowardsMousePosition()
     {
+        // cast ray from mouse position.
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
         {
+            // subtract the position of the player from the raycast of the mouse.
             targetDirection = hit.point - transform.position;
             targetDirection.y = 0;
         }
+        Rotate(targetDirection);
     }
 
-    // is invoked by Player Input to make the player dash on input
+    // is invoked by Player Input to make the player dash on input.
     public void OnDash(InputAction.CallbackContext context)
     {
-        //check if the cooldown is ready
-        if (Time.time - lastDashTime >= dashCooldown)
+        //check if there are dashes left in the charge.
+        if (availableDashes > 0 && !isDashing)
         {
             BeginDash();
         }
     }
-
     
     void Dash()
     {
+        //checking and resetting dash cooldown.
+        if (availableDashes < maxDashes)
+        {
+            currentDashCooldown += Time.deltaTime;
+            if (currentDashCooldown >= dashCooldown)
+            {
+                availableDashes++;
+                currentDashCooldown = 0f;
+            }
+        }
+        
+        //performs the dash.
         if (!isDashing) return;
         currentDashDuration -= Time.deltaTime;
         if (currentDashDuration <= 0f)
@@ -123,16 +154,21 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            characterController.Move(transform.forward * (dashSpeed * Time.deltaTime));
+            //makes the player dash in the direction they are moving
+            //if no movement, dash in the direction they are facing.
+            if(move != Vector3.zero)
+                characterController.Move(move * (dashSpeed * Time.deltaTime));
+            else
+                characterController.Move(transform.forward * (dashSpeed * Time.deltaTime));
+                
         }
-
     }
     
     void BeginDash()
     {
         isDashing = true;
         currentDashDuration = dashDuration;
-        lastDashTime = Time.time;
+        availableDashes--;
     }
 
     void EndDash()
