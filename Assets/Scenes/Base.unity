@@ -3054,7 +3054,9 @@ MonoBehaviour:
   - {fileID: 619062433}
   maxDistance: 12
   damageTickAmount: 5
-  damageTickRate: 0.4
+  tickRateInterval: 2
+  minTickRateInterval: 0.5
+  tickRateIntervalIncrease: 0.1
 --- !u!114 &1835654408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3067,7 +3069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d2536c5a1985c4d8d1d4abaa0a4be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 120
+  maxHealth: 5000
   currentHealth: 0
   healthBar: {fileID: 301104219}
   currentHealthText: {fileID: 2081539082}

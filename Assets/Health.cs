@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
         currentHealthText.text = $"{currentHealth} / {maxHealth}";
         healthBar.fillAmount = currentHealth / maxHealth;
     }
-    
+
     public void Heal(float amount)
     {
         currentHealth += amount;
@@ -42,12 +42,15 @@ public class Health : MonoBehaviour
     {
         if (isInvulnerable) return;
         currentHealth -= amount;
-        currentHealthText.text = $"{currentHealth} / {maxHealth}";
+        if (currentHealth <= 0)
+        {
+            //code to be executed upon death
+            currentHealth = 0;
+            isInvulnerable = true;
+        }
+        //update health bar and text.
         StartCoroutine(UpdateHealthBar());
-        if (!(currentHealth <= 0)) return;
-        //code to be executed upon death
-        currentHealth = 0;
-        isInvulnerable = true;
+        currentHealthText.text = $"{currentHealth} / {maxHealth}";
     }
     
     IEnumerator UpdateHealthBar()
