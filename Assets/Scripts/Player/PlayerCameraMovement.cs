@@ -7,7 +7,7 @@ public class PlayerCameraMovement : MonoBehaviour
     [SerializeField] [Tooltip("Invert the movement on the y-axis")] bool invertY;
     [SerializeField] [Tooltip("The camera's offset on the z-axis (the distance from the players). \nDefault: -20")] float zOffset= -20f;
     [SerializeField] [Tooltip("Invert the movement on the y-axis")] bool invertZ;
-    [SerializeField] [Tooltip("Zoom multiplier for the camera. \nDefault: 1")] float zoomMultiplier;
+    [SerializeField] [Tooltip("Zoom multiplier for the camera. \nDefault: 1")] float zoomMultiplier = 1;
     void Update()
     {
         Vector3 trackTarget = PlayerDistanceManager.Instance.playersMidpointGO.transform.position;
