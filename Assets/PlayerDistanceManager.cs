@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class PlayerDistanceManager : MonoBehaviour
 {
+    public static PlayerDistanceManager Instance;
     Health health;
+    [SerializeField] [Tooltip("A reference to the midpoint of the two players' position for the camera to look at.")]public GameObject playersMidpointGO;
     [SerializeField] [Tooltip("A reference to the flashing screen that serves as a visual warning for players to mind the distance between them.")] GameObject distanceWarning;
     [SerializeField] [Tooltip("A reference to the two players' GameObjects.")] GameObject[] players;
     [SerializeField] [Tooltip("The distance at which damage will begin to be taken. \nDefault: 12")] float maxDistance = 12f;
@@ -12,10 +14,16 @@ public class PlayerDistanceManager : MonoBehaviour
     [SerializeField] [Tooltip("The rate of which damage is taken in seconds. \nDefault: 2")] float tickRateInterval = 2f;
     [SerializeField] [Tooltip("The MINIMUM rate of which damage is taken in seconds. \nDefault: 0.5")] float minTickRateInterval = 0.5f;
     [SerializeField] [Tooltip("The rate of which the TICK RATE increases in seconds. \nDefault: 0.1")] float tickRateIntervalIncrease = 0.1f;
+    [HideInInspector] public float currentDistance;
     float time;
     float maxTickRateInterval;
+    
     void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
         health = GetComponent<Health>();
         distanceWarning.SetActive(false);
         maxTickRateInterval = tickRateInterval;
@@ -23,10 +31,17 @@ public class PlayerDistanceManager : MonoBehaviour
 
     void Update()
     {
-        float distance = Vector3.Distance(players[0].transform.position, players[1].transform.position);
-        print(distance);
+        currentDistance = Vector3.Distance(players[0].transform.position, players[1].transform.position);
+        print("distance between players: " + currentDistance);
+        //find the midpoint find the midpoint of the players. t = 0.5f since 0 is the pos of value a, and 1 is the pos of value b. 
+        Vector3 playersMidpoint = Vector3.Lerp(players[0].transform.position, players[1].transform.position, 0.5f);
+        playersMidpointGO.transform.position = playersMidpoint;
+        CheckDistance();
+    }
 
-        if (distance >= maxDistance)
+    void CheckDistance()
+    {
+        if (currentDistance >= maxDistance)
         {
             distanceWarning.SetActive(true);
             time += Time.deltaTime;
@@ -48,7 +63,6 @@ public class PlayerDistanceManager : MonoBehaviour
             //do that until the tick rate is the same as it was initially.
             if(tickRateInterval >= maxTickRateInterval) return;
             tickRateInterval = tickRateInterval > maxTickRateInterval ? maxTickRateInterval : Mathf.Max(tickRateInterval, tickRateInterval + tickRateIntervalIncrease);
-          
         }
     }
 

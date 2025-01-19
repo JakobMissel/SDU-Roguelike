@@ -77,7 +77,6 @@ public class PlayerMovement : MonoBehaviour
         Vector2 direction = context.ReadValue<Vector2>();
         targetDirection = new Vector3(direction.x, 0, direction.y);
         // sensitivity check for gamepad if needed
-        
     }
     
     
