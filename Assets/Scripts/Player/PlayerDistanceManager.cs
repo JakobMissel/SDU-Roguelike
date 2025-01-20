@@ -32,7 +32,7 @@ public class PlayerDistanceManager : MonoBehaviour
     [SerializeField] [Tooltip("The MINIMUM rate of which damage is taken in seconds. \nDefault: 0.5")] float minTickRate = 0.5f;
     [SerializeField] [Tooltip("The rate of which the TICK RATE increases in seconds. \nDefault: 0.1")] float tickRateIntervalIncrease = 0.1f;
     [HideInInspector] public float currentDistance;
-    
+    LineRenderer bond;
     float time;
     float maxTickRate;
     bool bondBreaking;
@@ -49,6 +49,7 @@ public class PlayerDistanceManager : MonoBehaviour
         maxTickRate = currentTickRate;
         currentVignettePower = minVignettePower;
         newVignettePower = currentVignettePower;
+        bond = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -59,6 +60,7 @@ public class PlayerDistanceManager : MonoBehaviour
         playersMidpointGO.transform.position = playersMidpoint;
         CheckDistance();
         VisualEffect();
+        DrawBond();
     }
 
     void CheckDistance()
@@ -96,6 +98,7 @@ public class PlayerDistanceManager : MonoBehaviour
             health.TakeDamage(damageTickAmount);
     }
 
+
     void VisualEffect()
     {
         //clamp the distance between the players to a normal.
@@ -104,7 +107,6 @@ public class PlayerDistanceManager : MonoBehaviour
         float exponentialNDistance = MathF.Pow(normalDistance, exponent);
         float vectorMultiplier = Mathf.SmoothStep(minColorMultiplier, maxColorMultiplier, exponentialNDistance);
         bondBreakMaterial.SetVector("_CurrentColorVector", new Vector3(currentDistance * vectorMultiplier, baseColor,baseColor));
-        
         //clamp the tick rate value to a normal.
         float normalTickRate = Mathf.Clamp01(time / currentTickRate);
         
@@ -126,5 +128,16 @@ public class PlayerDistanceManager : MonoBehaviour
             bondBreakMaterial.SetFloat("_VignetteMultiplier", minVignetteMultiplier);
             bondBreaking = false;
         }
+    }
+
+    void DrawBond()
+    {
+        bond.SetPosition(0, players[0].transform.position);
+        bond.SetPosition(1, players[1].transform.position);
+    }
+    
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(playersMidpointGO.transform.position, maxDistance/2); //get radius.
     }
 }
