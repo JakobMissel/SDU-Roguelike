@@ -10,9 +10,12 @@ public class PlayerMovement : MonoBehaviour
     Camera mainCamera;
     Animator animator;
     [SerializeField] [Tooltip("If this player is the Tamer, check this box.")]bool isTamer;
+    
+    [Header("Movement")]
     [SerializeField] [Tooltip("The base speed of this player's movement. \nDefault: 8")] public float movementSpeed = 8;
+    
+    [Header("Rotation")]
     Vector3 targetDirection;
-
     [SerializeField] [Tooltip("Check this box to rotate this player towards the mouse position, instead of the walking direction")] bool rotateToMouse;
     [SerializeField] [Tooltip("How fast the player will rotate towards their target direction. \nDefault: 750 for walking direction, 2000 for mouse position")] public float rotationSpeed = 750;
     [SerializeField] [Tooltip("**Value only required for non-Tamer Player** Sets the sensitivity requirement before the player rotates player rotation. \nDefault: 0.1")] float gamepadSensitivity = 0.1f;
