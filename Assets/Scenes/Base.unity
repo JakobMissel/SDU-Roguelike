@@ -169,35 +169,11 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2442637}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: b6288212-5388-4310-8b6e-3a16d1053c6d
     m_ActionName: 'PlayerDefault/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2442637}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnLook
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 085133c9-1823-48a4-bf22-af9a0f9e55a7
     m_ActionName: 'PlayerDefault/Look[/Mouse/delta]'
   - m_PersistentCalls:
@@ -213,19 +189,7 @@ MonoBehaviour:
     m_ActionId: e080ab88-3564-4dac-a3c3-178a438efd34
     m_ActionName: 'PlayerDefault/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2442637}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnDash
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: d140fb82-7c96-4a49-b963-2484fe614c1c
     m_ActionName: 'PlayerDefault/Jump[/Keyboard/space]'
   - m_PersistentCalls:
@@ -1288,35 +1252,11 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 619062436}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: b6288212-5388-4310-8b6e-3a16d1053c6d
     m_ActionName: 'PlayerDefault/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 619062436}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnLook
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 085133c9-1823-48a4-bf22-af9a0f9e55a7
     m_ActionName: 'PlayerDefault/Look[/Mouse/delta]'
   - m_PersistentCalls:
@@ -1332,19 +1272,7 @@ MonoBehaviour:
     m_ActionId: e080ab88-3564-4dac-a3c3-178a438efd34
     m_ActionName: 'PlayerDefault/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 619062436}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnDash
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: d140fb82-7c96-4a49-b963-2484fe614c1c
     m_ActionName: 'PlayerDefault/Jump[/Keyboard/space]'
   - m_PersistentCalls:

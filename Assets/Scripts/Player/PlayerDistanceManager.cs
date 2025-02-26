@@ -114,7 +114,6 @@ public class PlayerDistanceManager : MonoBehaviour
         {
             newVignettePower = Mathf.Lerp(currentVignettePower, maxVignettePower, normalTickRate);
             bondBreakMaterial.SetFloat("_VignettePower", newVignettePower);
-            print(newVignettePower);
             if (bondBreaking) return;
             bondBreakMaterial.SetFloat("_VignetteMultiplier", maxVignetteMultiplier);
             bondBreaking = true;
@@ -123,7 +122,6 @@ public class PlayerDistanceManager : MonoBehaviour
         {
             newVignettePower = Mathf.Lerp(currentVignettePower, minVignettePower, normalTickRate);
             bondBreakMaterial.SetFloat("_VignettePower", newVignettePower);
-            print(newVignettePower);
             if (!bondBreaking) return;
             bondBreakMaterial.SetFloat("_VignetteMultiplier", minVignetteMultiplier);
             bondBreaking = false;

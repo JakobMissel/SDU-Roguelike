@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     CharacterController characterController;
     Vector3 move;
+    PlayerInput playerInput;
     Camera mainCamera;
     Animator animator;
     [SerializeField] [Tooltip("If this player is the Tamer, check this box.")]bool isTamer;
@@ -33,10 +34,29 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
         isDashing = false;
         animator = GetComponent<Animator>();
         availableDashes = maxDashes;
+    }
+
+    void OnEnable()
+    {
+        //subscribe to the player input events.
+        playerInput.actions["Move"].performed += OnMove;
+        playerInput.actions["Move"].canceled += OnMove;
+        playerInput.actions["Look"].performed += OnLook;
+        playerInput.actions["Dash"].performed += OnDash;
+    }
+
+    void OnDisable()
+    {
+        //unsubscribe from the player input events.
+        playerInput.actions["Move"].performed -= OnMove;
+        playerInput.actions["Move"].canceled += OnMove;
+        playerInput.actions["Look"].performed -= OnLook;
+        playerInput.actions["Dash"].performed -= OnDash;
     }
 
     void Update()
@@ -63,16 +83,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //is invoked by Player Input to move the player.
-    public void OnMove(InputAction.CallbackContext context)
+    void OnMove(InputAction.CallbackContext context)
     {
         //get the players input values
         Vector2 movement = context.ReadValue<Vector2>();
         move = new Vector3(movement.x, 0, movement.y);
     }
 
-    //is invoked by Player Input to rotate the player with the right stick on gamepad.
-    public void OnLook(InputAction.CallbackContext context)
+    void OnLook(InputAction.CallbackContext context)
     {
         if(isTamer || move != Vector3.zero) return;
         print("look here");
@@ -124,8 +142,7 @@ public class PlayerMovement : MonoBehaviour
         Rotate(targetDirection);
     }
 
-    // is invoked by Player Input to make the player dash on input.
-    public void OnDash(InputAction.CallbackContext context)
+    void OnDash(InputAction.CallbackContext context)
     {
         //check if there are dashes left in the charge.
         if (availableDashes > 0 && !isDashing)
