@@ -20,25 +20,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Tooltip("Check this box to rotate this player towards the mouse position, instead of the walking direction")] bool rotateToMouse;
     [SerializeField] [Tooltip("How fast the player will rotate towards their target direction. \nDefault: 750 for walking direction, 2000 for mouse position")] public float rotationSpeed = 750;
     [SerializeField] [Tooltip("**Value only required for non-Tamer Player** Sets the sensitivity requirement before the player rotates player rotation. \nDefault: 0.1")] float gamepadSensitivity = 0.1f;
-    
-    [Header("Dash")] 
-    [HideInInspector] public bool isDashing; //check if the player is dashing, grant damage reduction or something maybe.
-    [SerializeField] [Tooltip("The base speed of this player's dash. \nDefault: 20")] public float dashSpeed = 20;
-    [SerializeField] [Tooltip("How long the dash lasts. \nDefault: 0.15")] public float dashDuration = 0.15f;
-    [SerializeField] [Tooltip("How long the player must wait before they can dash again. \nDefault: 4")] public float dashCooldown = 4;
-    [SerializeField] [Tooltip("How many charges can this player perform. \nDefault: 1")] public int maxDashes = 1;
-    [HideInInspector] public int availableDashes;
-    float currentDashDuration;
-    float currentDashCooldown;
-    
+
+    DashAbility DashAbility;
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
-        isDashing = false;
         animator = GetComponent<Animator>();
-        availableDashes = maxDashes;
+        DashAbility = GetComponent<DashAbility>();
     }
 
     void OnEnable()
@@ -47,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput.actions["Move"].performed += OnMove;
         playerInput.actions["Move"].canceled += OnMove;
         playerInput.actions["Look"].performed += OnLook;
-        playerInput.actions["Dash"].performed += OnDash;
+        playerInput.actions["Dash"].started += OnDash;
     }
 
     void OnDisable()
@@ -56,17 +46,17 @@ public class PlayerMovement : MonoBehaviour
         playerInput.actions["Move"].performed -= OnMove;
         playerInput.actions["Move"].canceled += OnMove;
         playerInput.actions["Look"].performed -= OnLook;
-        playerInput.actions["Dash"].performed -= OnDash;
+        playerInput.actions["Dash"].started -= OnDash;
     }
 
     void Update()
     {
-        if (!isDashing)
+        if (!DashAbility.isDashing)
         {
             Move();
             RotatePlayer();
         }
-        Dash();
+        DashAbility.CheckCooldown();
     }
 
     void Move()
@@ -90,10 +80,13 @@ public class PlayerMovement : MonoBehaviour
         move = new Vector3(movement.x, 0, movement.y);
     }
 
+    /// <summary>
+    /// Makes the player look towards the direction of the right joystick.
+    /// </summary>
+    /// <param name="context"></param>
     void OnLook(InputAction.CallbackContext context)
     {
         if(isTamer || move != Vector3.zero) return;
-        print("look here");
         //get the players input values
         Vector2 direction = context.ReadValue<Vector2>();
         targetDirection = new Vector3(direction.x, 0, direction.y);
@@ -120,6 +113,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Rotates the player towards the direction they are moving.
+    /// </summary>
+    /// <param name="direction"></param>
     void Rotate(Vector3 direction)
     {
         if(direction == Vector3.zero) return;
@@ -127,6 +124,9 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Rotates the player towards the mouse position.
+    /// </summary>
     void RotateTowardsMousePosition()
     {
         // cast ray from mouse position.
@@ -144,54 +144,6 @@ public class PlayerMovement : MonoBehaviour
 
     void OnDash(InputAction.CallbackContext context)
     {
-        //check if there are dashes left in the charge.
-        if (availableDashes > 0 && !isDashing)
-        {
-            BeginDash();
-        }
-    }
-    
-    void Dash()
-    {
-        //checking and resetting dash cooldown.
-        if (availableDashes < maxDashes)
-        {
-            currentDashCooldown += Time.deltaTime;
-            if (currentDashCooldown >= dashCooldown)
-            {
-                availableDashes++;
-                currentDashCooldown = 0f;
-            }
-        }
-        
-        //performs the dash.
-        if (!isDashing) return;
-        currentDashDuration -= Time.deltaTime;
-        if (currentDashDuration <= 0f)
-        {
-            EndDash();
-        }
-        else
-        {
-            //makes the player dash in the direction they are moving
-            //if no movement, dash in the direction they are facing.
-            if(move != Vector3.zero)
-                characterController.Move(move * (dashSpeed * Time.deltaTime));
-            else
-                characterController.Move(transform.forward * (dashSpeed * Time.deltaTime));
-                
-        }
-    }
-    
-    void BeginDash()
-    {
-        isDashing = true;
-        currentDashDuration = dashDuration;
-        availableDashes--;
-    }
-
-    void EndDash()
-    {
-        isDashing = false;
+        DashAbility.BeginDash();
     }
 }

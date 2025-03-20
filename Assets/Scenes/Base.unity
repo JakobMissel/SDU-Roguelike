@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 2442638}
   - component: {fileID: 2442636}
   - component: {fileID: 2442637}
+  - component: {fileID: 2442644}
   - component: {fileID: 2442643}
   m_Layer: 0
   m_Name: Player(Tamer)
@@ -265,12 +266,6 @@ MonoBehaviour:
   rotateToMouse: 1
   rotationSpeed: 750
   gamepadSensitivity: 0.1
-  isDashing: 0
-  dashSpeed: 20
-  dashDuration: 0.15
-  dashCooldown: 4
-  maxDashes: 1
-  availableDashes: 0
 --- !u!143 &2442638
 CharacterController:
   m_ObjectHideFlags: 0
@@ -410,6 +405,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2442644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2442635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec65e9e2815a294eacda784aaf72f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDashing: 0
+  dashSpeed: 20
+  dashDuration: 0.15
+  dashCooldown: 4
+  maxDashes: 1
+  availableDashes: 0
 --- !u!1 &70723079
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,12 +1369,6 @@ MonoBehaviour:
   rotateToMouse: 0
   rotationSpeed: 750
   gamepadSensitivity: 0.1
-  isDashing: 0
-  dashSpeed: 20
-  dashDuration: 0.15
-  dashCooldown: 4
-  maxDashes: 1
-  availableDashes: 0
 --- !u!143 &619062437
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3132,6 +3139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
   attackRange: 2.5
+  dashRange: 6
   damage: 5
 --- !u!1001 &1331639122
 PrefabInstance:
