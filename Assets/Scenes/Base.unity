@@ -422,6 +422,7 @@ MonoBehaviour:
   dashDuration: 0.15
   dashCooldown: 4
   maxDashes: 1
+  isPlayer: 1
   availableDashes: 0
 --- !u!1 &70723079
 GameObject:
@@ -1216,6 +1217,7 @@ GameObject:
   - component: {fileID: 619062437}
   - component: {fileID: 619062435}
   - component: {fileID: 619062436}
+  - component: {fileID: 619062442}
   - component: {fileID: 619062434}
   m_Layer: 6
   m_Name: Player(Spirit)
@@ -1486,6 +1488,25 @@ Transform:
   - {fileID: 1429117696}
   m_Father: {fileID: 1835654409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &619062442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619062433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec65e9e2815a294eacda784aaf72f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDashing: 0
+  dashSpeed: 20
+  dashDuration: 0.15
+  dashCooldown: 4
+  maxDashes: 1
+  isPlayer: 1
+  availableDashes: 0
 --- !u!1 &627130006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2944,6 +2965,7 @@ GameObject:
   - component: {fileID: 1322094904}
   - component: {fileID: 1322094905}
   - component: {fileID: 1322094899}
+  - component: {fileID: 1322094907}
   - component: {fileID: 1322094906}
   m_Layer: 0
   m_Name: TestEnemy
@@ -2969,12 +2991,21 @@ MonoBehaviour:
   m_BlackboardVariableOverridesList:
   - rid: 455622669760987440
   - rid: 455622669760987441
+  - rid: 160975697095164087
   m_IsInitialised: 0
   m_IsStarted: 0
   NetcodeRunOnlyOnOwner: 0
   references:
     version: 2
     RefIds:
+    - rid: 160975697095164087
+      type: {class: 'BlackboardVariable`1[[DashAbility, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 7074672954464505332
+          m_Value1: 6190322331944598880
+        Name: DashAbility
+        m_Value: {fileID: 1322094907}
     - rid: 455622669760987440
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -3141,6 +3172,25 @@ MonoBehaviour:
   attackRange: 2.5
   dashRange: 6
   damage: 5
+--- !u!114 &1322094907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322094898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec65e9e2815a294eacda784aaf72f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDashing: 0
+  dashSpeed: 20
+  dashDuration: 0.15
+  dashCooldown: 4
+  maxDashes: 1
+  isPlayer: 0
+  availableDashes: 0
 --- !u!1001 &1331639122
 PrefabInstance:
   m_ObjectHideFlags: 0

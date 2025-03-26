@@ -1,9 +1,15 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DashAbility : MonoBehaviour
 {
     CharacterController characterController;
+    
+    NavMeshAgent navMeshAgent;
+    float initialAcceleration;
+    float initialSpeed;
     
     Vector3 move;
 
@@ -13,20 +19,31 @@ public class DashAbility : MonoBehaviour
     [SerializeField][Tooltip("How long the dash lasts. \nDefault: 0.15")] public float dashDuration = 0.15f;
     [SerializeField][Tooltip("How long the entity must wait before they can dash again. \nDefault: 4")] public float dashCooldown = 4;
     [SerializeField][Tooltip("How many charges of dash this entity has. \nDefault: 1")] public int maxDashes = 1;
+    [SerializeField][Tooltip("Is this attached to a player entity?")] public bool isPlayer;
     [HideInInspector] public int availableDashes;
     float currentDashDuration;
     float currentDashCooldown;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Awake()
     {
         availableDashes = maxDashes;
-        if(gameObject.GetComponent<CharacterController>() != null)
-            characterController = gameObject.GetComponent<CharacterController>();
-        
+        if (GetComponent<CharacterController>() != null)
+            characterController = GetComponent<CharacterController>();
+        if (GetComponent<NavMeshAgent>() != null)
+        {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+            initialAcceleration = navMeshAgent.acceleration;
+            initialSpeed = navMeshAgent.speed;
+        }
+
     }
 
-    public void CheckCooldown()
+    void Update()
+    {
+        CheckCooldown();
+    }
+
+    void CheckCooldown()
     {
         //checking and resetting dash cooldown.
         if (availableDashes < maxDashes)
@@ -40,6 +57,11 @@ public class DashAbility : MonoBehaviour
         }
     }
 
+    public void GainCharge()
+    {
+        availableDashes++;
+    }
+
     public void BeginDash()
     {
         //check if there are dashes left in the charge.
@@ -48,18 +70,17 @@ public class DashAbility : MonoBehaviour
             isDashing = true;
             currentDashDuration = dashDuration;
             availableDashes--;
-            print(availableDashes);
             StartCoroutine(Dash());
         }
     }
 
     IEnumerator Dash()
     {
+        print($"{gameObject.name} is dashing");
         //performs the dash.
         while (isDashing)
         {
             currentDashDuration -= Time.deltaTime;
-            print("is dashing");
             if (currentDashDuration <= 0f)
             {
                 EndDash();
@@ -68,10 +89,17 @@ public class DashAbility : MonoBehaviour
             {
                 //makes the player dash in the direction they are moving
                 //if no movement, dash in the direction they are facing.
-                if (move != Vector3.zero)
-                    characterController.Move(move * (dashSpeed * Time.deltaTime));
+                if(isPlayer)
+                {
+                    if (move != Vector3.zero)
+                        characterController.Move(move * (dashSpeed * Time.deltaTime));
+                    else
+                        characterController.Move(transform.forward * (dashSpeed * Time.deltaTime));
+                }
                 else
-                    characterController.Move(transform.forward * (dashSpeed * Time.deltaTime));
+                {
+                    navMeshAgent.Move(transform.forward * (dashSpeed * Time.deltaTime));
+                }
             }
             yield return null;
         }
@@ -80,6 +108,11 @@ public class DashAbility : MonoBehaviour
     void EndDash()
     {
         isDashing = false;
+        if (navMeshAgent)
+        {
+            navMeshAgent.acceleration = initialAcceleration;
+            navMeshAgent.speed = initialSpeed;
+        }
         StopCoroutine(Dash());
     }
 }

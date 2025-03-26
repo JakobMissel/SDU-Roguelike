@@ -56,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
             Move();
             RotatePlayer();
         }
-        DashAbility.CheckCooldown();
     }
 
     void Move()
