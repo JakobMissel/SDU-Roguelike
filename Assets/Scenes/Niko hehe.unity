@@ -4066,7 +4066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d2536c5a1985c4d8d1d4abaa0a4be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 10000
   currentHealth: 0
   healthBar: {fileID: 301104219}
   currentHealthText: {fileID: 2081539082}
@@ -4144,8 +4144,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
+        time: 0.5439447
+        value: 0.47368437
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -4188,9 +4188,9 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 3
     textureScale: {x: 1, y: 1}
-    shadowBias: 0.5
+    shadowBias: 1
     generateLightingData: 0
   m_MaskInteraction: 0
   m_UseWorldSpace: 1

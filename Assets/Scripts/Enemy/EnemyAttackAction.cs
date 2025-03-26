@@ -20,7 +20,6 @@ public partial class EnemyAttackAction : Action
             LogFailure("No agent assigned.");
             return Status.Failure;
         }
-        Attack();
         return Status.Running;
     }
 
@@ -28,8 +27,17 @@ public partial class EnemyAttackAction : Action
     {
         enemy = Agent.Value.GetComponent<Enemy>();
         GameObject target = Target.Value;
-        Agent.Value.transform.LookAt(target.transform);
+        //Agent.Value.transform.LookAt(target.transform);
+        Vector3 direction = target.transform.position - Agent.Value.transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(direction, target.transform.up);
+        Agent.Value.transform.rotation = Quaternion.Slerp(Agent.Value.transform.rotation, targetRotation, Time.deltaTime * 5);
         target.GetComponentInParent<Health>().TakeDamage(enemy.damage);
+    }
+
+    protected override Status OnUpdate()
+    {
+        Attack();
+        return Status.Running;
     }
 }
 
