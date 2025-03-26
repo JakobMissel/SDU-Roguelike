@@ -5,11 +5,12 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "ChooseTarget", story: "[Agent] chooses a [Tag] target.", category: "Action", id: "e1755334169e967d801e0f672311fe22")]
+[NodeDescription(name: "ChooseTarget", story: "[Agent] chooses a [Tag] [Target]", category: "Action", id: "e1755334169e967d801e0f672311fe22")]
 public partial class ChooseTargetAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<string> Tag;
+    [SerializeReference] public BlackboardVariable<GameObject> Target;
 
     [SerializeReference] public BlackboardVariable<bool> Random;
 
@@ -71,6 +72,7 @@ public partial class ChooseTargetAction : Action
         else
             currentTarget = GetClosestTarget();
         enemy.currentTarget = targets[currentTarget];
+        Target.Value = targets[currentTarget];
     }
 
     int GetClosestTarget()
