@@ -1,34 +1,34 @@
-using System;
 using UnityEngine;
 
 public class PlayerCameraMovement : MonoBehaviour
 {
-    [SerializeField] [Tooltip("The camera's offset on the y-axis (the distance from the ground). \nDefault: 15")] float yOffset= 15f;
-    [SerializeField] [Tooltip("Invert the movement on the y-axis")] bool invertY;
-    [SerializeField] [Tooltip("The camera's offset on the z-axis (the distance from the players). \nDefault: -20")] float zOffset= -20f;
-    [SerializeField] [Tooltip("Invert the movement on the y-axis")] bool invertZ;
-    [SerializeField] [Tooltip("Zoom multiplier for the camera. \nDefault: 1")] float zoomMultiplier = 1;
-    void Update()
+    [SerializeField] Vector3 offset = new(0, 17, -11);
+    [SerializeField] float minZoom = 30;
+    [SerializeField] float maxZoom = 50;
+    [SerializeField] float zoomSpeed = 0.6f;
+    [SerializeField] [Range(0.001f, 1)] float followDelay = 0.02f;
+
+    [SerializeField] Vector3 initialRotation = new(55,0,0);
+
+    Camera camera;
+    void Awake()
     {
-        Vector3 trackTarget = PlayerDistanceManager.Instance.playersMidpointGO.transform.position;
-        float newYOffset;
-        float newZOffset;
-        if (invertY)
-        {
-            newYOffset = yOffset - PlayerDistanceManager.Instance.currentDistance;
-        }
-        else
-        {
-            newYOffset = yOffset + PlayerDistanceManager.Instance.currentDistance * zoomMultiplier;
-        }
-        if (invertZ)
-        {
-            newZOffset = zOffset + PlayerDistanceManager.Instance.currentDistance * zoomMultiplier;
-        }
-        else
-        {
-            newZOffset = zOffset - PlayerDistanceManager.Instance.currentDistance * zoomMultiplier;
-        }
-        transform.position = new Vector3(trackTarget.x, trackTarget.y + newYOffset, trackTarget.z + newZOffset);
+        camera = GetComponent<Camera>();
     }
+
+    void LateUpdate()
+    {
+        Vector3 midpoint = PlayerDistanceManager.Instance.playersMidpointGO.transform.position;
+        Vector3 desiredPosition = midpoint + offset;
+        
+        // Smoothly follow the desired position.
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, followDelay);
+        transform.eulerAngles = initialRotation;
+        float normalDistance = PlayerDistanceManager.Instance.normalDistance;
+        
+        // Adjust camera zoom based on the normal distance between players
+        float newZoom = Mathf.Lerp(minZoom,maxZoom,normalDistance);
+        camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, newZoom, zoomSpeed * Time.deltaTime);
+    }
+
 }

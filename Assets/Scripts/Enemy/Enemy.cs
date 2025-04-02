@@ -4,11 +4,13 @@ public class Enemy : MonoBehaviour
 {
     [HideInInspector] public GameObject currentTarget;
     public float attackRange = 2.5f;
-    public float dashRange = 6f;
     public int damage = 5;
 
-    void Awake()
+    public void Attack(GameObject target)
     {
-        
+        Vector3 direction = target.transform.position - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(direction, target.transform.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5);
+        target.GetComponentInParent<Health>().TakeDamage(damage);
     }
 }

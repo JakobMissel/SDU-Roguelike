@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.Rendering;
 
 public class PlayerDistanceManager : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class PlayerDistanceManager : MonoBehaviour
     [SerializeField] [Tooltip("The MINIMUM value of the multiplier on the vignette in the shader. \nDefault: 0.15")] float minVignetteMultiplier = .15f;
     [SerializeField] [Tooltip("The MAXIMUM value of the multiplier on the vignette in the shader. \nDefault: 0.2")] float maxVignetteMultiplier = 0.2f;
     
+    [SerializeField] [Tooltip("Original color of bond.")] [ColorUsage(true,true)] Color originalColor;
+    [SerializeField] [Tooltip("Break color of bond.")] [ColorUsage(true,true)] Color breakColor;
+    Color newSpiritBondColor;
+
     [Header("Distance")]
     [SerializeField] [Tooltip("The distance at which damage will begin to be taken. \nDefault: 12")] float maxDistance = 12f;
     
@@ -32,7 +37,9 @@ public class PlayerDistanceManager : MonoBehaviour
     [SerializeField] [Tooltip("The MINIMUM rate of which damage is taken in seconds. \nDefault: 0.5")] float minTickRate = 0.5f;
     [SerializeField] [Tooltip("The rate of which the TICK RATE increases in seconds. \nDefault: 0.1")] float tickRateIntervalIncrease = 0.1f;
     [HideInInspector] public float currentDistance;
-    LineRenderer bond;
+    [HideInInspector] public float normalDistance;
+
+    LineRenderer lineRenderer;
     float time;
     float maxTickRate;
     bool bondBreaking;
@@ -49,12 +56,16 @@ public class PlayerDistanceManager : MonoBehaviour
         maxTickRate = currentTickRate;
         currentVignettePower = minVignettePower;
         newVignettePower = currentVignettePower;
-        bond = GetComponent<LineRenderer>();
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     void Update()
     {
         currentDistance = Vector3.Distance(players[0].transform.position, players[1].transform.position);
+        
+        //clamp the distance between the players to a normal.
+        normalDistance = Mathf.Clamp01(currentDistance / maxDistance);
+
         //find the midpoint find the midpoint of the players. t = 0.5f since 0 is the pos of value a, and 1 is the pos of value b. 
         Vector3 playersMidpoint = Vector3.Lerp(players[0].transform.position, players[1].transform.position, 0.5f);
         playersMidpointGO.transform.position = playersMidpoint;
@@ -101,27 +112,23 @@ public class PlayerDistanceManager : MonoBehaviour
 
     void VisualEffect()
     {
-        //clamp the distance between the players to a normal.
-        float normalDistance = Mathf.Clamp01(currentDistance / maxDistance);
         //make it exponential. 
         float exponentialNDistance = MathF.Pow(normalDistance, exponent);
         float vectorMultiplier = Mathf.SmoothStep(minColorMultiplier, maxColorMultiplier, exponentialNDistance);
         bondBreakMaterial.SetVector("_CurrentColorVector", new Vector3(currentDistance * vectorMultiplier, baseColor,baseColor));
         //clamp the tick rate value to a normal.
         float normalTickRate = Mathf.Clamp01(time / currentTickRate);
+        newVignettePower = Mathf.Lerp(minVignettePower, maxVignettePower, normalTickRate);
+        bondBreakMaterial.SetFloat("_VignettePower", newVignettePower);
         
         if (currentDistance >= maxDistance)
         {
-            newVignettePower = Mathf.Lerp(currentVignettePower, maxVignettePower, normalTickRate);
-            bondBreakMaterial.SetFloat("_VignettePower", newVignettePower);
             if (bondBreaking) return;
             bondBreakMaterial.SetFloat("_VignetteMultiplier", maxVignetteMultiplier);
             bondBreaking = true;
         }
         else if (currentDistance < maxDistance)
         {
-            newVignettePower = Mathf.Lerp(currentVignettePower, minVignettePower, normalTickRate);
-            bondBreakMaterial.SetFloat("_VignettePower", newVignettePower);
             if (!bondBreaking) return;
             bondBreakMaterial.SetFloat("_VignetteMultiplier", minVignetteMultiplier);
             bondBreaking = false;
@@ -130,10 +137,18 @@ public class PlayerDistanceManager : MonoBehaviour
 
     void DrawBond()
     {
-        bond.SetPosition(0, players[0].transform.position);
-        bond.SetPosition(1, players[1].transform.position);
+        lineRenderer.SetPosition(0, players[0].transform.position);
+        lineRenderer.SetPosition(1, players[1].transform.position);
+        UpdateBondMaterial();
     }
-    
+
+    void UpdateBondMaterial()
+    {
+        Material spiritBond = lineRenderer.material;
+        float exponentialNDistance = MathF.Pow(normalDistance, exponent);
+        newSpiritBondColor = Color.Lerp(originalColor, breakColor, exponentialNDistance);
+        spiritBond.SetColor("_Red", newSpiritBondColor);
+    }
     void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(playersMidpointGO.transform.position, maxDistance/2); //get radius.
