@@ -19,12 +19,12 @@ public class PlayerDistanceManager : MonoBehaviour
     [SerializeField] [Tooltip("The MAXIMUM power value to be inserted into the vignette in the shader. \nDefault: 6")] float maxVignettePower = 6f;
     [SerializeField] [Tooltip("The MINIMUM value of the multiplier on the color based on distance. \nDefault: 0.5")] float minColorMultiplier = 0.5f;
     [SerializeField] [Tooltip("The MAXIMUM value of the multiplier on the color based on distance. \nDefault: 10")] float maxColorMultiplier = 10f;
-    [SerializeField] [Tooltip("The exponent value that controls the ramping of the visual effect. \nDefault: 3")] int exponent = 3;
+    [SerializeField] [Tooltip("The exponent value that controls the ramping of the visual effect. \nDefault: 50")] int exponent = 50;
     [SerializeField] [Tooltip("The MINIMUM value of the multiplier on the vignette in the shader. \nDefault: 0.15")] float minVignetteMultiplier = .15f;
     [SerializeField] [Tooltip("The MAXIMUM value of the multiplier on the vignette in the shader. \nDefault: 0.2")] float maxVignetteMultiplier = 0.2f;
-    
-    [SerializeField] [Tooltip("Original color of bond.")] [ColorUsage(true,true)] Color originalColor;
-    [SerializeField] [Tooltip("Break color of bond.")] [ColorUsage(true,true)] Color breakColor;
+    const float factor = 1f;
+    [SerializeField] [Tooltip("Original color of bond.")] [ColorUsage(true,true)] Color originalColor = new(0*factor,9*factor,191*factor, 255);
+    [SerializeField] [Tooltip("Break color of bond.")] [ColorUsage(true,true)] Color breakColor = new(191*factor, 9*factor, 0*factor, 255);
     Color newSpiritBondColor;
 
     [Header("Distance")]
@@ -34,7 +34,7 @@ public class PlayerDistanceManager : MonoBehaviour
     [SerializeField] [Tooltip("The amount of damage taken upon distancing to greatly. \nDefault: 5")] float damageTickAmount = 5f;
     [SerializeField] [Tooltip("Check this box if the damage taken value should be in percentages.")] bool isPercentage;
     [SerializeField] [Tooltip("The rate of which damage is taken in seconds. \nDefault: 2")] float currentTickRate = 2f;
-    [SerializeField] [Tooltip("The MINIMUM rate of which damage is taken in seconds. \nDefault: 0.5")] float minTickRate = 0.5f;
+    [SerializeField] [Tooltip("The rate of which damage is taken in seconds. \nDefault: 0.5")] float tickRate = 0.5f;
     [SerializeField] [Tooltip("The rate of which the TICK RATE increases in seconds. \nDefault: 0.1")] float tickRateIntervalIncrease = 0.1f;
     [HideInInspector] public float currentDistance;
     [HideInInspector] public float normalDistance;
@@ -84,14 +84,14 @@ public class PlayerDistanceManager : MonoBehaviour
             TakeDamage();
             //every time the players are too far away from each other increase the frequency of taken damage 
             //do this until the tick rate is the same as the minimum value.
-            if(currentTickRate <= minTickRate) return;
-            currentTickRate = currentTickRate < minTickRate ? minTickRate : Mathf.Min(currentTickRate, currentTickRate - tickRateIntervalIncrease);
+            if(currentTickRate <= tickRate) return;
+            currentTickRate = currentTickRate < tickRate ? tickRate : Mathf.Min(currentTickRate, currentTickRate - tickRateIntervalIncrease);
         }
         else
         {
             time += Time.deltaTime;
-            //using minTickRate to change the frequency back to normal faster than using the current tick rate
-            if (!(time >= minTickRate)) return;
+            //using tickRate to change the frequency back to normal faster than using the current tick rate
+            if (!(time >= tickRate)) return;
             time = 0;
             //when the players are close, decrease the frequency of damage taken when far away from each other (evening it out)
             //do that until the tick rate is the same as it was initially.

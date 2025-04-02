@@ -4049,7 +4049,7 @@ MonoBehaviour:
   players:
   - {fileID: 2442635}
   - {fileID: 619062433}
-  bondBreakMaterial: {fileID: 2100000, guid: 3f0ac804ec518f1448378c1f030afeef, type: 2}
+  bondBreakMaterial: {fileID: 0}
   baseColor: -40
   minVignettePower: 8
   maxVignettePower: 6
@@ -4058,15 +4058,16 @@ MonoBehaviour:
   exponent: 50
   minVignetteMultiplier: 0.15
   maxVignetteMultiplier: 0.2
-  originalColor: {r: 0, g: 2.6551187, b: 56.34752, a: 1}
-  breakColor: {r: 290.63727, g: 13.694948, b: 0, a: 1}
+  originalColor: {r: 0, g: 9, b: 191, a: 255}
+  breakColor: {r: 191, g: 9, b: 0, a: 255}
   maxDistance: 12
   damageTickAmount: 5
   isPercentage: 0
   currentTickRate: 2
-  minTickRate: 0.5
+  tickRate: 0.5
   tickRateIntervalIncrease: 0.1
   currentDistance: 0
+  normalDistance: 0
 --- !u!114 &1835654408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4229,7 +4230,7 @@ MonoBehaviour:
   offset: {x: 0, y: 17, z: -11}
   minZoom: 30
   maxZoom: 50
-  zoomSpeed: 5
+  zoomSpeed: 0.6
   followDelay: 0.023
   initialRotation: {x: 55, y: 0, z: 0}
 --- !u!1 &1964602097
