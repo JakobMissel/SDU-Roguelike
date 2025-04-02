@@ -11,7 +11,7 @@ public partial class EnemyAttackAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<GameObject> Target;
     [SerializeReference] public BlackboardVariable<Enemy> Enemy;
-
+    [SerializeReference] public BlackboardVariable<float> RotationSpeed;
     protected override Status OnStart()
     {
         if (Agent.Value == null)
@@ -32,11 +32,26 @@ public partial class EnemyAttackAction : Action
         GameObject target = Target.Value;
         Enemy.Value.Attack(target);
     }
+    
+    Status FaceTarget(GameObject target)
+    {
+        Vector3 direction = target.transform.position - Agent.Value.transform.position;
+        direction.Normalize();
+        Quaternion targetRotation = Quaternion.LookRotation(direction, target.transform.up);
+        Agent.Value.transform.rotation = Quaternion.Slerp(Agent.Value.transform.rotation, targetRotation, Time.deltaTime * RotationSpeed);
+
+        float dotProduct = Vector3.Dot(Agent.Value.transform.forward, direction);
+        if (dotProduct > 0.8f)
+        {
+            Attack();
+            return Status.Success;
+        }
+        return Status.Running;
+    }
 
     protected override Status OnUpdate()
     {
-        Attack();
-        return Status.Running;
+        return FaceTarget(Target.Value);
     }
 }
 

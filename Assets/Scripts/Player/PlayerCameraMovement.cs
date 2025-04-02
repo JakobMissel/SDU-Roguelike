@@ -3,12 +3,12 @@ using UnityEngine;
 public class PlayerCameraMovement : MonoBehaviour
 {
     [SerializeField] Vector3 offset = new(0, 17, -11);
+    [SerializeField] Vector3 initialRotation = new(55,0,0);
     [SerializeField] float minZoom = 30;
     [SerializeField] float maxZoom = 50;
-    [SerializeField] float zoomSpeed = 0.6f;
-    [SerializeField] [Range(0.001f, 1)] float followDelay = 0.02f;
+    [SerializeField] float zoomSpeed = 2f;
+    [SerializeField] [Range(0.001f, 1)] float followDelay = 0.03f;
 
-    [SerializeField] Vector3 initialRotation = new(55,0,0);
 
     Camera camera;
     void Awake()

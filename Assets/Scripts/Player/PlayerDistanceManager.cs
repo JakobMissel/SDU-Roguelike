@@ -22,9 +22,10 @@ public class PlayerDistanceManager : MonoBehaviour
     [SerializeField] [Tooltip("The exponent value that controls the ramping of the visual effect. \nDefault: 50")] int exponent = 50;
     [SerializeField] [Tooltip("The MINIMUM value of the multiplier on the vignette in the shader. \nDefault: 0.15")] float minVignetteMultiplier = .15f;
     [SerializeField] [Tooltip("The MAXIMUM value of the multiplier on the vignette in the shader. \nDefault: 0.2")] float maxVignetteMultiplier = 0.2f;
-    const float factor = 1f;
-    [SerializeField] [Tooltip("Original color of bond.")] [ColorUsage(true,true)] Color originalColor = new(0*factor,9*factor,191*factor, 255);
-    [SerializeField] [Tooltip("Break color of bond.")] [ColorUsage(true,true)] Color breakColor = new(191*factor, 9*factor, 0*factor, 255);
+    const float originalFactor = 0.1f;
+    const float breakFactor = 0.8f;
+    [SerializeField] [Tooltip("Original color of bond.")] [ColorUsage(true,true)] Color originalColor = new(0*originalFactor,9*originalFactor,191*originalFactor, 255);
+    [SerializeField] [Tooltip("Break color of bond.")] [ColorUsage(true,true)] Color breakColor = new(191*breakFactor, 9*breakFactor, 0*breakFactor, 255);
     Color newSpiritBondColor;
 
     [Header("Distance")]

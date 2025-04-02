@@ -144,5 +144,6 @@ public class PlayerMovement : MonoBehaviour
     void OnDash(InputAction.CallbackContext context)
     {
         DashAbility.BeginDash();
+        CameraShake.Instance.ShakeCamera();
     }
 }

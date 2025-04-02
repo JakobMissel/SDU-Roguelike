@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] bool isPlayer;
     [SerializeField] [Tooltip("Maximum health of entity.")] public float maxHealth;
     [SerializeField] [Tooltip("Current health of entity.")] public float currentHealth;
     [SerializeField] [Tooltip("Graphical representation of the current health for entity.")] Image healthBar;
@@ -51,6 +52,8 @@ public class Health : MonoBehaviour
         //update health bar and text.
         StartCoroutine(UpdateHealthBar());
         currentHealthText.text = $"{currentHealth} / {maxHealth}";
+        if(isPlayer)
+            CameraShake.Instance.ShakeCamera(0.1f, .1f, 0.2f);
     }
     
     IEnumerator UpdateHealthBar()

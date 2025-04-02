@@ -176,6 +176,7 @@ MonoBehaviour:
   - rid: 455622669760987440
   - rid: 455622669760987441
   - rid: 160975697095164087
+  - rid: 5916711816113160444
   m_IsInitialised: 0
   m_IsStarted: 0
   NetcodeRunOnlyOnOwner: 0
@@ -206,6 +207,14 @@ MonoBehaviour:
           m_Value1: 2160629522967900780
         Name: PlayerTag
         m_Value: Player
+    - rid: 5916711816113160444
+      type: {class: 'BlackboardVariable`1[[Enemy, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1644404808914020011
+          m_Value1: 11780904346142425919
+        Name: Enemy
+        m_Value: {fileID: 74044543066621512}
 --- !u!114 &7336794100386317677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +248,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
   attackRange: 2.5
-  dashRange: 6
   damage: 5
 --- !u!1 &8541175180716930051
 GameObject:
