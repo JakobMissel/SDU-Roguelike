@@ -10,8 +10,7 @@ public partial class EnemyAttackAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<GameObject> Target;
-
-    Enemy enemy;
+    [SerializeReference] public BlackboardVariable<Enemy> Enemy;
 
     protected override Status OnStart()
     {
@@ -20,18 +19,18 @@ public partial class EnemyAttackAction : Action
             LogFailure("No agent assigned.");
             return Status.Failure;
         }
+        if (Target.Value == null)
+        {
+            LogFailure("No target assigned.");
+            return Status.Failure;
+        }
         return Status.Running;
     }
 
     void Attack()
     {
-        enemy = Agent.Value.GetComponent<Enemy>();
         GameObject target = Target.Value;
-        //Agent.Value.transform.LookAt(target.transform);
-        Vector3 direction = target.transform.position - Agent.Value.transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(direction, target.transform.up);
-        Agent.Value.transform.rotation = Quaternion.Slerp(Agent.Value.transform.rotation, targetRotation, Time.deltaTime * 5);
-        target.GetComponentInParent<Health>().TakeDamage(enemy.damage);
+        Enemy.Value.Attack(target);
     }
 
     protected override Status OnUpdate()

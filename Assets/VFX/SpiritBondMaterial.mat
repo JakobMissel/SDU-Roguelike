@@ -59,9 +59,9 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Blue: {r: 0, g: 0.0022343067, b: 0.027122643, a: 1}
+    - _Blue: {r: 0, g: 0.003921569, b: 0.05490196, a: 1}
     - _DissolveSpd: {r: -0.5, g: 0, b: 0, a: 0}
     - _MainTexSpd: {r: -0.1, g: 0, b: 0, a: 0}
-    - _Red: {r: 0, g: 4.9338303, b: 120.9128, a: 1}
+    - _Red: {r: 0, g: 2.6551187, b: 56.34752, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
