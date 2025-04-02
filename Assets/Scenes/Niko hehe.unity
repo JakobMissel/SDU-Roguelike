@@ -4049,7 +4049,7 @@ MonoBehaviour:
   players:
   - {fileID: 2442635}
   - {fileID: 619062433}
-  bondBreakMaterial: {fileID: 0}
+  bondBreakMaterial: {fileID: -876546973899608171, guid: 30fb7957b08d3434992f9a77b1c41bc1, type: 3}
   baseColor: -40
   minVignettePower: 8
   maxVignettePower: 6
