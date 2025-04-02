@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "com.sinnwrig.fogvolumes": {
+      "version": "file:C:/Users/1dema/Desktop/URP-Fog-Volumes-main",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.render-pipelines.universal": "10.x.x"
+      }
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.5",
       "depth": 0,
