@@ -56,7 +56,7 @@ Material:
     - _Color: {r: 0.006048833, g: 1, b: 0.7379107, a: 1}
     - _Color_1: {r: 0.7320637, g: 2.996079, b: 2.180392, a: 1}
     - _CurrentColor: {r: 0.7320637, g: 2.996079, b: 2.180392, a: 1}
-    - _CurrentColorVector: {r: 7.6428795, g: -40, b: -40, a: 0}
+    - _CurrentColorVector: {r: 1.4127693, g: -40, b: -40, a: 0}
     - _DamageColor: {r: 3.773585, g: 0.08899964, b: 0.3009156, a: 1}
     - _NoiseTiling: {r: 0.1, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
