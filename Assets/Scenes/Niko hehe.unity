@@ -1731,6 +1731,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &779314864 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 74044543066621512, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
+  m_PrefabInstance: {fileID: 4770130511533272136}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be7e2bcfa1d6c0b44b604c12045bb947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &813788787
 GameObject:
   m_ObjectHideFlags: 0
@@ -4038,22 +4049,25 @@ MonoBehaviour:
   players:
   - {fileID: 2442635}
   - {fileID: 619062433}
-  bondBreakMaterial: {fileID: 2100000, guid: 3f0ac804ec518f1448378c1f030afeef, type: 2}
+  bondBreakMaterial: {fileID: -876546973899608171, guid: 30fb7957b08d3434992f9a77b1c41bc1, type: 3}
   baseColor: -40
   minVignettePower: 8
   maxVignettePower: 6
   minColorMultiplier: 0.5
   maxColorMultiplier: 10
-  exponent: 3
+  exponent: 50
   minVignetteMultiplier: 0.15
   maxVignetteMultiplier: 0.2
+  originalColor: {r: 0, g: 9, b: 191, a: 255}
+  breakColor: {r: 191, g: 9, b: 0, a: 255}
   maxDistance: 12
   damageTickAmount: 5
   isPercentage: 0
   currentTickRate: 2
-  minTickRate: 0.5
+  tickRate: 0.5
   tickRateIntervalIncrease: 0.1
   currentDistance: 0
+  normalDistance: 0
 --- !u!114 &1835654408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4213,11 +4227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3662927be5d835e4895d7253e2147c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yOffset: 17
-  invertY: 0
-  zOffset: -11
-  invertZ: 0
-  zoomMultiplier: 0.2
+  offset: {x: 0, y: 17, z: -11}
+  minZoom: 30
+  maxZoom: 50
+  zoomSpeed: 0.6
+  followDelay: 0.023
+  initialRotation: {x: 55, y: 0, z: 0}
 --- !u!1 &1964602097
 GameObject:
   m_ObjectHideFlags: 0
@@ -4531,6 +4546,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2991218997766273580, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
+      propertyPath: 'managedReferences[5916711816113160444]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[Enemy, Assembly-CSharp]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991218997766273580, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
+      propertyPath: managedReferences[5916711816113160444].Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991218997766273580, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
+      propertyPath: m_BlackboardVariableOverridesList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991218997766273580, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
+      propertyPath: managedReferences[5916711816113160444].m_Value
+      value: 
+      objectReference: {fileID: 779314864}
+    - target: {fileID: 2991218997766273580, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[3]'
+      value: 5916711816113160444
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991218997766273580, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
+      propertyPath: managedReferences[5916711816113160444].GUID.m_Value0
+      value: 1644404808914020011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991218997766273580, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
+      propertyPath: managedReferences[5916711816113160444].GUID.m_Value1
+      value: 11780904346142425919
+      objectReference: {fileID: 0}
     - target: {fileID: 4757387025278066758, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
       propertyPath: m_Name
       value: TestEnemy

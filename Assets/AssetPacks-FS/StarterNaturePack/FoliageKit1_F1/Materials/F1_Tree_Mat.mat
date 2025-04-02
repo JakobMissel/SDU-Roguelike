@@ -147,12 +147,12 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Dark_Leaf: {r: 0.2942857, g: 0.32, b: 0.14571428, a: 0}
+    - _Dark_Leaf: {r: 0.1186904, g: 0.3207547, b: 0.055980776, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Gradient_Color: {r: 0.35121953, g: 0.4, b: 0.10406506, a: 0}
+    - _Gradient_Color: {r: 0.12156863, g: 0.32156864, b: 0.05882353, a: 0}
     - _Gradient_EndPoints: {r: 0, g: 5, b: 0, a: 0}
     - _Gradient_Strength: {r: -2, g: 8, b: 0, a: 0}
-    - _Light_Leaf: {r: 0.3479675, g: 0.4, b: 0.12357726, a: 1}
+    - _Light_Leaf: {r: 0.25394562, g: 0.5188679, b: 0.17377181, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _UvOffset: {r: 0, g: 0, b: 0, a: 0}
     - _UvTiling: {r: 1, g: 1, b: 0, a: 0}

@@ -67,10 +67,7 @@ public partial class ChooseTargetAction : Action
             LogFailure("No targets in array to choose.");
             return;
         }
-        if (Random)
-            currentTarget = GetRandomTarget();
-        else
-            currentTarget = GetClosestTarget();
+        currentTarget = Random ? GetRandomTarget() : GetClosestTarget();
         enemy.currentTarget = targets[currentTarget];
         Target.Value = targets[currentTarget];
     }
