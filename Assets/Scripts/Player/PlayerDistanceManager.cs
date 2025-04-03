@@ -71,7 +71,7 @@ public class PlayerDistanceManager : MonoBehaviour
         Vector3 playersMidpoint = Vector3.Lerp(players[0].transform.position, players[1].transform.position, 0.5f);
         playersMidpointGO.transform.position = playersMidpoint;
         CheckDistance();
-        VisualEffect();
+        VisualEffectOnScreenEdge();
         DrawBond();
     }
 
@@ -111,17 +111,14 @@ public class PlayerDistanceManager : MonoBehaviour
     }
 
 
-    void VisualEffect()
+    void VisualEffectOnScreenEdge()
     {
-        //make it exponential. 
+        //make the distance exponential for a more abrupt change. 
         float exponentialNDistance = MathF.Pow(normalDistance, exponent);
         float vectorMultiplier = Mathf.SmoothStep(minColorMultiplier, maxColorMultiplier, exponentialNDistance);
         bondBreakMaterial.SetVector("_CurrentColorVector", new Vector3(currentDistance * vectorMultiplier, baseColor,baseColor));
-        //clamp the tick rate value to a normal.
-        float normalTickRate = Mathf.Clamp01(time / currentTickRate);
-        newVignettePower = Mathf.Lerp(minVignettePower, maxVignettePower, normalTickRate);
-        bondBreakMaterial.SetFloat("_VignettePower", newVignettePower);
-        
+        FlickerEffect();
+
         if (currentDistance >= maxDistance)
         {
             if (bondBreaking) return;
@@ -136,6 +133,13 @@ public class PlayerDistanceManager : MonoBehaviour
         }
     }
 
+    void FlickerEffect()
+    {
+        //clamp the tick rate value to a normal.
+        float normalTickRate = Mathf.Clamp01(time / currentTickRate);
+        newVignettePower = Mathf.Lerp(minVignettePower, maxVignettePower, normalTickRate);
+        bondBreakMaterial.SetFloat("_VignettePower", newVignettePower);
+    }
     void DrawBond()
     {
         lineRenderer.SetPosition(0, players[0].transform.position);

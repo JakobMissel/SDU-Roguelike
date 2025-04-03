@@ -53,7 +53,7 @@ public class Health : MonoBehaviour
         StartCoroutine(UpdateHealthBar());
         currentHealthText.text = $"{currentHealth} / {maxHealth}";
         if(isPlayer)
-            CameraShake.Instance.ShakeCamera(0.1f, .1f, 0.2f);
+            CameraShake.Instance.ShakeCamera(0.1f, .5f, 0.1f);
     }
     
     IEnumerator UpdateHealthBar()
