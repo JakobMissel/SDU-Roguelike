@@ -10,8 +10,9 @@ public partial class CheckRangeAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<GameObject> Target;
-    [SerializeReference] public BlackboardVariable<float> Range;
     [SerializeReference] public BlackboardVariable<Enemy> Enemy;
+    [SerializeReference] public BlackboardVariable<float> AttackRange;
+    [SerializeReference] public BlackboardVariable<float> DashRange;
     
 
     protected override Status OnStart()
@@ -26,9 +27,10 @@ public partial class CheckRangeAction : Action
             LogFailure("No target assigned.");
             return Status.Failure;
         }
-        Range.Value = Enemy.Value.attackRange;
+        AttackRange.Value = Enemy.Value.attackRange;
+        DashRange.Value = Enemy.Value.dashRange;
         var distance = Vector3.Distance(Agent.Value.transform.position, Target.Value.transform.position);
-        if (distance > Range.Value)
+        if (distance > AttackRange.Value)
         {
             LogFailure("Target out of range.");
         }

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class DashAbility : MonoBehaviour
 {
-    CharacterController characterController;
+    Rigidbody rigidbody;
     
     NavMeshAgent navMeshAgent;
     float initialAcceleration;
@@ -27,8 +27,8 @@ public class DashAbility : MonoBehaviour
     void Awake()
     {
         availableDashes = maxDashes;
-        if (GetComponent<CharacterController>() != null)
-            characterController = GetComponent<CharacterController>();
+        if (GetComponent<Rigidbody>() != null)
+            rigidbody = GetComponent<Rigidbody>();
         if (GetComponent<NavMeshAgent>() != null)
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
@@ -92,9 +92,9 @@ public class DashAbility : MonoBehaviour
                 if(isPlayer)
                 {
                     if (move != Vector3.zero)
-                        characterController.Move(move * (dashSpeed * Time.deltaTime));
+                        rigidbody.MovePosition(transform.position + move * (dashSpeed * Time.deltaTime));
                     else
-                        characterController.Move(transform.forward * (dashSpeed * Time.deltaTime));
+                        rigidbody.MovePosition(transform.position + transform.forward * (dashSpeed * Time.deltaTime));
                 }
                 else
                 {

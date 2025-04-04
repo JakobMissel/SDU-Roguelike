@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    CharacterController characterController;
+    Rigidbody rigidbody;
     Vector3 move;
     PlayerInput playerInput;
     Camera mainCamera;
@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     DashAbility DashAbility;
     void Awake()
     {
-        characterController = GetComponent<CharacterController>();
+        rigidbody = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
@@ -53,17 +53,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!DashAbility.isDashing)
         {
-            Move();
             RotatePlayer();
         }
     }
-
+    void FixedUpdate()
+    {
+        if (!DashAbility.isDashing)
+        { 
+            Move();
+        }
+    }
     void Move()
     {
         if (move != Vector3.zero)
         {
             //feed input values to character controller.
-            characterController.Move(move * (movementSpeed * Time.deltaTime));
+            rigidbody.MovePosition(transform.position + move * (movementSpeed * Time.deltaTime));
             animator.SetBool("isWalking", true);
         }
         else
@@ -76,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //get the players input values
         Vector2 movement = context.ReadValue<Vector2>();
-        move = new Vector3(movement.x, 0, movement.y);
+        move = new Vector3(movement.x, 0, movement.y).normalized;
     }
 
     /// <summary>
@@ -88,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
         if(isTamer || move != Vector3.zero) return;
         //get the players input values
         Vector2 direction = context.ReadValue<Vector2>();
-        targetDirection = new Vector3(direction.x, 0, direction.y);
+        targetDirection = new Vector3(direction.x, 0, direction.y).normalized;
         // sensitivity check for gamepad if needed
     }
     

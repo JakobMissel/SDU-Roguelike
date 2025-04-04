@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerCameraMovement : MonoBehaviour
@@ -9,11 +10,11 @@ public class PlayerCameraMovement : MonoBehaviour
     [SerializeField] float zoomSpeed = 2f;
     [SerializeField] [Range(0.001f, 1)] float followDelay = 0.03f;
 
+    CinemachineCamera cinemachineCamera;
 
-    Camera camera;
     void Awake()
     {
-        camera = GetComponent<Camera>();
+        cinemachineCamera = GetComponent<CinemachineCamera>();
     }
 
     void LateUpdate()
@@ -28,7 +29,7 @@ public class PlayerCameraMovement : MonoBehaviour
         
         // Adjust camera zoom based on the normal distance between players
         float newZoom = Mathf.Lerp(minZoom,maxZoom,normalDistance);
-        camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, newZoom, zoomSpeed * Time.deltaTime);
+        cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, newZoom, zoomSpeed * Time.deltaTime);
     }
 
 }

@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
   attackRange: 2.5
+  dashRange: 3
   damage: 5
 --- !u!1 &8541175180716930051
 GameObject:

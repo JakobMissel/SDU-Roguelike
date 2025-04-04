@@ -32,7 +32,7 @@ public class PlayerDistanceManager : MonoBehaviour
     [SerializeField] [Tooltip("The distance at which damage will begin to be taken. \nDefault: 12")] float maxDistance = 12f;
     
     [Header("Damage and Tick rate")]
-    [SerializeField] [Tooltip("The amount of damage taken upon distancing to greatly. \nDefault: 5")] float damageTickAmount = 5f;
+    [SerializeField] [Tooltip("The amount of damage taken upon distancing to greatly. \nDefault: 5")] int damageTickAmount = 5;
     [SerializeField] [Tooltip("Check this box if the damage taken value should be in percentages.")] bool isPercentage;
     [SerializeField] [Tooltip("The rate of which damage is taken in seconds. \nDefault: 2")] float currentTickRate = 2f;
     [SerializeField] [Tooltip("The rate of which damage is taken in seconds. \nDefault: 0.5")] float tickRate = 0.5f;
