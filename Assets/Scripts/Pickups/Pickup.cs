@@ -12,15 +12,13 @@ public class Pickup : MonoBehaviour
     float initialY;
     [Header("Pickup")]
     [SerializeField] AudioClip audioClip;
-    bool hasAudioClip = false;
     [SerializeField] bool canBepickedUp = true;
 
     private void Awake()
     {
-        if (audioClip != null) 
-            hasAudioClip = true;
         initialY = transform.position.y;
     }
+
     void OnTriggerEnter(Collider other)
     {
         if(!canBepickedUp) return;
@@ -30,9 +28,13 @@ public class Pickup : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Activates the pickup, plays a sound (on the player's parent's Audio Source component) if given an audio clip, and finally destroys it.
+    /// </summary>
+    /// <param name="player"></param>
     protected virtual void ActivatePickup(GameObject player) 
     {
-        if (hasAudioClip)
+        if (audioClip != null)
         {
             player.GetComponentInParent<AudioSource>().PlayOneShot(audioClip);
         }
@@ -44,6 +46,13 @@ public class Pickup : MonoBehaviour
         Animate(verticalAnimation, verticalSpeed, rotate, rotationSpeed); 
     }
 
+    /// <summary>
+    /// Animates the pickup by moving it up and down and/or rotating it, depending on the parameters.
+    /// </summary>
+    /// <param name="verticalAnimation"></param>
+    /// <param name="verticalSpeed"></param>
+    /// <param name="rotate"></param>
+    /// <param name="rotationSpeed"></param>
     void Animate(bool verticalAnimation, float verticalSpeed, bool rotate, float rotationSpeed)
     {
         if(verticalAnimation) 
@@ -52,11 +61,19 @@ public class Pickup : MonoBehaviour
             Rotate(rotationSpeed);
     }
 
+    /// <summary>
+    /// Rotates the pickup around itself.
+    /// </summary>
+    /// <param name="speed"></param>
     void Rotate(float speed)
     { 
         transform.Rotate(Vector3.up * speed * Time.deltaTime); 
     }
 
+    /// <summary>
+    /// Moves the pickup up and down in a sine wave pattern.
+    /// </summary>
+    /// <param name="speed"></param>
     void MoveUpAndDown(float speed)
     {
         float height = initialY;

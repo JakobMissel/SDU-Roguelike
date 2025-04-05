@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
             RotatePlayer();
         }
     }
+
     void FixedUpdate()
     {
         if (!DashAbility.isDashing)
@@ -63,6 +64,10 @@ public class PlayerMovement : MonoBehaviour
             Move();
         }
     }
+
+    /// <summary>
+    /// Moves the player in the direction of the input values.
+    /// </summary>
     void Move()
     {
         if (move != Vector3.zero)
@@ -77,6 +82,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets the players input values from the left joystick or WASD keys.
+    /// </summary>
+    /// <param name="context"></param>
     void OnMove(InputAction.CallbackContext context)
     {
         //get the players input values
@@ -96,8 +105,10 @@ public class PlayerMovement : MonoBehaviour
         targetDirection = new Vector3(direction.x, 0, direction.y).normalized;
         // sensitivity check for gamepad if needed
     }
-    
-    
+
+    /// <summary>
+    /// Rotates the player towards the direction they are moving or towards the mouse position.
+    /// </summary>
     void RotatePlayer()
     {
         // initialize the rotation only when input from movement.
