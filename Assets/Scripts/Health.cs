@@ -6,7 +6,11 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    [Header("Player")]
     [SerializeField] bool isPlayer;
+    [SerializeField] GameObject[] players;
+    [Header("Health")]
+    [SerializeField] GameObject healingEffect;
     [SerializeField] [Tooltip("Maximum health of entity.")] public int maxHealth;
     [SerializeField] [Tooltip("Current health of entity.")] public int currentHealth;
     int accumulatedDamage;
@@ -38,6 +42,14 @@ public class Health : MonoBehaviour
         if (!canBeHealed) return;
         accumulatedDamage -= amount;
         StartHealthUpdate();
+        if (isPlayer)
+        { 
+            foreach(var player in players)
+            {
+                var effect = Instantiate(healingEffect, player.transform.position, Quaternion.identity);
+                effect.transform.SetParent(player.transform);
+            }
+        }
     }
 
     /// <summary>
@@ -62,10 +74,6 @@ public class Health : MonoBehaviour
         if (isPlayer)
             CameraShake.Instance.ShakeCamera(0.1f, .5f, 0.1f);
     }
-    private void Update()
-    {
-        print(canBeHealed);
-    }
 
     /// <summary>
     /// Kills the entity.
@@ -73,10 +81,10 @@ public class Health : MonoBehaviour
     void Die() 
     {
         if(isDead) return;
+        canBeHealed = false;
+        isInvulnerable = true;
         currentHealth = 0;
         print($"{name} DIED LOL");
-        isInvulnerable = true;
-        canBeHealed = false;
         if (isPlayer)
         {
             //player dead event maybe?
@@ -135,9 +143,7 @@ public class Health : MonoBehaviour
     /// </summary>
     void UpdateHealthStatus()
     {
-        if (currentHealth >= maxHealth)
-            canBeHealed = false;
-        else if (currentHealth - accumulatedDamage == maxHealth)
+        if (currentHealth - accumulatedDamage >= maxHealth)
             canBeHealed = false;
         else if (currentHealth - accumulatedDamage <= 0)
             Die();
