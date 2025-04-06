@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,39 +9,48 @@ public class Ability : MonoBehaviour {
     [SerializeField] internal float CurrentCastTime;
     [SerializeField] internal bool IsCasting;
     
-    [SerializeField] internal float Damage;
+    [SerializeField] internal int Damage;
     [SerializeField] internal float DamageModifier;
 
     [SerializeField] internal float Range;
     [SerializeField] internal float RangeModifier;
-
-    [SerializeField] internal GameObject HitBox;
     [SerializeField] internal float AreaModifier;
     [SerializeField] internal GameObject VFX;
 
     [SerializeField] internal PlayerInput playerInput;
     [SerializeField] internal Animator animator;
-    // [SerializeField] internal InputActionReference Activate;
     [SerializeField] internal string ActivateActionName;
+
+    [SerializeField] internal float ProjectTileSpeed;
+    [SerializeField] internal bool PlayerAbility;
 
     // void Awake() {
     //     playerInput = GetComponent<PlayerInput>();
     // }
     protected void OnEnable() {
-        if (ActivateActionName != "")
-            playerInput.actions[ActivateActionName].started += ActivateAbility;
-        // Activate.action.performed += ActivateAbility;
+        if (!string.IsNullOrEmpty(ActivateActionName)){
+            Debug.Log("hej 2");
+            var action = playerInput.actions[ActivateActionName];
+            action.Enable();
+            if (action != null) {
+                action.started += ActivateAbility;
+            } else {
+                Debug.LogError($"Action '{ActivateActionName}' not found!");
+            }
+        }
     }
 
     protected void OnDisable() {
-        if (ActivateActionName != "")
+        if (!string.IsNullOrEmpty(ActivateActionName))
             playerInput.actions[ActivateActionName].started -= ActivateAbility;
         // Activate.action.performed -= ActivateAbility;
         // Activate.action.Disable();
     }
 
-    public virtual void ActivateAbility(InputAction.CallbackContext context){}
-    public virtual void ActivateAbility(){}
+    public virtual void ActivateAbility(InputAction.CallbackContext context){
+        Debug.Log("tried to cast ability");
+    }
+    // public virtual void ActivateAbility(){}
     internal void RunCooldown(){
         CurrentCooldown = Mathf.Clamp(CurrentCooldown - Time.deltaTime, 0, Cooldown);
         // if (CurrentCooldown < 0) {
@@ -81,5 +89,8 @@ public class Ability : MonoBehaviour {
             default:
                 break;
         }
+    }
+    public int CalculateDamage(){
+        return (int)(Damage+(float)Damage*DamageModifier);
     }
 }
