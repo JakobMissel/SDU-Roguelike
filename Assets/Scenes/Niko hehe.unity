@@ -5751,10 +5751,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1128415954550050365, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2470076045488823840, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
       propertyPath: healthBar
       value: 
@@ -5763,42 +5759,6 @@ PrefabInstance:
       propertyPath: currentHealthText
       value: 
       objectReference: {fileID: 2081539082}
-    - target: {fileID: 2573427136526872455, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4341919448114668710, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
-      propertyPath: dashCooldown
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6421673481058833465, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
-      propertyPath: isTamer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6421673481058833465, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
-      propertyPath: acceleration
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6421673481058833465, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
-      propertyPath: rotateToMouse
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6421673481058833465, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
-      propertyPath: maxMovementSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6947404304574318771, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
-      propertyPath: acceleration
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6947404304574318771, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
-      propertyPath: maxMovementSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8883406494676721213, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8962051280081333606, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
       propertyPath: m_Name
       value: Players(Health, PDM)
