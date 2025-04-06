@@ -108,8 +108,6 @@ public class Health : MonoBehaviour
     /// <returns></returns>
     IEnumerator UpdateHealthBar()
     {
-        var t = 0f;
-        var startHealth = currentHealth;
         var absAccumulatedDamage = MathF.Abs(accumulatedDamage);
         var duration = fillTime;
         while (absAccumulatedDamage > 0)

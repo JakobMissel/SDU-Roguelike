@@ -5,16 +5,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody rigidbody;
-    Vector3 move;
+    Rigidbody rb;
+    [HideInInspector] public Vector3 move;
     PlayerInput playerInput;
     Camera mainCamera;
     Animator animator;
     [SerializeField] [Tooltip("If this player is the Tamer, check this box.")]bool isTamer;
     
     [Header("Movement")]
-    [SerializeField] [Tooltip("The base speed of this player's movement. \nDefault: 8")] public float movementSpeed = 8;
-    
+    [SerializeField] [Tooltip("The acceleration of this player's movement. \nDefault: 100")] public float acceleration = 100;
+    [SerializeField] [Tooltip("The max speed of this player's movement. \nDefault: 4")] public float maxMovementSpeed = 4;
+
     [Header("Rotation")]
     Vector3 targetDirection;
     [SerializeField] [Tooltip("Check this box to rotate this player towards the mouse position, instead of the walking direction")] bool rotateToMouse;
@@ -24,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     DashAbility DashAbility;
     void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
@@ -46,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput.actions["Move"].performed -= OnMove;
         playerInput.actions["Move"].canceled += OnMove;
         playerInput.actions["Look"].performed -= OnLook;
-        playerInput.actions["Dash"].started -= OnDash;
+        playerInput.actions["Dash"].canceled -= OnDash;
     }
 
     void Update()
@@ -73,11 +74,14 @@ public class PlayerMovement : MonoBehaviour
         if (move != Vector3.zero)
         {
             //feed input values to character controller.
-            rigidbody.MovePosition(transform.position + move * (movementSpeed * Time.deltaTime));
+            rb.AddForce(move * (acceleration * Time.deltaTime), ForceMode.VelocityChange);
+            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxMovementSpeed);
+            //rigidbody.MovePosition(transform.position + move * (movementSpeed * Time.deltaTime));
             animator.SetBool("isWalking", true);
         }
         else
         {
+            rb.linearVelocity = new(0, rb.linearVelocity.y, 0);
             animator.SetBool("isWalking", false);
         }
     }
@@ -102,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         if(isTamer || move != Vector3.zero) return;
         //get the players input values
         Vector2 direction = context.ReadValue<Vector2>();
-        targetDirection = new Vector3(direction.x, 0, direction.y).normalized;
+        targetDirection = new Vector2(direction.x, direction.y).normalized;
         // sensitivity check for gamepad if needed
     }
 

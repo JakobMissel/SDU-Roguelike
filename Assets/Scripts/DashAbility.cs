@@ -5,13 +5,14 @@ using UnityEngine.AI;
 
 public class DashAbility : MonoBehaviour
 {
-    Rigidbody rigidbody;
-    
+    //Player stuff.
+    Rigidbody rb;
+    PlayerMovement playerMovement;
+
+    //AI stuff.
     NavMeshAgent navMeshAgent;
     float initialAcceleration;
     float initialSpeed;
-    
-    Vector3 move;
 
     [Header("Dash")]
     [HideInInspector] public bool isDashing; //check if the player is dashing, grant damage reduction or something maybe.
@@ -28,7 +29,9 @@ public class DashAbility : MonoBehaviour
     {
         availableDashes = maxDashes;
         if (GetComponent<Rigidbody>() != null)
-            rigidbody = GetComponent<Rigidbody>();
+            rb = GetComponent<Rigidbody>();
+        if(GetComponent<PlayerMovement>() != null)
+            playerMovement = GetComponent<PlayerMovement>();
         if (GetComponent<NavMeshAgent>() != null)
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
@@ -91,10 +94,12 @@ public class DashAbility : MonoBehaviour
                 //if no movement, dash in the direction they are facing.
                 if(isPlayer)
                 {
-                    if (move != Vector3.zero)
-                        rigidbody.MovePosition(transform.position + move * (dashSpeed * Time.deltaTime));
+                    if (playerMovement.move != Vector3.zero)
+                    {
+                        rb.MovePosition(transform.position + playerMovement.move * (dashSpeed * Time.deltaTime));
+                    }
                     else
-                        rigidbody.MovePosition(transform.position + transform.forward * (dashSpeed * Time.deltaTime));
+                        rb.MovePosition(transform.position + transform.forward * (dashSpeed * Time.deltaTime));
                 }
                 else
                 {

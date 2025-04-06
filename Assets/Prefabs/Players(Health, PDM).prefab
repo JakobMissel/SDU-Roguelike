@@ -261,8 +261,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eca8448f652dda4989b124525b8adbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTamer: 0
-  movementSpeed: 8
+  move: {x: 0, y: 0, z: 0}
+  isTamer: 1
+  acceleration: 100
+  maxMovementSpeed: 4
   rotateToMouse: 0
   rotationSpeed: 750
   gamepadSensitivity: 0.1
@@ -281,7 +283,7 @@ MonoBehaviour:
   isDashing: 0
   dashSpeed: 20
   dashDuration: 0.15
-  dashCooldown: 4
+  dashCooldown: 0
   maxDashes: 1
   isPlayer: 1
   availableDashes: 0
@@ -568,8 +570,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eca8448f652dda4989b124525b8adbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move: {x: 0, y: 0, z: 0}
   isTamer: 1
-  movementSpeed: 6
+  acceleration: 100
+  maxMovementSpeed: 4
   rotateToMouse: 1
   rotationSpeed: 750
   gamepadSensitivity: 0.1
