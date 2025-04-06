@@ -5287,15 +5287,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2f4f93d78b91a4b80630dcaa7650df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cooldown: 0.5
+  Cooldown: 3
   CooldownModifier: 0
   CurrentCooldown: 0
   CastTime: 0.2
   CurrentCastTime: 0
   IsCasting: 0
-  Damage: 0
+  Damage: 100
   DamageModifier: 0
-  Range: 15
+  Range: 3
   RangeModifier: 0
   AreaModifier: 0
   VFX: {fileID: 1940409667107805121, guid: 13eea155b472b584a856e43a459a9a00, type: 3}
@@ -5633,6 +5633,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1116600337910774229, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4757387025278066758, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
       propertyPath: m_Name
       value: TestEnemy
@@ -5808,6 +5812,10 @@ PrefabInstance:
       propertyPath: currentHealthText
       value: 
       objectReference: {fileID: 2081539082}
+    - target: {fileID: 4304654060314443315, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8962051280081333606, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
       propertyPath: m_Name
       value: Players(Health, PDM)

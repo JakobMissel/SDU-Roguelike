@@ -2,16 +2,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 public class AbilityInstance : MonoBehaviour {
-    internal Ability SourceAbility;
-    void Start() {
-    }
+    [SerializeField] internal Ability SourceAbility;
+    internal Vector3 StartPosition;
 
     public void SetInfo(Ability source){
         SourceAbility = source;
-    }
-
-    // Update is called once per frame
-    void Update() {
-        
+        StartPosition = source.transform.position;
     }
 }
