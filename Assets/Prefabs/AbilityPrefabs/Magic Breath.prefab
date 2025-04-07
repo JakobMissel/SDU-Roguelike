@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1151845147967680951}
+  - component: {fileID: 1697647220026020206}
+  - component: {fileID: 7926939671092043431}
   m_Layer: 0
   m_Name: Magic Breath
   m_TagString: Untagged
@@ -34,6 +36,32 @@ Transform:
   - {fileID: 2272361339003911829}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1697647220026020206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326547959823185787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953b60ee4c9c5374cb80f7c7aa0a3827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualEffect: {fileID: 6867201778346226499}
+--- !u!114 &7926939671092043431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326547959823185787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e3c816e8c48cd42b99301f10150c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SourceAbility: {fileID: 0}
 --- !u!1 &5522897104022607655
 GameObject:
   m_ObjectHideFlags: 0

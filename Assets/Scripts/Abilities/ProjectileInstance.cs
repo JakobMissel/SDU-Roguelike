@@ -9,13 +9,14 @@ public class ProjectileInstance : AbilityInstance {
     }
 
     void Update() {
-        transform.Translate(Vector3.forward * SourceAbility.ProjectTileSpeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * SourceAbility.ProjectileSpeed * Time.deltaTime);
         Distance = Vector3.Distance(StartPosition,transform.position);
         if (Distance >= SourceAbility.Range){
             Destroy(gameObject);
         }
     }
-    void OnCollisionEnter(Collision other) {
+    void OnTriggerEnter(Collider other) {
+        Debug.Log("hit");
         if ((other.gameObject.CompareTag("Enemy") && SourceAbility.PlayerAbility) || 
         (other.gameObject.CompareTag("Player") && !SourceAbility.PlayerAbility)){
             other.gameObject.GetComponent<Health>().TakeDamage(SourceAbility.CalculateDamage());

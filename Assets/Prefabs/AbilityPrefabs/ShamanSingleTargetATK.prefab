@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 3841726906862417671}
   - component: {fileID: 8413125357545695085}
   - component: {fileID: 91164506637142322}
+  - component: {fileID: 3530473840485750359}
   m_Layer: 0
   m_Name: ShamanSingleTargetATK
   m_TagString: Untagged
@@ -309,6 +310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a45d81c9d79906499ce3a3d90b3ca7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SourceAbility: {fileID: 0}
+  Distance: 0
 --- !u!135 &91164506637142322
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -330,6 +333,33 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3530473840485750359
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940409667107805121}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2082554121254312090
 GameObject:
   m_ObjectHideFlags: 0

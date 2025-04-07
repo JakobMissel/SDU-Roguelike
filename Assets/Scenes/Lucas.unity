@@ -3248,6 +3248,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7019092938877818428, guid: 088bc1b91c31bb84498801200fbae0c2, type: 3}
   m_PrefabInstance: {fileID: 1259140026}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1287619264 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4757387025278066758, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
+  m_PrefabInstance: {fileID: 4770130511533272136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1287619274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287619264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d2536c5a1985c4d8d1d4abaa0a4be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 0
+  players: []
+  healingEffect: {fileID: 142588288291984085, guid: 54f337db2253c034d89715e451804319, type: 3}
+  maxHealth: 100
+  currentHealth: 100
+  fillTime: 0.4
+  healthBar: {fileID: 0}
+  currentHealthText: {fileID: 0}
+  isInvulnerable: 1
+  canBeHealed: 0
+  isDead: 0
 --- !u!1 &1299630395
 GameObject:
   m_ObjectHideFlags: 0
@@ -5287,7 +5315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2f4f93d78b91a4b80630dcaa7650df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cooldown: 3
+  Cooldown: 1
   CooldownModifier: 0
   CurrentCooldown: 0
   CastTime: 0.2
@@ -5295,15 +5323,44 @@ MonoBehaviour:
   IsCasting: 0
   Damage: 100
   DamageModifier: 0
-  Range: 3
+  Range: 15
   RangeModifier: 0
   AreaModifier: 0
   VFX: {fileID: 1940409667107805121, guid: 13eea155b472b584a856e43a459a9a00, type: 3}
   playerInput: {fileID: 2053464920}
   animator: {fileID: 0}
   ActivateActionName: Attack
-  ProjectTileSpeed: 5
+  ProjectileSpeed: 5
   PlayerAbility: 1
+--- !u!114 &2053464935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053464916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6c671689e068e4f8b57a105821ffb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cooldown: 4
+  CooldownModifier: 0
+  CurrentCooldown: 0
+  CastTime: 0
+  CurrentCastTime: 0
+  IsCasting: 0
+  Damage: 100
+  DamageModifier: 0
+  Range: 0
+  RangeModifier: 0
+  AreaModifier: 0
+  VFX: {fileID: 3326547959823185787, guid: a5ed06a788d739643bdf3a68c91c25de, type: 3}
+  playerInput: {fileID: 2053464920}
+  animator: {fileID: 0}
+  ActivateActionName: Special
+  ProjectileSpeed: 0
+  PlayerAbility: 0
 --- !u!1 &2081539081
 GameObject:
   m_ObjectHideFlags: 0
@@ -5635,7 +5692,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1116600337910774229, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4757387025278066758, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
       propertyPath: m_Name
@@ -5688,7 +5745,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4757387025278066758, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1287619274}
   m_SourcePrefab: {fileID: 100100000, guid: 207b20433aad87d4982a144e7dceeb69, type: 3}
 --- !u!1001 &4966879138622159047
 PrefabInstance:
@@ -5804,6 +5864,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1666470629442572161, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666470629442572161, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionId
+      value: 5a82561d-8916-49ab-8336-21d774a6f5d6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666470629442572161, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionName
+      value: 'PlayerDefault/Special[/Mouse/rightButton]'
+      objectReference: {fileID: 0}
     - target: {fileID: 2470076045488823840, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
       propertyPath: healthBar
       value: 
@@ -5827,6 +5899,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1546906308975252551, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2053464926}
+    - targetCorrespondingSourceObject: {fileID: 1546906308975252551, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2053464935}
   m_SourcePrefab: {fileID: 100100000, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

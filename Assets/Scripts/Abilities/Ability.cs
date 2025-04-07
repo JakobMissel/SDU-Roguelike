@@ -21,7 +21,7 @@ public class Ability : MonoBehaviour {
     [SerializeField] internal Animator animator;
     [SerializeField] internal string ActivateActionName;
 
-    [SerializeField] internal float ProjectTileSpeed;
+    [SerializeField] internal float ProjectileSpeed;
     [SerializeField] internal bool PlayerAbility;
 
     // void Awake() {
