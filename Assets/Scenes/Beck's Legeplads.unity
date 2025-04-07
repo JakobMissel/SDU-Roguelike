@@ -398,6 +398,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5a82561d-8916-49ab-8336-21d774a6f5d6
+    m_ActionName: 'PlayerDefault/Special[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: PlayerDefault
@@ -6348,7 +6352,7 @@ Transform:
   m_GameObject: {fileID: 581304230}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.35, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26895,8 +26899,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378795559}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06440559, y: 0.20914213, z: 0.17217648, w: 0.96045136}
-  m_LocalPosition: {x: -0.1771766, y: -0.033792853, z: -0.3923583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26904,7 +26908,7 @@ Transform:
   - {fileID: 447549726}
   - {fileID: 1532516977}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 2.963, y: 25.118, z: 20.987}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1400970006
 GameObject:
   m_ObjectHideFlags: 0

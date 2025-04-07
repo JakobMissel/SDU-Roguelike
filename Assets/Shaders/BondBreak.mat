@@ -48,15 +48,15 @@ Material:
     - _Fullscreen_SrcAlphaBlend: 1
     - _Fullscreen_SrcColorBlend: 5
     - _VignetteIntensity: 5
-    - _VignetteMultiplier: 0.15
-    - _VignettePower: 7.8973126
+    - _VignetteMultiplier: 0.2
+    - _VignettePower: 6.3586707
     m_Colors:
     - _BaseColor: {r: 0.7320637, g: 2.996079, b: 2.180392, a: 1}
     - _BondColor: {r: 0.627451, g: 3.137255, b: 2.1960785, a: 1}
     - _Color: {r: 0.006048833, g: 1, b: 0.7379107, a: 1}
     - _Color_1: {r: 0.7320637, g: 2.996079, b: 2.180392, a: 1}
     - _CurrentColor: {r: 0.7320637, g: 2.996079, b: 2.180392, a: 1}
-    - _CurrentColorVector: {r: 1.6731018, g: -40, b: -40, a: 0}
+    - _CurrentColorVector: {r: 156.82687, g: -40, b: -40, a: 0}
     - _DamageColor: {r: 3.773585, g: 0.08899964, b: 0.3009156, a: 1}
     - _NoiseTiling: {r: 0.1, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
