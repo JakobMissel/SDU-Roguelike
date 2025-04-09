@@ -66,9 +66,11 @@ public class Health : MonoBehaviour
     /// Decreases the current health of the entity by a certain amount.
     /// </summary>
     /// <param name="amount"></param>
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, bool isPercentage = false)
     {
         if (isInvulnerable) return;
+        if(isPercentage)
+            amount = Mathf.RoundToInt(currentHealth * (amount / 100));
         accumulatedDamage += amount;
         StartHealthUpdate();
         if (isPlayer)

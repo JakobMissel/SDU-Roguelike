@@ -105,7 +105,7 @@ public class PlayerDistanceManager : MonoBehaviour
     {
         if(health.currentHealth <= 0) return;
         if(isPercentage)
-            health.TakeDamage(health.maxHealth * (damageTickAmount / 100));
+            health.TakeDamage(damageTickAmount, true);
         else
             health.TakeDamage(damageTickAmount);
     }
