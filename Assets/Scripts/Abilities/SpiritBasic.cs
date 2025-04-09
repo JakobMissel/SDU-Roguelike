@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BreathAttack : Ability {
+public class SpiritBasic : Ability {
     void Awake() {
         playerInput = GetComponent<PlayerInput>();
     }
-
     void Update() {
         RunCooldown();
     }

@@ -9759,7 +9759,7 @@ GameObject:
   - component: {fileID: 8617889119669723099}
   - component: {fileID: 5398449067357225976}
   m_Layer: 0
-  m_Name: VFX Spectral Cross Slash
+  m_Name: SpiritSpecial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

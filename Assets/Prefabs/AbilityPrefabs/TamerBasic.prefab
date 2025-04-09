@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 91164506637142322}
   - component: {fileID: 3530473840485750359}
   m_Layer: 0
-  m_Name: ShamanSingleTargetATK
+  m_Name: TamerBasic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

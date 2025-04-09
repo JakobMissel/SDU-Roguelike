@@ -2,7 +2,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class ProjectileInstance : AbilityInstance {
-    // Vector3 StartPosition;
     [SerializeField] float Distance;
     void Start() {
         StartPosition = SourceAbility.transform.position;
@@ -15,22 +14,7 @@ public class ProjectileInstance : AbilityInstance {
             Destroy(gameObject);
         }
     }
-    void OnTriggerEnter(Collider other) {
-        Debug.Log("hit");
-        if ((other.gameObject.CompareTag("Enemy") && SourceAbility.PlayerAbility) || 
-        (other.gameObject.CompareTag("Player") && !SourceAbility.PlayerAbility)){
-            other.gameObject.GetComponent<Health>().TakeDamage(SourceAbility.CalculateDamage());
-            Destroy(gameObject);
-        }
-        // if (other.gameObject.CompareTag("Player") && !SourceAbility.PlayerAbility){
-        //     other.gameObject.GetComponent<Health>().TakeDamage(SourceAbility.CalculateDamage());
-        //     Destroy(this);
-        // }
-        // switch(other.gameObject.tag){
-        //     case "Enemy":
-        //     break;
-        //     case "Player":
-        //     break;
-        // }
+    internal override void OnHit(){
+        Destroy(gameObject);
     }
 }

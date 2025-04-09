@@ -23,15 +23,12 @@ public class Ability : MonoBehaviour {
 
     [SerializeField] internal float ProjectileSpeed;
     [SerializeField] internal bool PlayerAbility;
-
-    // void Awake() {
-    //     playerInput = GetComponent<PlayerInput>();
-    // }
+    void Awake() {
+        playerInput = GetComponent<PlayerInput>();
+    }
     protected void OnEnable() {
         if (!string.IsNullOrEmpty(ActivateActionName)){
-            Debug.Log("hej 2");
             var action = playerInput.actions[ActivateActionName];
-            action.Enable();
             if (action != null) {
                 action.started += ActivateAbility;
             } else {
@@ -43,22 +40,24 @@ public class Ability : MonoBehaviour {
     protected void OnDisable() {
         if (!string.IsNullOrEmpty(ActivateActionName))
             playerInput.actions[ActivateActionName].started -= ActivateAbility;
-        // Activate.action.performed -= ActivateAbility;
-        // Activate.action.Disable();
     }
 
     public virtual void ActivateAbility(InputAction.CallbackContext context){
-        Debug.Log("tried to cast ability");
+        if (CheckCooldown()) {
+            var vfx = Instantiate(VFX, transform.position, Quaternion.LookRotation(transform.forward));
+            vfx.GetComponent<AbilityInstance>().SetInfo(this);
+            ApplyCooldown();
+        }
     }
-    // public virtual void ActivateAbility(){}
+    public virtual void ActivateAbility(){
+        if (CheckCooldown()) {
+            var vfx = Instantiate(VFX, transform.position, Quaternion.LookRotation(transform.forward));
+            vfx.GetComponent<AbilityInstance>().SetInfo(this);
+            ApplyCooldown();
+        }
+    }
     internal void RunCooldown(){
         CurrentCooldown = Mathf.Clamp(CurrentCooldown - Time.deltaTime, 0, Cooldown);
-        // if (CurrentCooldown < 0) {
-        //     CurrentCooldown = 0;
-        //     return;
-        // }
-        // if (CurrentCooldown > 0)
-        //     CurrentCooldown -= Time.deltaTime;
     }
 
     public bool CheckCooldown() {
