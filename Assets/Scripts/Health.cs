@@ -15,8 +15,8 @@ public class Health : MonoBehaviour
     [SerializeField] [Tooltip("Current health of entity.")] public int currentHealth;
     int accumulatedDamage;
     [SerializeField] [Tooltip("The time it takes to update the health bar relative to the amount of health restored or lost.")] [Range(0.01f, 2f)] float fillTime = 0.4f;
-    [SerializeField] [Tooltip("Graphical representation of the current health for entity.")] Image healthBar;
-    [SerializeField] [Tooltip("Numerical representation of the health for entity.")] TMP_Text currentHealthText;
+    [SerializeField] [Tooltip("Graphical representation of the current health for entity.")] Image[] healthBar;
+    [SerializeField] [Tooltip("Numerical representation of the health for entity.")] TMP_Text[] currentHealthText;
 
     [Header("GodMode")] 
     [SerializeField] [Tooltip("Checking this box disallows subtraction of health for entity")] bool isInvulnerable;
@@ -28,8 +28,7 @@ public class Health : MonoBehaviour
     {
         currentHealth = maxHealth;
         canBeHealed = false;
-        currentHealthText.text = $"{currentHealth} / {maxHealth}";
-        healthBar.fillAmount = currentHealth / maxHealth;
+        UpdateHealthUI();
     }
 
     /// <summary>
@@ -145,7 +144,7 @@ public class Health : MonoBehaviour
     {
         if (currentHealth - accumulatedDamage >= maxHealth)
             canBeHealed = false;
-        else if (currentHealth - accumulatedDamage <= 0)
+        else if (currentHealth <= 0)
             Die();
         else if (currentHealth < maxHealth && !isDead)
             canBeHealed = true;
@@ -157,7 +156,15 @@ public class Health : MonoBehaviour
     void UpdateHealthUI()
     {
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        currentHealthText.text = $"{currentHealth} / {maxHealth}";
-        healthBar.fillAmount = currentHealth / (float)maxHealth;
+        for (int i = 0; i < healthBar.Length; i++)
+        {
+            if (healthBar[i] == null) continue;
+            healthBar[i].fillAmount = currentHealth / (float)maxHealth;
+        }
+        for (int i = 0; i < currentHealthText.Length; i++)
+        {
+            if (currentHealthText[i] == null) continue;
+            currentHealthText[i].text = $"{currentHealth} / {maxHealth}";
+        }
     }
 }

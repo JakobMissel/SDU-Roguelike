@@ -20,9 +20,10 @@ public class PlayerMovement : MonoBehaviour
     Vector3 targetDirection;
     [SerializeField] [Tooltip("Check this box to rotate this player towards the mouse position, instead of the walking direction")] bool rotateToMouse;
     [SerializeField] [Tooltip("How fast the player will rotate towards their target direction. \nDefault: 750 for walking direction, 2000 for mouse position")] public float rotationSpeed = 750;
-    [SerializeField] [Tooltip("**Value only required for non-Tamer Player** Sets the sensitivity requirement before the player rotates player rotation. \nDefault: 0.1")] float gamepadSensitivity = 0.1f;
-
+    [SerializeField] [Tooltip("**Value only required for non-Tamer Player** Sets the sensitivity requirement before the player rotates player rotation. \nDefault: 0.2")] float gamepadSensitivity = 0.2f;
+    
     DashAbility DashAbility;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -103,10 +104,10 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="context"></param>
     void OnLook(InputAction.CallbackContext context)
     {
-        if(isTamer || move != Vector3.zero) return;
+        if(isTamer) return;
         //get the players input values
         Vector2 direction = context.ReadValue<Vector2>();
-        targetDirection = new Vector2(direction.x, direction.y).normalized;
+        targetDirection = new Vector3(direction.x, 0, direction.y).normalized;
         // sensitivity check for gamepad if needed
     }
 
@@ -115,8 +116,12 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void RotatePlayer()
     {
+        if (!isTamer && targetDirection.magnitude > gamepadSensitivity)
+        {
+            Rotate(targetDirection);
+        }
         // initialize the rotation only when input from movement.
-        if (move != Vector3.zero)
+        else if (move != Vector3.zero)
         {
             Rotate(move);
         }
@@ -124,11 +129,6 @@ public class PlayerMovement : MonoBehaviour
         else if (rotateToMouse && isTamer)
         { 
             RotateTowardsMousePosition();
-        }
-        else if (!isTamer)
-        {
-            if (targetDirection.magnitude > gamepadSensitivity)
-                Rotate(targetDirection);
         }
     }
 
