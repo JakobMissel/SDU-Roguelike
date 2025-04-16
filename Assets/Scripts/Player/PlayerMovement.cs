@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     PlayerInput playerInput;
     Camera mainCamera;
     Animator animator;
-    [SerializeField] [Tooltip("If this player is the Tamer, check this box.")]bool isTamer;
+    [SerializeField] [Tooltip("If this player uses keyboard, check this box.")] bool usesKeyboard;
     
     [Header("Movement")]
     [SerializeField] [Tooltip("The acceleration of this player's movement. \nDefault: 100")] public float acceleration = 100;
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         DashAbility = GetComponent<DashAbility>();
     }
 
@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="context"></param>
     void OnLook(InputAction.CallbackContext context)
     {
-        if(isTamer) return;
+        if(usesKeyboard) return;
         //get the players input values
         Vector2 direction = context.ReadValue<Vector2>();
         targetDirection = new Vector3(direction.x, 0, direction.y).normalized;
@@ -116,17 +116,17 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void RotatePlayer()
     {
-        if (!isTamer && targetDirection.magnitude > gamepadSensitivity)
+        if (!usesKeyboard && targetDirection.magnitude > gamepadSensitivity)
         {
             Rotate(targetDirection);
         }
         // initialize the rotation only when input from movement.
         else if (move != Vector3.zero)
         {
-            Rotate(move);
+            //Rotate(move);
         }
         // when the player is not moving, the player rotates towards the mouse position.
-        else if (rotateToMouse && isTamer)
+        else if (rotateToMouse && usesKeyboard)
         { 
             RotateTowardsMousePosition();
         }

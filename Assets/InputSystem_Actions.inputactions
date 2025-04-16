@@ -90,7 +90,7 @@
                     "name": "Sprint",
                     "type": "Button",
                     "id": "a5c3afdb-2021-4aa1-a951-6bcd17a28614",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -275,6 +275,17 @@
                 },
                 {
                     "name": "",
+                    "id": "6ff1adf3-2795-4c98-b44b-3c2a22b5da56",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f36859c5-1b41-44de-82e5-353aa85c3453",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -332,6 +343,17 @@
                     "name": "",
                     "id": "2abad470-a23a-4fc2-b255-ea165e07a343",
                     "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Special",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df72d05d-6ba4-4b95-b4d6-dee15c99c130",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",

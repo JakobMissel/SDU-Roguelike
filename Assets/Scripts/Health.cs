@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using TMPro;
@@ -86,9 +87,14 @@ public class Health : MonoBehaviour
         isInvulnerable = true;
         currentHealth = 0;
         print($"{name} DIED LOL");
+        DestrotUI();
         if (isPlayer)
         {
             //player dead event maybe?
+        }
+        else
+        {
+            GetComponent<Animator>().Play("Die");
         }
         isDead = true;
     }
@@ -142,6 +148,7 @@ public class Health : MonoBehaviour
     /// </summary>
     void UpdateHealthStatus()
     {
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         if (currentHealth - accumulatedDamage >= maxHealth)
             canBeHealed = false;
         else if (currentHealth <= 0)
@@ -155,7 +162,6 @@ public class Health : MonoBehaviour
     /// </summary>
     void UpdateHealthUI()
     {
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         for (int i = 0; i < healthBar.Length; i++)
         {
             if (healthBar[i] == null) continue;
@@ -166,5 +172,24 @@ public class Health : MonoBehaviour
             if (currentHealthText[i] == null) continue;
             currentHealthText[i].text = $"{currentHealth} / {maxHealth}";
         }
+    }
+
+    void DestrotUI()
+    {
+        for (int i = 0; i < healthBar.Length; i++)
+        {
+            if (healthBar[i] == null) continue;
+            Destroy(healthBar[i].gameObject);
+        }
+        for (int i = 0; i < currentHealthText.Length; i++)
+        {
+            if (currentHealthText[i] == null) continue;
+            Destroy(currentHealthText[i].gameObject);
+        }
+    }
+    
+    public void DestroyGameObject()
+    {
+        Destroy(gameObject);
     }
 }

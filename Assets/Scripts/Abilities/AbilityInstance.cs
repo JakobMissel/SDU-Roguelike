@@ -14,9 +14,14 @@ public class AbilityInstance : MonoBehaviour {
     }
     internal virtual void OnHit(){}
     void OnTriggerEnter(Collider other) {
-        if ((other.gameObject.CompareTag("Enemy") && SourceAbility.PlayerAbility) || 
-        (other.gameObject.CompareTag("Player") && !SourceAbility.PlayerAbility)){
+        if (other.gameObject.CompareTag("Enemy") && SourceAbility.PlayerAbility)
+        {
             other.gameObject.GetComponent<Health>().TakeDamage(SourceAbility.CalculateDamage());
+            OnHit();
+        }
+        if (other.gameObject.CompareTag("Player") && !SourceAbility.PlayerAbility)
+        {
+            other.gameObject.GetComponentInParent<Health>().TakeDamage(SourceAbility.CalculateDamage());
             OnHit();
         }
     }
