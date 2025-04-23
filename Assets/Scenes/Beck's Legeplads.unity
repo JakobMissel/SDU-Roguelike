@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
-  isTamer: 0
+  usesKeyboard: 0
   acceleration: 100
   maxMovementSpeed: 4
   rotateToMouse: 0
@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
-  isTamer: 1
+  usesKeyboard: 0
   acceleration: 100
   maxMovementSpeed: 4
   rotateToMouse: 1
@@ -27474,7 +27474,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
