@@ -7,7 +7,7 @@ using Unity.Properties;
 using UnityEngine.AI;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "FleeTarget", story: "[Agent] flees [target]", category: "Action", id: "f8044c730d164c3556c754d149001877")]
+[NodeDescription(name: "FleeTarget", story: "[Agent] flees from target", category: "Action", id: "f8044c730d164c3556c754d149001877")]
 public partial class FleeTargetAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
@@ -61,7 +61,7 @@ public partial class FleeTargetAction : Action
         //Animator.Value?.SetFloat("walkSpeed", NavMeshAgent.Value.speed);
         var direction = (Agent.Value.transform.position - Enemy.Value.currentTarget.transform.position).normalized;
         direction = Quaternion.Euler(0, randomAngle, 0) * direction;
-        var fleePosition = Agent.Value.transform.position + direction * Enemy.Value.fleeRange / 2;
+        var fleePosition = Agent.Value.transform.position + direction * Enemy.Value.fleeRange;
         NavMeshAgent.Value.SetDestination(fleePosition);
         NavMeshAgent.Value.stoppingDistance = 0;
         pointGiven = true;

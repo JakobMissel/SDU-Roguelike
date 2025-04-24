@@ -13,6 +13,7 @@ public partial class PerformDashAction : Action
 
     protected override Status OnStart()
     {
+        if(Dash.Value == null) return Status.Failure;
         Dash.Value.BeginDash();
         return Status.Running;
     }
