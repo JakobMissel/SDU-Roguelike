@@ -13,7 +13,8 @@ public partial class CheckRangeAction : Action
     [SerializeReference] public BlackboardVariable<Enemy> Enemy;
     [SerializeReference] public BlackboardVariable<float> AttackRange;
     [SerializeReference] public BlackboardVariable<float> DashRange;
-    
+    [SerializeReference] public BlackboardVariable<float> FleeRange;
+
 
     protected override Status OnStart()
     {
@@ -29,13 +30,16 @@ public partial class CheckRangeAction : Action
         }
         AttackRange.Value = Enemy.Value.attackRange;
         DashRange.Value = Enemy.Value.dashRange;
+        FleeRange.Value = Enemy.Value.fleeRange;
         var distance = Vector3.Distance(Agent.Value.transform.position, Target.Value.transform.position);
         if (distance > AttackRange.Value)
         {
-            LogFailure("Target out of range.");
             return Status.Failure;
         }
-        Debug.Log("Target in range.");
+        if (distance < FleeRange.Value)
+        {
+            return Status.Failure;
+        }
         return Status.Success;
     }
 }

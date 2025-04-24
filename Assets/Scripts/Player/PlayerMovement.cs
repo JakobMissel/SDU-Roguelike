@@ -121,12 +121,12 @@ public class PlayerMovement : MonoBehaviour
             Rotate(targetDirection);
         }
         // initialize the rotation only when input from movement.
-        else if (move != Vector3.zero)
+        if (move != Vector3.zero)
         {
             //Rotate(move);
         }
         // when the player is not moving, the player rotates towards the mouse position.
-        else if (rotateToMouse && usesKeyboard)
+        if (rotateToMouse && usesKeyboard)
         { 
             RotateTowardsMousePosition();
         }
@@ -164,6 +164,5 @@ public class PlayerMovement : MonoBehaviour
     void OnDash(InputAction.CallbackContext context)
     {
         DashAbility.BeginDash();
-        CameraShake.Instance.ShakeCamera();
     }
 }

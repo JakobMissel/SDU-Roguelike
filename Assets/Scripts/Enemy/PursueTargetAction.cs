@@ -31,6 +31,7 @@ public partial class PursueTargetAction : Action
     
     void Pursue()
     {
+        NavMeshAgent.Value.stoppingDistance = Enemy.Value.attackRange;
         NavMeshAgent.Value.SetDestination(Enemy.Value.currentTarget.transform.position);
     }
 }

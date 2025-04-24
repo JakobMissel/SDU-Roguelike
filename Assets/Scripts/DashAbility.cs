@@ -45,6 +45,10 @@ public class DashAbility : MonoBehaviour
         {
             SpawnVisualDashCharge();
         }
+        if (cooldownImage != null)
+        {
+            cooldownImage.fillAmount = Mathf.Clamp01(currentCooldown / cooldown);
+        }
     }
 
     void Update()
@@ -57,16 +61,18 @@ public class DashAbility : MonoBehaviour
         //checking and resetting dash cooldown.
         if (availableDashes < maxDashes)
         {
+            if(currentCooldown == 0)
+                currentCooldown = cooldown;
             currentCooldown -= Time.deltaTime;
-            if (cooldownImage != null)
-            {
-                cooldownImage.fillAmount = Mathf.Clamp01(currentCooldown / cooldown);
-            }
-            if (currentCooldown >= cooldown)
+            if (currentCooldown <= 0)
             {
                 availableDashes++;
                 UpdateDashChargeVisual(false);
                 currentCooldown = 0f;
+            }
+            if (cooldownImage != null)
+            {
+                cooldownImage.fillAmount = Mathf.Clamp01(currentCooldown / cooldown);
             }
         }
     }
@@ -78,17 +84,19 @@ public class DashAbility : MonoBehaviour
         {
             if (removeCharge)
             {
-                if (maxCharges.transform.GetChild(i).gameObject.GetComponent<Image>().color == Color.white)
+                var charge = maxCharges.transform.GetChild(i).transform.GetChild(0).GetComponent<Image>();
+                if (charge.color == Color.white)
                 {
-                    maxCharges.transform.GetChild(i).gameObject.GetComponent<Image>().color = Color.clear;
+                    charge.color = Color.clear;
                     break;
                 }
             }
-            else if (!removeCharge)
+            else
             {
-                if (maxCharges.transform.GetChild(i).gameObject.GetComponent<Image>().color == Color.clear)
+                var charge = maxCharges.transform.GetChild((maxCharges.transform.childCount - 1) - i).transform.GetChild(0).GetComponent<Image>();
+                if (charge.color == Color.clear)
                 {
-                    maxCharges.transform.GetChild(i).gameObject.GetComponent<Image>().color = Color.white;
+                    charge.color = Color.white;
                     break;
                 }
             }
@@ -113,7 +121,6 @@ public class DashAbility : MonoBehaviour
         {
             isDashing = true;
             currentDuration = duration;
-            currentCooldown = cooldown;
             availableDashes--;
             UpdateDashChargeVisual(true);
             StartCoroutine(Dash());
@@ -122,7 +129,6 @@ public class DashAbility : MonoBehaviour
 
     IEnumerator Dash()
     {
-        print($"{gameObject.name} is dashing");
         //performs the dash.
         while (isDashing)
         {
