@@ -10,9 +10,9 @@ using UnityEngine.AI;
 public partial class PursueTargetAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
+    [SerializeReference] public BlackboardVariable<NavMeshAgent> NavMeshAgent;
+    [SerializeReference] public BlackboardVariable<Enemy> Enemy;
 
-    NavMeshAgent navMeshAgent;
-    Enemy enemy;
     protected override Status OnStart()
     {
         if (Agent.Value == null)
@@ -20,7 +20,6 @@ public partial class PursueTargetAction : Action
             LogFailure("No agent assigned.");
             return Status.Failure;
         }
-        Initialize();
         return Status.Running;
     }
 
@@ -30,14 +29,9 @@ public partial class PursueTargetAction : Action
         return Status.Success;
     }
     
-    void Initialize()
-    {
-        navMeshAgent = Agent.Value.GetComponent<NavMeshAgent>();
-        enemy = Agent.Value.GetComponent<Enemy>();
-    }
     void Pursue()
     {
-        navMeshAgent.SetDestination(enemy.currentTarget.transform.position);
+        NavMeshAgent.Value.SetDestination(Enemy.Value.currentTarget.transform.position);
     }
 }
 

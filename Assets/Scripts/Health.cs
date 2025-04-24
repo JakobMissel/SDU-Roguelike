@@ -18,6 +18,11 @@ public class Health : MonoBehaviour
     [SerializeField] [Tooltip("The time it takes to update the health bar relative to the amount of health restored or lost.")] [Range(0.01f, 2f)] float fillTime = 0.4f;
     [SerializeField] [Tooltip("Graphical representation of the current health for entity.")] Image[] healthBar;
     [SerializeField] [Tooltip("Numerical representation of the health for entity.")] TMP_Text[] currentHealthText;
+    [SerializeField] [Tooltip("GameObject that visualizes a hit on the entity.")] GameObject[] hitVisualizer;
+    [SerializeField] [Tooltip("How many seconds is the Hit Visualizer visible.")] [Range(0.01f, 0.5f)] float hitVisualizerDuration = 0.1f;
+    [SerializeField] [Tooltip("Audio clip played when the entity takes damage.")] AudioClip damageTakenAudioClip;
+    [SerializeField][Tooltip("Audio clip played when the entity is healed.")] AudioClip healAudioClip;
+    AudioSource audioSource;
 
     [Header("GodMode")] 
     [SerializeField] [Tooltip("Checking this box disallows subtraction of health for entity")] bool isInvulnerable;
@@ -30,6 +35,8 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
         canBeHealed = false;
         UpdateHealthUI();
+        ShowHitVisualizer(false);
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -49,6 +56,8 @@ public class Health : MonoBehaviour
                 var effect = Instantiate(healingEffect, player.transform.position, Quaternion.identity);
                 effect.transform.SetParent(player.transform);
             }
+            if (audioSource != null && healAudioClip != null)
+                audioSource.PlayOneShot(healAudioClip);
         }
     }
 
@@ -74,7 +83,12 @@ public class Health : MonoBehaviour
         accumulatedDamage += amount;
         StartHealthUpdate();
         if (isPlayer)
+        {
             CameraShake.Instance.ShakeCamera(0.1f, .5f, 0.1f);
+            if(audioSource != null && damageTakenAudioClip != null)
+                audioSource.PlayOneShot(damageTakenAudioClip);
+        }
+        StartCoroutine(VisualHitIndicator());
     }
 
     /// <summary>
@@ -107,6 +121,22 @@ public class Health : MonoBehaviour
         if (updateHealthBar != null)
             StopCoroutine(updateHealthBar);
         updateHealthBar = StartCoroutine(UpdateHealthBar());
+    }
+
+    void ShowHitVisualizer(bool toggle)
+    {
+        for (int i = 0; i < hitVisualizer.Length; i++)
+        {
+            if (hitVisualizer[i] == null) continue;
+            hitVisualizer[i].SetActive(toggle);
+        }
+    }
+
+    IEnumerator VisualHitIndicator()
+    {
+        ShowHitVisualizer(true);
+        yield return new WaitForSeconds(hitVisualizerDuration);
+        ShowHitVisualizer(false);
     }
 
     /// <summary>

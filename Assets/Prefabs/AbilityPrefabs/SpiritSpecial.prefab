@@ -9760,6 +9760,7 @@ GameObject:
   - component: {fileID: 5398449067357225976}
   - component: {fileID: -2665782939427605613}
   - component: {fileID: 6708493211165610106}
+  - component: {fileID: 9112428321253637696}
   m_Layer: 0
   m_Name: SpiritSpecial
   m_TagString: Untagged
@@ -9876,11 +9877,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5698038324825202569}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 080c4a7cdb311e94ca5683250828a0c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9112428321253637696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5698038324825202569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea8d245fd2853c42b21541e8919e990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SourceAbility: {fileID: 0}
+  GameObjectToDestroy: {fileID: 5698038324825202569}
 --- !u!1 &9040087505873296249
 GameObject:
   m_ObjectHideFlags: 0

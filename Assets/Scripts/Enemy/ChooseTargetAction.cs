@@ -57,7 +57,6 @@ public partial class ChooseTargetAction : Action
             return;
         }
         targets = GameObject.FindGameObjectsWithTag(Tag.Value);
-        Debug.Log($"Found {targets.Length} targets with tag {Tag.Value}");
     }
 
     void SetTarget()
@@ -85,7 +84,6 @@ public partial class ChooseTargetAction : Action
                 closestTarget = i;
             }
         }
-        Debug.Log($"Chose target: {targets[closestTarget].name}");
         return closestTarget;
     }
 
@@ -93,7 +91,6 @@ public partial class ChooseTargetAction : Action
     {
         int targetCount = targets.Length;
         int randomTarget = UnityEngine.Random.Range(0, targetCount);
-        Debug.Log($"Chose target: {targets[currentTarget].name}");
         return randomTarget;
     }
 }
