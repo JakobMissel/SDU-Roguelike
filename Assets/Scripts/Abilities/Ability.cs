@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Ability : MonoBehaviour {
+    [SerializeField] internal Image CooldownImage;
     [SerializeField] internal float Cooldown;
     [SerializeField] internal float CooldownModifier;
     [SerializeField] internal float CurrentCooldown;
@@ -24,9 +26,11 @@ public class Ability : MonoBehaviour {
     [SerializeField] internal float ProjectileSpeed;
     [SerializeField] internal bool PlayerAbility;
     void Awake() {
+        if (!PlayerAbility) return;
         playerInput = GetComponent<PlayerInput>();
     }
     protected void OnEnable() {
+        if (!PlayerAbility) return;
         if (!string.IsNullOrEmpty(ActivateActionName)){
             var action = playerInput.actions[ActivateActionName];
             if (action != null) {
@@ -38,6 +42,7 @@ public class Ability : MonoBehaviour {
     }
 
     protected void OnDisable() {
+        if (!PlayerAbility) return;
         if (!string.IsNullOrEmpty(ActivateActionName))
             playerInput.actions[ActivateActionName].started -= ActivateAbility;
     }
@@ -58,6 +63,9 @@ public class Ability : MonoBehaviour {
     }
     internal void RunCooldown(){
         CurrentCooldown = Mathf.Clamp(CurrentCooldown - Time.deltaTime, 0, Cooldown);
+        if (CooldownImage != null) {
+            CooldownImage.fillAmount = Mathf.Clamp01(CurrentCooldown / Cooldown);
+        }
     }
 
     public bool CheckCooldown() {

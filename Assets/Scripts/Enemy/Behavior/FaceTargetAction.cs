@@ -39,12 +39,12 @@ public partial class FaceTargetAction : Action
     }
     Status FaceTarget(GameObject target)
     {
-        Vector3 direction = target.transform.position - Agent.Value.transform.position;
-        direction.Normalize();
-        Quaternion targetRotation = Quaternion.LookRotation(direction, target.transform.up);
+        var direction = target.transform.position - Agent.Value.transform.position;
+        direction.y = 0; // Ignore vertical direction
+        var targetRotation = Quaternion.LookRotation(direction);
         Agent.Value.transform.rotation = Quaternion.Slerp(Agent.Value.transform.rotation, targetRotation, Time.deltaTime * RotationSpeed);
 
-        float dotProduct = Vector3.Dot(Agent.Value.transform.forward, direction);
+        float dotProduct = Vector3.Dot(Agent.Value.transform.forward, direction.normalized);
         if (dotProduct > FacingAccuracy.Value)
         {
             return Status.Success;

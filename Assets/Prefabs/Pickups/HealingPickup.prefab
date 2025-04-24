@@ -127,7 +127,7 @@ MonoBehaviour:
   verticalHeight: 0.5
   rotate: 1
   rotationSpeed: 50
-  audioClip: {fileID: 8300000, guid: 1a0ea225acf2629448b71137c0b80957, type: 3}
+  audioClip: {fileID: 0}
   canBepickedUp: 1
   healAmount: 10
 --- !u!1 &4848377069021815774

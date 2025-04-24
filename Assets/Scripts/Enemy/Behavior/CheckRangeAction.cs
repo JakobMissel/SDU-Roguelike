@@ -33,9 +33,10 @@ public partial class CheckRangeAction : Action
         if (distance > AttackRange.Value)
         {
             LogFailure("Target out of range.");
+            return Status.Failure;
         }
         Debug.Log("Target in range.");
-        return Status.Running;
+        return Status.Success;
     }
 }
 
