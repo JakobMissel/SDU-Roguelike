@@ -46,14 +46,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe6c4642fb89414cb669b22b9da5871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnArea: {fileID: 5222266378517728114}
-  spawnRadius: 6.5
-  spawnText: CLEANS THE CORRUPTION!
   enemyPrefabs:
   - {fileID: 5270228530466345366, guid: 26b8f1fa498151940907816a3ec04041, type: 3}
   - {fileID: 5955679496142819747, guid: 1596d520e1670c442a972350a74346a0, type: 3}
   numberOfEnemiesToSpawn: 10
   zoneLevel: 1
+  spawnArea: {fileID: 5222266378517728114}
+  spawnRadius: 10.1
+  spawnText1: ATTENTION!
+  spawnText2: EAT MR. BEAST BAR
+  openColor: {r: 0, g: 0.42352942, b: 1, a: 0}
+  closedColor: {r: 1, g: 0.41960785, b: 0, a: 0}
+  pointLight:
+  - {fileID: 0}
+  - {fileID: 0}
+  doors: []
 --- !u!65 &9166039544754084238
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -100,7 +107,7 @@ Transform:
   m_GameObject: {fileID: 3678884972528394814}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.33, y: 0, z: 15.75}
+  m_LocalPosition: {x: 4.59, y: 0, z: 17.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -5,4 +5,7 @@ public class GameEvents : MonoBehaviour
 {
     public static event Action OnPlayerDeath;
     public static void PlayerDeath() => OnPlayerDeath?.Invoke();
+
+    public static event Action OnEnemyDeath;
+    public static void EnemyDeath() => OnEnemyDeath?.Invoke();
 }

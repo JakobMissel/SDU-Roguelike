@@ -1229,27 +1229,6 @@
 }
 
 {
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
-    "m_ObjectId": "5aed381ed76045b69d21c218b39d992a",
-    "m_Id": 1,
-    "m_DisplayName": "Tiling",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Tiling",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 1.0,
-        "y": 1.0
-    },
-    "m_DefaultValue": {
-        "x": 1.0,
-        "y": 1.0
-    },
-    "m_Labels": []
-}
-
-{
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.Internal.Vector3ShaderProperty",
     "m_ObjectId": "5aa7e992276e49b79084f3bde545594a",
@@ -1275,6 +1254,27 @@
         "z": 0.0,
         "w": 0.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "5aed381ed76045b69d21c218b39d992a",
+    "m_Id": 1,
+    "m_DisplayName": "Tiling",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Tiling",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 1.0,
+        "y": 1.0
+    },
+    "m_DefaultValue": {
+        "x": 1.0,
+        "y": 1.0
+    },
+    "m_Labels": []
 }
 
 {
@@ -1931,8 +1931,8 @@
     "m_ObjectId": "942a615f15da4a8687ab645a3031eac7",
     "m_Title": "VIGNETTE",
     "m_Position": {
-        "x": -939.0,
-        "y": -502.0
+        "x": -939.199951171875,
+        "y": -503.199951171875
     }
 }
 
@@ -2553,21 +2553,15 @@
     "m_Value": 0.0,
     "m_SerializableColorKeys": [
         {
-            "x": 0.0,
+            "x": 1.0,
             "y": 1.0,
-            "z": 0.7420225143432617,
+            "z": 1.0,
             "w": 0.0
         },
         {
-            "x": 0.9061288833618164,
-            "y": 1.0,
-            "z": 0.0,
-            "w": 0.5000076293945313
-        },
-        {
             "x": 1.0,
-            "y": 0.0,
-            "z": 0.0,
+            "y": 1.0,
+            "z": 1.0,
             "w": 1.0
         }
     ],

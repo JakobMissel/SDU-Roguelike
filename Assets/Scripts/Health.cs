@@ -113,6 +113,7 @@ public class Health : MonoBehaviour
         else
         {
             GetComponentInChildren<Animator>().Play("Die");
+            GameEvents.EnemyDeath();
         }
     }
 

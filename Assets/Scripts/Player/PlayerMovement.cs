@@ -76,7 +76,10 @@ public class PlayerMovement : MonoBehaviour
         {
             //feed input values to character controller.
             rb.AddForce(move * (acceleration * Time.deltaTime), ForceMode.VelocityChange);
-            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxMovementSpeed);
+            if(!DashAbility.isDashing)
+                rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxMovementSpeed);
+            else
+                rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, DashAbility.speed);
             //rigidbody.MovePosition(transform.position + move * (movementSpeed * Time.deltaTime));
             animator.SetBool("isWalking", true);
         }

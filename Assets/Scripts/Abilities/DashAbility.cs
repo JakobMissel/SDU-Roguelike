@@ -145,10 +145,14 @@ public class DashAbility : MonoBehaviour
                 {
                     if (playerMovement.move != Vector3.zero)
                     {
-                        rb.MovePosition(transform.position + playerMovement.move * (speed * Time.deltaTime));
+                        rb.AddForce(playerMovement.move * (10 * speed * Time.deltaTime), ForceMode.VelocityChange);
+
+                        //rb.MovePosition(transform.position + playerMovement.move * (speed * Time.deltaTime));
                     }
                     else
-                        rb.MovePosition(transform.position + transform.forward * (speed * Time.deltaTime));
+                        rb.AddForce(transform.forward * (10 * speed * Time.deltaTime), ForceMode.VelocityChange);
+
+                    //rb.MovePosition(transform.position + transform.forward * (speed * Time.deltaTime));
                 }
                 else
                 {
