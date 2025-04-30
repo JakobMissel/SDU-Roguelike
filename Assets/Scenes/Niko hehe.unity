@@ -7072,12 +7072,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5992219001392063788, guid: 1596d520e1670c442a972350a74346a0, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7134877091308010369, guid: 1596d520e1670c442a972350a74346a0, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 445349028}
+    - target: {fileID: 7488814131886985495, guid: 1596d520e1670c442a972350a74346a0, type: 3}
+      propertyPath: 'managedReferences[2461528929849311879]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Boolean,
+        mscorlib]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488814131886985495, guid: 1596d520e1670c442a972350a74346a0, type: 3}
+      propertyPath: managedReferences[2461528929849311879].Name
+      value: IsRanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488814131886985495, guid: 1596d520e1670c442a972350a74346a0, type: 3}
+      propertyPath: m_BlackboardVariableOverridesList.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488814131886985495, guid: 1596d520e1670c442a972350a74346a0, type: 3}
+      propertyPath: managedReferences[2461528929849311879].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488814131886985495, guid: 1596d520e1670c442a972350a74346a0, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[5]'
+      value: 2461528929849311879
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488814131886985495, guid: 1596d520e1670c442a972350a74346a0, type: 3}
+      propertyPath: managedReferences[2461528929849311879].GUID.m_Value0
+      value: 10167695410554887627
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488814131886985495, guid: 1596d520e1670c442a972350a74346a0, type: 3}
+      propertyPath: managedReferences[2461528929849311879].GUID.m_Value1
+      value: 1350309439155823769
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

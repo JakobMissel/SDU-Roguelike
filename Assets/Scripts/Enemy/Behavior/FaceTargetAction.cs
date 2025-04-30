@@ -12,6 +12,8 @@ public partial class FaceTargetAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> Target;
     [SerializeReference] public BlackboardVariable<float> RotationSpeed;
     [SerializeReference] public BlackboardVariable<float> FacingAccuracy;
+    [SerializeReference] public BlackboardVariable<bool> IsRanged;
+    Vector3 direction;
 
     protected override Status OnStart()
     {
@@ -39,7 +41,14 @@ public partial class FaceTargetAction : Action
     }
     Status FaceTarget(GameObject target)
     {
-        var direction = target.transform.position - Agent.Value.transform.position;
+        if(IsRanged.Value)
+        {
+            direction = Agent.Value.transform.position - target.transform.position;
+        }
+        else
+        {
+            direction = target.transform.position - Agent.Value.transform.position;
+        }
         direction.y = 0; // Ignore vertical direction
         var targetRotation = Quaternion.LookRotation(direction);
         Agent.Value.transform.rotation = Quaternion.Slerp(Agent.Value.transform.rotation, targetRotation, Time.deltaTime * RotationSpeed);

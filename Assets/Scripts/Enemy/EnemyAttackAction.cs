@@ -31,7 +31,7 @@ public partial class EnemyAttackAction : Action
 
     void Attack()
     {
-        NavMeshAgent.Value.ResetPath();
+        NavMeshAgent.Value.SetDestination(Agent.Value.transform.position);
         GameObject target = Target.Value;
         Enemy.Value.Attack(target);
     }
