@@ -435,7 +435,7 @@ MonoBehaviour:
   DamageModifier: 0
   Range: 0
   RangeModifier: 0
-  AreaModifier: 0
+  AreaModifier: 1
   VFX: {fileID: 2146063966744521395, guid: 91c8670b32ecd4640acd702e5bb579f0, type: 3}
   playerInput: {fileID: 4304654060314443315}
   animator: {fileID: 1103390317966959686}
@@ -736,7 +736,7 @@ MonoBehaviour:
   DamageModifier: 0
   Range: 15
   RangeModifier: 0
-  AreaModifier: 0
+  AreaModifier: 1
   VFX: {fileID: 1940409667107805121, guid: 13eea155b472b584a856e43a459a9a00, type: 3}
   playerInput: {fileID: 1666470629442572161}
   animator: {fileID: 78488472762371152}

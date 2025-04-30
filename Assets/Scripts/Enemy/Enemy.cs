@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -44,7 +45,7 @@ public class Enemy : MonoBehaviour
 
     public void Attack(GameObject target)
     {
-        if (enemyBasicAttack.CurrentCooldown == 0 && attackAudioClip != null)
+        if (enemyBasicAttack.CurrentCooldown == 0 && attackAudioClip != null && !health.isDead)
         {
             if(isRanged)
                 animator.Play("RangedAttack");
@@ -57,6 +58,10 @@ public class Enemy : MonoBehaviour
 
     public void SetLevel(int level)
     {
+        this.level = level;
+        transform.localScale = Vector3.one * Mathf.Pow(1.05f, level);
+        attackRange *= Mathf.Pow(1.05f, level);
+        enemyBasicAttack.AreaModifier = Mathf.Pow(1.05f, level);
         if (level > 0)
         {
             damage = Mathf.RoundToInt(damage * Mathf.Pow(levelMultiplier, level));

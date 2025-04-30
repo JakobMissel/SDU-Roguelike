@@ -57,6 +57,7 @@ public class Ability : MonoBehaviour {
     public virtual void ActivateAbility(){
         if (CheckCooldown()) {
             var vfx = Instantiate(VFX, transform.position, Quaternion.LookRotation(transform.forward));
+            vfx.transform.localScale = Vector3.one * AreaModifier;
             vfx.GetComponent<AbilityInstance>().SetInfo(this);
             ApplyCooldown();
         }

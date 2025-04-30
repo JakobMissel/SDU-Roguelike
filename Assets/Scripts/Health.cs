@@ -22,7 +22,8 @@ public class Health : MonoBehaviour
     [SerializeField] [Tooltip("Audio clip played when the entity takes damage.")] AudioClip damageTakenAudioClip;
     [SerializeField][Tooltip("Audio clip played when the entity is healed.")] AudioClip healAudioClip;
     AudioSource audioSource;
-
+    Animator animator;
+    Animator[] animators = new Animator[2];
     [Header("GodMode")] 
     [SerializeField] [Tooltip("Checking this box disallows subtraction of health for entity")] bool isInvulnerable;
     [HideInInspector] public bool canBeHealed;
@@ -36,6 +37,16 @@ public class Health : MonoBehaviour
         UpdateHealthUI();
         ShowHitVisualizer(false);
         audioSource = GetComponent<AudioSource>();
+        if(!isPlayer)
+            animator = GetComponentInChildren<Animator>();
+        else
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i] == null) continue;
+                animators[i] = players[i].GetComponentInChildren<Animator>();
+            }
+        }
     }
 
     /// <summary>
@@ -103,16 +114,17 @@ public class Health : MonoBehaviour
         DestrotUI();
         if (isPlayer)
         {
-            foreach (var player in players)
+            for (int i = 0; i < players.Length; i++)
             {
-                player.GetComponent<PlayerMovement>().enabled = false;
-                player.GetComponentInChildren<Animator>().Play("Die");
+                if (players[i] == null) continue;
+                players[i].GetComponent<PlayerMovement>().enabled = false;
+                animators[i].Play("Die");
             }
             GameEvents.PlayerDeath();
         }
         else
         {
-            GetComponentInChildren<Animator>().Play("Die");
+            animator.Play("Die");
             GameEvents.EnemyDeath();
         }
     }
