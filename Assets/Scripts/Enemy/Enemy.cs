@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     EnemyBasicAttack enemyBasicAttack;
     Health health;
     NavMeshAgent navMeshAgent;
+    [SerializeField] bool isRanged;
+    [SerializeField] Animator animator;
     [Tooltip("The distance between enemy and its target before it will perform its attack.")] public float attackRange = 1.5f;
     [Tooltip("The distance between enemy and its target before it will perform a dash.")] public float dashRange = 3f;
     [Tooltip("The distance between enemy and its target before it attempt to flee.")] public float fleeRange = 1f;
@@ -46,6 +48,10 @@ public class Enemy : MonoBehaviour
         {
             target.GetComponentInParent<AudioSource>().PlayOneShot(attackAudioClip);
         }
+        if(isRanged)
+            animator.Play("RangedAttack");
+        else
+            animator.Play("MeleeAttack");
         enemyBasicAttack.ActivateAbility();
     }
 
