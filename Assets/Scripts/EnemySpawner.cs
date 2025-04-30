@@ -35,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
         GetComponent<Collider>().isTrigger = true;
         spawnMessage = GameObject.Find("SpawnMessage").GetComponent<TextMeshProUGUI>();
         spawnMessage.text = "";
+        zoneLevel = GameEvents.FloorLevel;
     }
 
     private void OnEnable()
