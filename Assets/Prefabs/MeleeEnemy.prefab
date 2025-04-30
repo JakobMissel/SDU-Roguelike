@@ -412,7 +412,7 @@ MonoBehaviour:
   Range: 0
   RangeModifier: 0
   AreaModifier: 0
-  VFX: {fileID: 2146063966744521395, guid: 9751189b606a2ee4c9ec4e99da03b6d9, type: 3}
+  VFX: {fileID: 7508369707688270100, guid: 3bc27f611ddac474e9c173f9ec767b41, type: 3}
   playerInput: {fileID: 0}
   animator: {fileID: 0}
   ActivateActionName: 

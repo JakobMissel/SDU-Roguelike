@@ -46,12 +46,12 @@ public class Enemy : MonoBehaviour
     {
         if (enemyBasicAttack.CurrentCooldown == 0 && attackAudioClip != null)
         {
+            if(isRanged)
+                animator.Play("RangedAttack");
+            else
+                animator.Play("MeleeAttack");
             target.GetComponentInParent<AudioSource>().PlayOneShot(attackAudioClip);
         }
-        if(isRanged)
-            animator.Play("RangedAttack");
-        else
-            animator.Play("MeleeAttack");
         enemyBasicAttack.ActivateAbility();
     }
 
