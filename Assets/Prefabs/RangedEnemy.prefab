@@ -445,6 +445,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5811523908613435620}
   - component: {fileID: 4554215193234883324}
+  - component: {fileID: 1764091890086281941}
   m_Layer: 0
   m_Name: Character Mesh
   m_TagString: Untagged
@@ -480,7 +481,7 @@ Animator:
   m_GameObject: {fileID: 4906523986831193891}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 94f4a183f1b7d3f47b277c8d3c48f150, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2167d89d3d0b23f4d9bf6ad2c25596b2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -492,6 +493,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1764091890086281941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4906523986831193891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8973ef83dbd52284ab5851f18f2c731e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyGrandparent: 0
 --- !u!1 &5688691294569957077
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +582,6 @@ GameObject:
   - component: {fileID: 707419237487607304}
   - component: {fileID: 320904646202432402}
   - component: {fileID: 8294533250385836481}
-  - component: {fileID: 9019325986852367649}
   m_Layer: 0
   m_Name: RangedEnemy
   m_TagString: Enemy
@@ -656,6 +669,8 @@ MonoBehaviour:
   - rid: 160975697095164087
   - rid: 5916711816113160444
   - rid: 2461528887195599260
+  - rid: 2461528929849311879
+  - rid: 2461529045824176346
   m_IsInitialised: 0
   m_IsStarted: 0
   NetcodeRunOnlyOnOwner: 0
@@ -694,6 +709,22 @@ MonoBehaviour:
           m_Value1: 13599617749515689297
         Name: NavMeshAgent
         m_Value: {fileID: 2944918911336735954}
+    - rid: 2461528929849311879
+      type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10167695410554887627
+          m_Value1: 1350309439155823769
+        Name: IsRanged
+        m_Value: 1
+    - rid: 2461529045824176346
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 550481554893365772
+          m_Value1: 2733366579614848798
+        Name: Animator
+        m_Value: {fileID: 4554215193234883324}
     - rid: 5916711816113160444
       type: {class: 'BlackboardVariable`1[[Enemy, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -739,8 +770,13 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   attackRange: 6
   dashRange: 3
+  fleeRange: 5
   attackAudioClip: {fileID: 8300000, guid: a3c04fb3e5fc47040a54c7f36b96f529, type: 3}
-  damage: 5
+  damage: 4
+  maxHealth: 20
+  speed: 3.5
+  level: 0
+  levelMultiplier: 1.2
 --- !u!114 &320904646202432402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -800,28 +836,6 @@ MonoBehaviour:
   isInvulnerable: 0
   canBeHealed: 0
   isDead: 0
---- !u!95 &9019325986852367649
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5955679496142819747}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2167d89d3d0b23f4d9bf6ad2c25596b2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8655204497185080620
 GameObject:
   m_ObjectHideFlags: 0

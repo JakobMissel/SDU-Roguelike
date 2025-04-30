@@ -31,6 +31,7 @@ public partial class FleeTargetAction : Action
 
     protected override Status OnUpdate()
     {
+        if(Enemy.Value.currentTarget == null) return Status.Failure;
         direction = (Agent.Value.transform.position - Enemy.Value.currentTarget.transform.position).normalized;
         GiveFleePoint();
         return Status.Running;

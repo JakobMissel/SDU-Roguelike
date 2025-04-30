@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDashing: 0
-  speed: 20
+  speed: 30
   duration: 0.15
   cooldownImage: {fileID: 0}
   cooldown: 4
@@ -488,6 +488,7 @@ GameObject:
   - component: {fileID: 7019161240203701662}
   - component: {fileID: 4876171395304231533}
   - component: {fileID: 8798122168824381901}
+  - component: {fileID: 375273243092110555}
   m_Layer: 0
   m_Name: Player(Tamer)
   m_TagString: Player
@@ -667,7 +668,7 @@ MonoBehaviour:
     m_ActionId: 5a82561d-8916-49ab-8336-21d774a6f5d6
     m_ActionName: 'PlayerDefault/Special[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast,/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: PlayerDefault
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -684,10 +685,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
-  usesKeyboard: 0
+  usesKeyboard: 1
   acceleration: 100
   maxMovementSpeed: 4
-  rotateToMouse: 0
+  rotateToMouse: 1
   rotationSpeed: 750
   gamepadSensitivity: 0.1
 --- !u!114 &7019161240203701662
@@ -703,13 +704,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDashing: 0
-  speed: 20
+  speed: 25
   duration: 0.15
   cooldownImage: {fileID: 0}
   cooldown: 4
   dashChargeImagePrefab: {fileID: 8920644572205715813, guid: 60854e66fb5877d47a399da3cca16c7e, type: 3}
   maxCharges: {fileID: 0}
-  maxDashes: 1
+  maxDashes: 3
   isPlayer: 1
   availableDashes: 0
 --- !u!114 &4876171395304231533
@@ -740,7 +741,7 @@ MonoBehaviour:
   playerInput: {fileID: 1666470629442572161}
   animator: {fileID: 78488472762371152}
   ActivateActionName: Attack
-  ProjectileSpeed: 5
+  ProjectileSpeed: 15
   PlayerAbility: 1
 --- !u!114 &8798122168824381901
 MonoBehaviour:
@@ -772,6 +773,22 @@ MonoBehaviour:
   ActivateActionName: Special
   ProjectileSpeed: 0
   PlayerAbility: 1
+--- !u!208 &375273243092110555
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546906308975252551}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1742128317492843599
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,6 +799,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6921658253100147792}
   - component: {fileID: 1103390317966959686}
+  - component: {fileID: 4462539252688303044}
+  - component: {fileID: 8245359835458886370}
   m_Layer: 0
   m_Name: Character Mesh
   m_TagString: Untagged
@@ -830,6 +849,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4462539252688303044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742128317492843599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3b621b397e24f4ba78312accd8c5df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: c5b5b140129097841a138615d406ea34, type: 3}
+--- !u!114 &8245359835458886370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742128317492843599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8973ef83dbd52284ab5851f18f2c731e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyGrandparent: 1
 --- !u!1 &2150453561613416470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,6 +1229,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8779720807551687297}
   - component: {fileID: 78488472762371152}
+  - component: {fileID: 5025116718417656190}
+  - component: {fileID: 5095685735350611439}
   m_Layer: 0
   m_Name: Character Mesh
   m_TagString: Untagged
@@ -1232,6 +1279,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5025116718417656190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389048424345538521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3b621b397e24f4ba78312accd8c5df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: c5b5b140129097841a138615d406ea34, type: 3}
+--- !u!114 &5095685735350611439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389048424345538521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8973ef83dbd52284ab5851f18f2c731e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyGrandparent: 1
 --- !u!1 &8861955709167328223
 GameObject:
   m_ObjectHideFlags: 0

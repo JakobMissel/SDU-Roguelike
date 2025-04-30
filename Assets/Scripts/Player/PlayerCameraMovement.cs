@@ -19,6 +19,11 @@ public class PlayerCameraMovement : MonoBehaviour
 
     void LateUpdate()
     {
+        if (PlayerDistanceManager.Instance == null)
+        {
+            Debug.LogWarning("PlayerDistanceManager instance is null. Camera movement will not be applied.");
+            return;
+        }
         Vector3 midpoint = PlayerDistanceManager.Instance.playersMidpointGO.transform.position;
         Vector3 desiredPosition = midpoint + offset;
         

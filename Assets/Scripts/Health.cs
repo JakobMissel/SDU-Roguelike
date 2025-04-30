@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
@@ -97,6 +98,7 @@ public class Health : MonoBehaviour
     void Die() 
     {
         if(isDead) return;
+        isDead = true;
         canBeHealed = false;
         isInvulnerable = true;
         currentHealth = 0;
@@ -104,13 +106,17 @@ public class Health : MonoBehaviour
         DestrotUI();
         if (isPlayer)
         {
-            //player dead event maybe?
+            foreach (var player in players)
+            {
+                player.GetComponent<PlayerMovement>().enabled = false;
+                player.GetComponentInChildren<Animator>().Play("Die");
+            }
+            GameEvents.PlayerDeath();
         }
         else
         {
-            GetComponent<Animator>().Play("Die");
+            GetComponentInChildren<Animator>().Play("Die");
         }
-        isDead = true;
     }
 
     /// <summary>

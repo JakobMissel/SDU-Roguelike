@@ -41,7 +41,12 @@ public partial class FaceTargetAction : Action
     }
     Status FaceTarget(GameObject target)
     {
-        if(IsRanged.Value)
+        if(target == null)
+        {
+            LogFailure("Target is null.");
+            return Status.Failure;
+        }
+        if (IsRanged.Value)
         {
             direction = Agent.Value.transform.position - target.transform.position;
         }

@@ -163,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnDash(InputAction.CallbackContext context)
     {
-        DashAbility.BeginDash();
+        if(DashAbility != null)
+            DashAbility.BeginDash();
     }
 }

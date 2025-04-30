@@ -77,6 +77,7 @@ public partial class ChooseTargetAction : Action
         float closestDistance = Mathf.Infinity;
         for (int i = 0; i < targets.Length; i++)
         {
+            if(targets[i] == null) continue;
             float distance = Vector3.Distance(targets[i].transform.position, enemy.transform.position);
             if (distance < closestDistance)
             {

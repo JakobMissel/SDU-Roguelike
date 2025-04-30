@@ -32,6 +32,11 @@ public partial class PursueTargetAction : Action
     void Pursue()
     {
         NavMeshAgent.Value.stoppingDistance = Enemy.Value.attackRange;
+        if(Enemy.Value.currentTarget == null)
+        {
+            LogFailure("No target assigned.");
+            return;
+        }
         NavMeshAgent.Value.SetDestination(Enemy.Value.currentTarget.transform.position);
     }
 }
