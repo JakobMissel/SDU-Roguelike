@@ -1,9 +1,12 @@
+using TMPro;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] Transform spawnArea;
     [SerializeField] float spawnRadius = 5f;
+    [SerializeField] [TextArea] string spawnText = "CLEANS THE CORRUPTION!";
+    TextMeshProUGUI spawnMessage;
     public GameObject[] enemyPrefabs;
     public int numberOfEnemiesToSpawn = 5;
     public int zoneLevel = 1;
@@ -12,6 +15,8 @@ public class EnemySpawner : MonoBehaviour
     void Awake()
     {
         GetComponent<Collider>().isTrigger = true;
+        spawnMessage = GameObject.Find("SpawnMessage").GetComponent<TextMeshProUGUI>();
+        spawnMessage.gameObject.SetActive(false);
     }
 
     void OnTriggerEnter(Collider other)
@@ -32,6 +37,8 @@ public class EnemySpawner : MonoBehaviour
             var enemy = Instantiate(enemyPrefabs[randomIndex], randomPosition, Quaternion.identity);
             enemy.GetComponent<Enemy>().SetLevel(zoneLevel);
         }
+        spawnMessage.gameObject.SetActive(true);
+        spawnMessage.text = spawnText;
         hasSpawned = true;
     }
 

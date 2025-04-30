@@ -1,9 +1,7 @@
-using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
@@ -102,7 +100,6 @@ public class Health : MonoBehaviour
         canBeHealed = false;
         isInvulnerable = true;
         currentHealth = 0;
-        print($"{name} DIED LOL");
         DestrotUI();
         if (isPlayer)
         {
