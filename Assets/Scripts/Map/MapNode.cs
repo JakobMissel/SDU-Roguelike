@@ -3,9 +3,9 @@ using UnityEngine;
 
 public enum NodeType {
     Currency = 60,
-    Healing = 15,
+    Healing = 11,
     Upgrade = 20,
-    Talisman = 5,
+    Talisman = 9,
     Boss = 0,
 }
 public class MapNode {
@@ -15,17 +15,25 @@ public class MapNode {
     [SerializeField] public bool ActiveNode;
     [SerializeField] public bool Completed;
     public int Floor;
+    public int ID;
+    public static int CURRENTID;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
-        
+        CURRENTID += 1;
+        ID = CURRENTID;
     }
 
     public MapNode(NodeType type, int floor) {
         this.Type = type;
         this.Floor = floor;
-        ActiveNode = false;
-        ConnectedNodes = new List<MapNode>();    }
+        if (floor == 1) {
+            ActiveNode = true;
+        } else {
+            ActiveNode = false;
+        }
+        ConnectedNodes = new List<MapNode>();
+    }
 
     // Update is called once per frame
     void Update()
