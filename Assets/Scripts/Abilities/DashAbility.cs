@@ -116,6 +116,7 @@ public class DashAbility : MonoBehaviour
 
     public void BeginDash()
     {
+        if (GameEvents.GameIsOver) return;
         //check if there are dashes left in the charge.
         if (availableDashes > 0 && !isDashing)
         {
@@ -146,13 +147,9 @@ public class DashAbility : MonoBehaviour
                     if (playerMovement.move != Vector3.zero)
                     {
                         rb.AddForce(playerMovement.move * (10 * speed * Time.deltaTime), ForceMode.VelocityChange);
-
-                        //rb.MovePosition(transform.position + playerMovement.move * (speed * Time.deltaTime));
                     }
                     else
                         rb.AddForce(transform.forward * (10 * speed * Time.deltaTime), ForceMode.VelocityChange);
-
-                    //rb.MovePosition(transform.position + transform.forward * (speed * Time.deltaTime));
                 }
                 else
                 {

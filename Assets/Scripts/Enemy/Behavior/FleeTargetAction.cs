@@ -15,7 +15,6 @@ public partial class FleeTargetAction : Action
     [SerializeReference] public BlackboardVariable<Enemy> Enemy;
     Vector3 direction;
     float randomAngle;
-    bool pointGiven = false;
 
     protected override Status OnStart()
     {
@@ -24,7 +23,6 @@ public partial class FleeTargetAction : Action
             LogFailure("No agent assigned.");
             return Status.Failure;
         }
-        pointGiven = false;
         randomAngle = Random.Range(-60, 60);
         return Status.Running;
     }
@@ -39,13 +37,10 @@ public partial class FleeTargetAction : Action
 
     void GiveFleePoint()
     {
-        //Animator.Value?.SetBool("isWalking", true);
-        //Animator.Value?.SetFloat("walkSpeed", NavMeshAgent.Value.speed);
         direction = Quaternion.Euler(0, randomAngle, 0) * direction;
         var fleePosition = Agent.Value.transform.position + direction * Enemy.Value.fleeRange;
         NavMeshAgent.Value.SetDestination(fleePosition);
         NavMeshAgent.Value.stoppingDistance = 0;
-        pointGiven = true;
     }
 }
 

@@ -117,7 +117,6 @@ public class Health : MonoBehaviour
             for (int i = 0; i < players.Length; i++)
             {
                 if (players[i] == null) continue;
-                players[i].GetComponent<PlayerMovement>().enabled = false;
                 animators[i].Play("Die");
             }
             GameEvents.PlayerDeath();

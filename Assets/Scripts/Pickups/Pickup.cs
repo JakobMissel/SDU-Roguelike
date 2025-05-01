@@ -10,6 +10,7 @@ public class Pickup : MonoBehaviour
     [SerializeField][Tooltip("Should the pickup rotate around itself?")] protected bool rotate = true;
     [SerializeField][Tooltip("The rotation speed of the pickup. \nDefault: 100")] protected float rotationSpeed = 100;
     float initialY;
+    float distance;
     [Header("Pickup")]
     [SerializeField] AudioClip audioClip;
     [SerializeField] bool canBepickedUp = true;
@@ -76,8 +77,7 @@ public class Pickup : MonoBehaviour
     /// <param name="speed"></param>
     void MoveUpAndDown(float speed)
     {
-        float height = initialY;
-        float y = height + (Mathf.Sin(speed * Time.time) * verticalHeight);
+        float y = Mathf.PingPong(Time.time * speed, verticalHeight) + initialY;
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 }

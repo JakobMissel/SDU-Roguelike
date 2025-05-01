@@ -102,8 +102,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if(!hasActiveEnemies || !isActive) return;
         slainEnemies++;
-        Debug.Log("Enemy slain: " + slainEnemies);
-        if (slainEnemies >= numberOfEnemiesToSpawn) 
+        if (slainEnemies == numberOfEnemiesToSpawn) 
         {
             WaveCompleted();
         }

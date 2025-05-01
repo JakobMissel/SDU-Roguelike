@@ -8,7 +8,7 @@ public class PlayerCameraMovement : MonoBehaviour
     [SerializeField] float minZoom = 30;
     [SerializeField] float maxZoom = 50;
     [SerializeField] float zoomSpeed = 2f;
-    [SerializeField] [Range(0.001f, 1)] float followDelay = 0.03f;
+    [SerializeField] [Range(0.001f, 1)] float followSpeed = 0.03f;
 
     CinemachineCamera cinemachineCamera;
 
@@ -17,7 +17,7 @@ public class PlayerCameraMovement : MonoBehaviour
         cinemachineCamera = GetComponent<CinemachineCamera>();
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (PlayerDistanceManager.Instance == null)
         {
@@ -28,7 +28,7 @@ public class PlayerCameraMovement : MonoBehaviour
         Vector3 desiredPosition = midpoint + offset;
         
         // Smoothly follow the desired position.
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, followDelay);
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed);
         transform.eulerAngles = initialRotation;
         float normalDistance = PlayerDistanceManager.Instance.normalDistance;
         

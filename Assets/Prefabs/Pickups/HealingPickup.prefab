@@ -123,11 +123,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalAnimation: 1
-  verticalSpeed: 2
+  verticalSpeed: 0.5
   verticalHeight: 0.5
   rotate: 1
   rotationSpeed: 50
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: c60d9a854837d354286c81e2b2370b89, type: 3}
   canBepickedUp: 1
   healAmount: 10
 --- !u!1 &4848377069021815774

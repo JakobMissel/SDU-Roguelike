@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BreathAttack : Ability {
+public class TamerSpecialAttack : Ability {
     void Awake() {
         playerInput = GetComponent<PlayerInput>();
         animator = GetComponentInChildren<Animator>();
@@ -12,7 +12,7 @@ public class BreathAttack : Ability {
     }
     public override void ActivateAbility(InputAction.CallbackContext context){
         if (CheckCooldown()) {
-            animator.Play("TamerSpecial");
+            animator.Play("Special");
             var vfx = Instantiate(VFX, transform.position, Quaternion.LookRotation(transform.forward));
             vfx.GetComponent<AbilityInstance>().SetInfo(this);
             ApplyCooldown();

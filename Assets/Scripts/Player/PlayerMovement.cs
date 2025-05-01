@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
     [HideInInspector] public Vector3 move;
+
     PlayerInput playerInput;
     Camera mainCamera;
     Animator animator;
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Tooltip("**Value only required for non-Tamer Player** Sets the sensitivity requirement before the player rotates player rotation. \nDefault: 0.2")] float gamepadSensitivity = 0.2f;
     
     DashAbility DashAbility;
+    float currentMaxSpeed;
 
     void Awake()
     {
@@ -40,15 +42,32 @@ public class PlayerMovement : MonoBehaviour
         playerInput.actions["Move"].canceled += OnMove;
         playerInput.actions["Look"].performed += OnLook;
         playerInput.actions["Dash"].started += OnDash;
+
+        GameEvents.OnPlayerDeath += OnGameOver;
+        playerInput.actions["SouthButton"].started += OnSouthButton;
     }
 
     void OnDisable()
     {
         //unsubscribe from the player input events.
         playerInput.actions["Move"].performed -= OnMove;
-        playerInput.actions["Move"].canceled += OnMove;
+        playerInput.actions["Move"].canceled -= OnMove;
         playerInput.actions["Look"].performed -= OnLook;
-        playerInput.actions["Dash"].canceled -= OnDash;
+        playerInput.actions["Dash"].started -= OnDash;
+
+        GameEvents.OnPlayerDeath -= OnGameOver;
+        playerInput.actions["SouthButton"].started -= OnSouthButton;
+    }
+
+    void OnGameOver()
+    {
+        playerInput.actions["Move"].performed -= OnMove;
+        playerInput.actions["Move"].canceled -= OnMove;
+        playerInput.actions["Look"].performed -= OnLook;
+        playerInput.actions["Dash"].started -= OnDash;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.isKinematic = true;
     }
 
     void Update()
@@ -77,10 +96,12 @@ public class PlayerMovement : MonoBehaviour
             //feed input values to character controller.
             rb.AddForce(move * (acceleration * Time.deltaTime), ForceMode.VelocityChange);
             if(!DashAbility.isDashing)
-                rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxMovementSpeed);
+                currentMaxSpeed = maxMovementSpeed;
             else
-                rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, DashAbility.speed);
+                currentMaxSpeed = DashAbility.speed;
+            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, currentMaxSpeed);
             //rigidbody.MovePosition(transform.position + move * (movementSpeed * Time.deltaTime));
+            animator.SetFloat("speed", currentMaxSpeed);
             animator.SetBool("isWalking", true);
         }
         else
@@ -88,6 +109,12 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new(0, rb.linearVelocity.y, 0);
             animator.SetBool("isWalking", false);
         }
+    }
+
+    void OnSouthButton(InputAction.CallbackContext context)
+    {
+        GameEvents.SouthButton();
+        Debug.Log("South Button Pressed");
     }
 
     /// <summary>
@@ -107,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="context"></param>
     void OnLook(InputAction.CallbackContext context)
     {
-        if(usesKeyboard) return;
+        if (usesKeyboard) return;
         //get the players input values
         Vector2 direction = context.ReadValue<Vector2>();
         targetDirection = new Vector3(direction.x, 0, direction.y).normalized;

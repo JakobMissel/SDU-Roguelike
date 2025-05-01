@@ -39,12 +39,16 @@ public class Ability : MonoBehaviour {
                 Debug.LogError($"Action '{ActivateActionName}' not found!");
             }
         }
+
+        GameEvents.OnPlayerDeath += OnDisable;
     }
 
     protected void OnDisable() {
         if (!PlayerAbility) return;
         if (!string.IsNullOrEmpty(ActivateActionName))
             playerInput.actions[ActivateActionName].started -= ActivateAbility;
+
+        GameEvents.OnPlayerDeath -= OnDisable;
     }
 
     public virtual void ActivateAbility(InputAction.CallbackContext context){
