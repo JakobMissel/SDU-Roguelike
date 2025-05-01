@@ -91,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Move()
     {
+        if (rb.isKinematic) return;
         if (move != Vector3.zero)
         {
             //feed input values to character controller.
@@ -114,7 +115,6 @@ public class PlayerMovement : MonoBehaviour
     void OnSouthButton(InputAction.CallbackContext context)
     {
         GameEvents.SouthButton();
-        Debug.Log("South Button Pressed");
     }
 
     /// <summary>

@@ -43,7 +43,6 @@ public partial class FaceTargetAction : Action
     {
         if(target == null)
         {
-            LogFailure("Target is null.");
             return Status.Failure;
         }
         if (IsRanged.Value)

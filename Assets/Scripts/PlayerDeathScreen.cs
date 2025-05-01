@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PlayerDeathScreen : MonoBehaviour
@@ -12,7 +10,6 @@ public class PlayerDeathScreen : MonoBehaviour
     [SerializeField] TextMeshProUGUI killCountTMP;
     [SerializeField] [TextArea] string killCountText;
     bool gameOver = false;
-    int currentCount;
 
     void Awake()
     {
@@ -47,9 +44,7 @@ public class PlayerDeathScreen : MonoBehaviour
     {
         if(!gameOver) return;
         deathScreen.SetActive(false);
-        GameEvents.GameIsOver = false;
-        GameEvents.FloorLevel = 1;
-        GameEvents.EnemyKillCount = 0;
+        GameEvents.GameRestart();
         SceneManager.LoadScene(sceneToLoad);
     }
 
@@ -63,11 +58,11 @@ public class PlayerDeathScreen : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(0.5f);
-        for (int i = 0; i <= GameEvents.EnemyKillCount; i++)
+        
+        for (int i = 1; i <= GameEvents.EnemyKillCount; i++)
         {
-            killCountTMP.text = $"{text2}\n{i.ToString()}";
+            killCountTMP.text = $"{text2}\n{(i)}";
             yield return new WaitForSeconds(0.05f);
         }
-        
     }
 }

@@ -3,11 +3,16 @@ using UnityEngine;
 
 public class GameEvents : MonoBehaviour
 {
+    public static GameEvents instance;
+
     public static event Action OnSouthButton;
     public static void SouthButton() => OnSouthButton?.Invoke();
 
     public static event Action OnPlayerDeath;
     public static void PlayerDeath() => OnPlayerDeath?.Invoke();
+
+    public static event Action OnGameRestart;
+    public static void GameRestart() => OnGameRestart?.Invoke();
 
     public static event Action OnEnemyDeath;
     public static void EnemyDeath() => OnEnemyDeath?.Invoke();
@@ -20,6 +25,15 @@ public class GameEvents : MonoBehaviour
 
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
         DontDestroyOnLoad(this);
     }
 
@@ -27,6 +41,7 @@ public class GameEvents : MonoBehaviour
     {
         OnEnemyDeath += UpdateEnemyKillCount;
         OnPlayerDeath += GameOver;
+        OnGameRestart += GameRestarted;
     }
 
 
@@ -34,6 +49,7 @@ public class GameEvents : MonoBehaviour
     {
         OnEnemyDeath -= UpdateEnemyKillCount;
         OnPlayerDeath -= GameOver;
+        OnGameRestart -= GameRestarted;
     }
     
     private void GameOver()
@@ -41,8 +57,17 @@ public class GameEvents : MonoBehaviour
         GameIsOver = true;
     }
 
+    private void GameRestarted()
+    {
+        GameIsOver = false;
+        EnemyKillCount = 0;
+        FloorLevel = 1;
+        Debug.Log("Game Restarted");
+    }
+
     void UpdateEnemyKillCount()
     {
         EnemyKillCount++;
+        Debug.Log("Enemy Kill Count: " + EnemyKillCount);
     }
 }

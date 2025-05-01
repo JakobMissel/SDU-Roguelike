@@ -240,7 +240,7 @@ MonoBehaviour:
   move: {x: 0, y: 0, z: 0}
   usesKeyboard: 0
   acceleration: 100
-  maxMovementSpeed: 4
+  maxMovementSpeed: 5
   rotateToMouse: 0
   rotationSpeed: 750
   gamepadSensitivity: 0.3
@@ -257,13 +257,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDashing: 0
-  speed: 30
+  speed: 20
   duration: 0.15
   cooldownImage: {fileID: 0}
-  cooldown: 4
+  cooldown: 5
   dashChargeImagePrefab: {fileID: 8920644572205715813, guid: 60854e66fb5877d47a399da3cca16c7e, type: 3}
   maxCharges: {fileID: 0}
-  maxDashes: 1
+  maxDashes: 2
   isPlayer: 1
   availableDashes: 0
 --- !u!114 &6818766569470961884
@@ -521,8 +521,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 5a82561d-8916-49ab-8336-21d774a6f5d6
     m_ActionName: 'PlayerDefault/Special[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast,/Mouse/rightButton]'
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: PlayerDefault
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -539,10 +539,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0, z: 0}
-  usesKeyboard: 1
+  usesKeyboard: 0
   acceleration: 100
   maxMovementSpeed: 4
-  rotateToMouse: 1
+  rotateToMouse: 0
   rotationSpeed: 750
   gamepadSensitivity: 0.1
 --- !u!114 &7019161240203701662
@@ -558,13 +558,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDashing: 0
-  speed: 15
+  speed: 30
   duration: 0.15
   cooldownImage: {fileID: 0}
-  cooldown: 5
+  cooldown: 4
   dashChargeImagePrefab: {fileID: 8920644572205715813, guid: 60854e66fb5877d47a399da3cca16c7e, type: 3}
   maxCharges: {fileID: 0}
-  maxDashes: 2
+  maxDashes: 1
   isPlayer: 1
   availableDashes: 0
 --- !u!114 &4876171395304231533
