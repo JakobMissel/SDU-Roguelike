@@ -23,10 +23,6 @@ public class Map : MonoBehaviour {
         CompleteNode -= ChangeActiveNodes;
     }
     void Start() {
-        EndNode = new MapNode(NodeType.Boss, Floors);
-        StartNode = new MapNode(NodeType.Currency, 1);
-        HealingNode = new MapNode(NodeType.Healing, Floors-1);
-        HealingNode.ConnectedNodes = new List<MapNode>() {EndNode};
         GenerateMap();
     }
     void ChangeActiveNodes(MapNode node){
@@ -42,13 +38,17 @@ public class Map : MonoBehaviour {
     }
 
     void GenerateMap(){
+        EndNode = new MapNode(NodeType.Boss, Floors);
+        StartNode = new MapNode(NodeType.Currency, 1);
+        HealingNode = new MapNode(NodeType.Healing, Floors-1);
+        HealingNode.ConnectedNodes = new List<MapNode>() {EndNode};
         List<NodeType> weightedList = new List<NodeType>();
         //make a list of each
         weightedList.AddRange(Enumerable.Repeat(NodeType.Currency, (int)NodeType.Currency-1));
         weightedList.AddRange(Enumerable.Repeat(NodeType.Healing, (int)NodeType.Healing-1));
         weightedList.AddRange(Enumerable.Repeat(NodeType.Upgrade, (int)NodeType.Upgrade));
         weightedList.AddRange(Enumerable.Repeat(NodeType.Talisman, (int)NodeType.Talisman));
-        StartNode.ConnectedNodes = Generatebranches(weightedList, 2, 3);
+        StartNode.ConnectedNodes = Generatebranches(weightedList, 2, StartingBranches);
         LastCompletedNode = StartNode;
         ChangeActiveNodes(LastCompletedNode);
     }
