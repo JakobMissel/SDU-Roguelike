@@ -42,7 +42,6 @@ public class Map : MonoBehaviour {
     }
 
     void GenerateMap(){
-        LastCompletedNode = StartNode;
         List<NodeType> weightedList = new List<NodeType>();
         //make a list of each
         weightedList.AddRange(Enumerable.Repeat(NodeType.Currency, (int)NodeType.Currency-1));
@@ -50,6 +49,8 @@ public class Map : MonoBehaviour {
         weightedList.AddRange(Enumerable.Repeat(NodeType.Upgrade, (int)NodeType.Upgrade));
         weightedList.AddRange(Enumerable.Repeat(NodeType.Talisman, (int)NodeType.Talisman));
         StartNode.ConnectedNodes = Generatebranches(weightedList, 2, 3);
+        LastCompletedNode = StartNode;
+        ChangeActiveNodes(LastCompletedNode);
     }
 
     List<MapNode> Generatebranches(List<NodeType> weightedList, int floor, int branches) {
