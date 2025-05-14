@@ -27,20 +27,15 @@ public partial class ChooseTargetAction : Action
             LogFailure("No agent assigned.");
             return Status.Failure;
         }
-        if (Tag == null || Tag == "")
+        if (Tag.Value == null || Tag.Value == "")
         {
             LogFailure("No target assigned.");
             return Status.Failure;
         }
         Initialize();
-        return Status.Running;
+        return SetTarget();
     }
 
-    protected override Status OnUpdate()
-    {
-        SetTarget();
-        return Status.Success;
-    }
 
     void Initialize()
     {
@@ -59,16 +54,17 @@ public partial class ChooseTargetAction : Action
         targets = GameObject.FindGameObjectsWithTag(Tag.Value);
     }
 
-    void SetTarget()
+    Status SetTarget()
     {
         if (targets == null || targets.Length == 0)
         {
             LogFailure("No targets in array to choose.");
-            return;
+            return Status.Failure;
         }
-        currentTarget = Random ? GetRandomTarget() : GetClosestTarget();
+        currentTarget = Random.Value ? GetRandomTarget() : GetClosestTarget();
         enemy.currentTarget = targets[currentTarget];
         Target.Value = targets[currentTarget];
+        return Status.Success;
     }
 
     int GetClosestTarget()
