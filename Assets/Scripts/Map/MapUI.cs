@@ -12,6 +12,10 @@ public class MapUI : MonoBehaviour {
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
+        UpdateMapUI();
+    }
+
+    void UpdateMapUI() {
         for (int i = 0; i < MapData.Floors; i++) {
             Instantiate(FloorPrefab, transform);
         }
@@ -22,10 +26,6 @@ public class MapUI : MonoBehaviour {
         GenerateLinesUI();
     }
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
     void GenerateNodesUI(MapNode node) {
         if (node == null)
             return;
