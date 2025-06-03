@@ -11,9 +11,9 @@ public class Health : MonoBehaviour
     [SerializeField] GameObject[] players;
     [Header("Health")]
     [SerializeField] GameObject healingEffect;
-    [SerializeField] [Tooltip("Maximum health of entity.")] public int maxHealth;
-    [SerializeField] [Tooltip("Current health of entity.")] public int currentHealth;
-    int accumulatedDamage;
+    [SerializeField] [Tooltip("Maximum health of entity.")] public float maxHealth;
+    [SerializeField] [Tooltip("Current health of entity.")] public float currentHealth;
+    float accumulatedDamage;
     [SerializeField] [Tooltip("The time it takes to update the health bar relative to the amount of health restored or lost.")] [Range(0.01f, 2f)] float fillTime = 0.4f;
     [SerializeField] [Tooltip("Graphical representation of the current health for entity.")] Image[] healthBar;
     [SerializeField] [Tooltip("Numerical representation of the health for entity.")] TMP_Text[] currentHealthText;
@@ -85,7 +85,7 @@ public class Health : MonoBehaviour
     /// Decreases the current health of the entity by a certain amount.
     /// </summary>
     /// <param name="amount"></param>
-    public void TakeDamage(int amount, bool isPercentage = false)
+    public void TakeDamage(float amount, bool isPercentage = false)
     {
         if (isInvulnerable) return;
         if(isPercentage)
@@ -215,7 +215,7 @@ public class Health : MonoBehaviour
         for (int i = 0; i < currentHealthText.Length; i++)
         {
             if (currentHealthText[i] == null) continue;
-            currentHealthText[i].text = $"{currentHealth} / {maxHealth}";
+            currentHealthText[i].text = $"{Mathf.Ceil(currentHealth)} / {maxHealth}";
         }
     }
 

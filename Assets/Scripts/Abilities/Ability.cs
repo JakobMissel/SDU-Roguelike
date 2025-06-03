@@ -21,6 +21,7 @@ public class Ability : MonoBehaviour {
 
     [SerializeField] internal PlayerInput playerInput;
     [SerializeField] internal Animator animator;
+    [SerializeField] internal string CastAnimation;
     [SerializeField] internal string ActivateActionName;
 
     [SerializeField] internal float ProjectileSpeed;
@@ -52,25 +53,44 @@ public class Ability : MonoBehaviour {
     }
 
     public virtual void ActivateAbility(InputAction.CallbackContext context){
-        if (CheckCooldown()) {
-            var vfx = Instantiate(VFX, transform.position, Quaternion.LookRotation(transform.forward));
-            vfx.GetComponent<AbilityInstance>().SetInfo(this);
+        if (CanCast()) {
+            CurrentCastTime = CastTime;
             ApplyCooldown();
+            animator.Play(CastAnimation);
+            Invoke("CastAbility", CastTime);
+            // var vfx = Instantiate(VFX, transform.position, Quaternion.LookRotation(transform.forward));
+            // vfx.GetComponent<AbilityInstance>().SetInfo(this);
+            // ApplyCooldown();
         }
     }
     public virtual void ActivateAbility(){
-        if (CheckCooldown()) {
-            var vfx = Instantiate(VFX, transform.position, Quaternion.LookRotation(transform.forward));
-            vfx.transform.localScale = Vector3.one * AreaModifier;
-            vfx.GetComponent<AbilityInstance>().SetInfo(this);
+        if (CanCast()) {
+            CurrentCastTime = CastTime;
             ApplyCooldown();
+            animator.Play(CastAnimation);
+            Invoke("CastAbility", CastTime);
         }
     }
     internal void RunCooldown(){
-        CurrentCooldown = Mathf.Clamp(CurrentCooldown - Time.deltaTime, 0, Cooldown);
+        if (CurrentCastTime <= 0) {
+            CurrentCooldown = Mathf.Clamp(CurrentCooldown - Time.deltaTime, 0, Cooldown);
+        } else {
+            CurrentCastTime -= Time.deltaTime;
+        }
         if (CooldownImage != null) {
             CooldownImage.fillAmount = Mathf.Clamp01(CurrentCooldown / Cooldown);
         }
+    }
+    public bool CanCast(){
+        if (CheckCooldown() && CurrentCastTime <= 0){
+            return true;
+        }
+        return false;
+    }
+    public virtual void CastAbility(){
+            var vfx = Instantiate(VFX, transform.position, Quaternion.LookRotation(transform.forward));
+            vfx.transform.localScale = Vector3.one * AreaModifier;
+            vfx.GetComponent<AbilityInstance>().SetInfo(this);
     }
 
     public bool CheckCooldown() {
@@ -80,7 +100,7 @@ public class Ability : MonoBehaviour {
         return true;
     }
 
-    internal void ApplyCooldown(){
+    public virtual void ApplyCooldown(){
         CurrentCooldown = Cooldown*(1-CooldownModifier);
     }
 

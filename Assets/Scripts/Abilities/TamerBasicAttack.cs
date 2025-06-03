@@ -11,12 +11,8 @@ public class TamerBasicAttack : Ability {
         RunCooldown();
     }
 
-    public override void ActivateAbility(InputAction.CallbackContext context){
-        if (CheckCooldown()) {
-            animator.Play("Basic");
+    public override void CastAbility() {
             var vfx = Instantiate(VFX, transform.position, Quaternion.LookRotation(transform.forward));
             vfx.GetComponent<AbilityInstance>().SetInfo(this);
-            ApplyCooldown();
-        }
     }
 }

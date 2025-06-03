@@ -75960,13 +75960,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1532460734}
     - target: {fileID: 4861094189835595566, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CastTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861094189835595566, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CastAnimation
+      value: Special
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861094189835595566, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
       propertyPath: CooldownImage
       value: 
       objectReference: {fileID: 82997274}
     - target: {fileID: 4876171395304231533, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CastAnimation
+      value: Basic
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876171395304231533, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
       propertyPath: CooldownImage
       value: 
       objectReference: {fileID: 1833442463}
+    - target: {fileID: 6818766569470961884, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CastTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6818766569470961884, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CastAnimation
+      value: Basic
+      objectReference: {fileID: 0}
     - target: {fileID: 6818766569470961884, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
       propertyPath: CooldownImage
       value: 
@@ -75979,6 +75999,14 @@ PrefabInstance:
       propertyPath: cooldownImage
       value: 
       objectReference: {fileID: 64719415}
+    - target: {fileID: 8798122168824381901, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CastTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8798122168824381901, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CastAnimation
+      value: Special
+      objectReference: {fileID: 0}
     - target: {fileID: 8798122168824381901, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
       propertyPath: CooldownImage
       value: 
