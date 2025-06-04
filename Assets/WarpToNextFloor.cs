@@ -10,7 +10,16 @@ public class WarpToNextFloor : MonoBehaviour
     [SerializeField] float maxIntensity = 5000f;
     float time;
     int playerCount = 0;
-
+    public static event System.Action<NodeType> WarpToFloor;
+    public static void OnWarpToFloor(NodeType value) => WarpToFloor?.Invoke(value);
+    void OnEnable()
+    {
+        WarpToFloor += Warp;
+    }
+    void OnDisable()
+    {
+        WarpToFloor -= Warp;
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -32,7 +41,8 @@ public class WarpToNextFloor : MonoBehaviour
             if (time >= warpDelay)
             {
                 time = 0;
-                Warp();
+                // Warp();
+                StartWarp();
             }
         }
         else
@@ -50,11 +60,24 @@ public class WarpToNextFloor : MonoBehaviour
             if (playerCount < 2)
             {
                 time = 0;
+                StopWarp();
             }
         }
     }
     void Warp()
     {
+        GameEvents.FloorLevel++;
+        SceneManager.LoadScene(floorLevelIndex);
+    }
+    void StartWarp()
+    {
+        ToggleMap.OnToggleMapUI(true);
+    }
+    void StopWarp()
+    {
+        ToggleMap.OnToggleMapUI(false);
+    }
+    void Warp(NodeType value) {
         GameEvents.FloorLevel++;
         SceneManager.LoadScene(floorLevelIndex);
     }

@@ -52,7 +52,10 @@ public class NodeUI : MonoBehaviour {
         Image.color = DefaultColor;
         Button.enabled = false;
     }
-    public void OnClick(){
+    public void OnClick()
+    {
         Map.OnCompleteNode(NodeData);
+        WarpToNextFloor.OnWarpToFloor((NodeType)NodeData.Floor);
+        ToggleMap.OnToggleMapUI(false);
     }
 }

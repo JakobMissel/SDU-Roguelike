@@ -18,12 +18,6 @@ public class MapNode {
     public int ID;
     public static int CURRENTID;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start() {
-        CURRENTID += 1;
-        ID = CURRENTID;
-    }
-
     public MapNode(NodeType type, int floor) {
         this.Type = type;
         this.Floor = floor;
@@ -33,11 +27,8 @@ public class MapNode {
             ActiveNode = false;
         }
         ConnectedNodes = new List<MapNode>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        CURRENTID += 1;
+        ID = CURRENTID;
+        Debug.Log("MapNode ID: " + ID + " Type: " + Type + " Floor: " + Floor);
     }
 }

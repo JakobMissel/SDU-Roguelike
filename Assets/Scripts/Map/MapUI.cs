@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapUI : MonoBehaviour {
-    [SerializeField] Map MapData;
+    [SerializeField] public Map MapData;
     [SerializeField] GameObject FloorPrefab;
     [SerializeField] GameObject NodePrefab;
     [SerializeField] GameObject LinePrefab;
@@ -12,11 +12,15 @@ public class MapUI : MonoBehaviour {
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
+        Canvas canvas = FindFirstObjectByType<Canvas>();
+        CanvasRoot = canvas.GetComponent<RectTransform>();
         UpdateMapUI();
     }
 
-    void UpdateMapUI() {
-        for (int i = 0; i < MapData.Floors; i++) {
+    public void UpdateMapUI() {
+        Canvas.ForceUpdateCanvases();
+        for (int i = 0; i < MapData.Floors; i++)
+        {
             Instantiate(FloorPrefab, transform);
         }
         GenerateNodesUI(MapData.StartNode);
@@ -53,11 +57,13 @@ public class MapUI : MonoBehaviour {
             }
         }
     }
-    void GenerateLine(RectTransform start, RectTransform end) {
+    void GenerateLine(RectTransform start, RectTransform end)
+    {
         var lineGO = Instantiate(LinePrefab, LineContainer.transform);
         UILine line = lineGO.AddComponent<UILine>();
         line.StartObject = start;
         line.EndObject = end;
+        line.Initialize();
     }
 
 }
