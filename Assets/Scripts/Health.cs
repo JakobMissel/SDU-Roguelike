@@ -90,8 +90,9 @@ public class Health : MonoBehaviour
     {
         if (isInvulnerable) return;
         if(isPercentage)
-            amount = Mathf.RoundToInt(currentHealth * (amount / 100));
+            amount = currentHealth * (amount / 100);
         accumulatedDamage += amount;
+        accumulatedDamage = Mathf.CeilToInt(accumulatedDamage);
         StartHealthUpdate();
         if (isPlayer)
         {
@@ -208,6 +209,7 @@ public class Health : MonoBehaviour
     /// </summary>
     void UpdateHealthUI()
     {
+        currentHealth = Mathf.CeilToInt(currentHealth);
         for (int i = 0; i < healthBar.Length; i++)
         {
             if (healthBar[i] == null) continue;
@@ -216,7 +218,7 @@ public class Health : MonoBehaviour
         for (int i = 0; i < currentHealthText.Length; i++)
         {
             if (currentHealthText[i] == null) continue;
-            currentHealthText[i].text = $"{Mathf.Ceil(currentHealth)} / {maxHealth}";
+            currentHealthText[i].text = $"{currentHealth} / {maxHealth}";
         }
     }
 

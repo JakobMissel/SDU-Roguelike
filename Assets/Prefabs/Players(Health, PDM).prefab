@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 555036652531943167}
   - component: {fileID: 4304654060314443315}
   - component: {fileID: 6421673481058833465}
+  - component: {fileID: 5402078616061391029}
   - component: {fileID: 7923596930857480024}
   - component: {fileID: 4341919448114668710}
   - component: {fileID: 6818766569470961884}
@@ -81,7 +82,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -245,6 +246,22 @@ MonoBehaviour:
   rotateToMouse: 0
   rotationSpeed: 750
   gamepadSensitivity: 0.3
+--- !u!114 &5402078616061391029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207213724004639898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61dd8c95f42b2f240ad8f9d81e458781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageMultiplier: 0.5
+  health: {fileID: 2470076045488823840}
+  dashAbility: {fileID: 4341919448114668710}
+  damageNumberPrefab: {fileID: 6645358744308375278, guid: 7f1fefed90fa3ca488bef13b9e667b44, type: 3}
 --- !u!114 &7923596930857480024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +277,7 @@ MonoBehaviour:
   damageMultiplier: 0.5
   health: {fileID: 2470076045488823840}
   dashAbility: {fileID: 4341919448114668710}
+  damageNumberPrefab: {fileID: 6645358744308375278, guid: 7f1fefed90fa3ca488bef13b9e667b44, type: 3}
 --- !u!114 &4341919448114668710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +379,7 @@ GameObject:
   - component: {fileID: 6300523625169722413}
   - component: {fileID: 1666470629442572161}
   - component: {fileID: 6947404304574318771}
+  - component: {fileID: 194111739771287144}
   - component: {fileID: 472835444913217513}
   - component: {fileID: 7019161240203701662}
   - component: {fileID: 4876171395304231533}
@@ -572,6 +591,22 @@ MonoBehaviour:
   rotateToMouse: 0
   rotationSpeed: 750
   gamepadSensitivity: 0.1
+--- !u!114 &194111739771287144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546906308975252551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61dd8c95f42b2f240ad8f9d81e458781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageMultiplier: 1
+  health: {fileID: 2470076045488823840}
+  dashAbility: {fileID: 7019161240203701662}
+  damageNumberPrefab: {fileID: 0}
 --- !u!114 &472835444913217513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,6 +622,7 @@ MonoBehaviour:
   damageMultiplier: 1
   health: {fileID: 2470076045488823840}
   dashAbility: {fileID: 7019161240203701662}
+  damageNumberPrefab: {fileID: 6645358744308375278, guid: 7f1fefed90fa3ca488bef13b9e667b44, type: 3}
 --- !u!114 &7019161240203701662
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9761,7 +9761,7 @@ GameObject:
   - component: {fileID: -2665782939427605613}
   - component: {fileID: 6708493211165610106}
   - component: {fileID: 9112428321253637696}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpiritSpecial
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1503184253167812107}
   - component: {fileID: 6916682238122298992}
   - component: {fileID: -1072200642657605278}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpiritBasic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

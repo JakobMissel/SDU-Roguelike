@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 783607422763846125}
   - component: {fileID: 2791352083752687296}
   - component: {fileID: 4829575944719168957}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tree Trunk Slash
   m_TagString: Untagged
   m_Icon: {fileID: 0}

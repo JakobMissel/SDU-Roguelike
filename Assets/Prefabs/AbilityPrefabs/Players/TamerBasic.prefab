@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 8413125357545695085}
   - component: {fileID: 91164506637142322}
   - component: {fileID: 3530473840485750359}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TamerBasic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3576487882891728780}
   - component: {fileID: 700205235374487147}
   - component: {fileID: 4770815885936592208}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sappling Throw
   m_TagString: Untagged
   m_Icon: {fileID: 0}

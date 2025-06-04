@@ -25,7 +25,7 @@ public class WarpToNextFloor : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && playerCount == 2)
+        if (other.CompareTag("Player") && playerCount > 2)
         {
             time += Time.deltaTime;
             warpLight.intensity = Mathf.Lerp(warpLight.intensity, maxIntensity, Time.deltaTime);

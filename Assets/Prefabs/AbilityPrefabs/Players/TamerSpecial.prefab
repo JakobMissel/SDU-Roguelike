@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 6481591471716340200}
   - component: {fileID: 5347856543262356498}
   - component: {fileID: -7393843564058331265}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TamerSpecial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,6 +234,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SourceAbility: {fileID: 0}
+  ObjectsInZone: []
+  damageleft: 0
 --- !u!64 &5347856543262356498
 MeshCollider:
   m_ObjectHideFlags: 0
