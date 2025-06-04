@@ -13,7 +13,7 @@ public class ProjectileInstance : AbilityInstance {
             Destroy(gameObject);
         }
     }
-    internal override void OnHit(){
+    internal override void OnHit(Collider other) {
         Destroy(gameObject);
     }
 }

@@ -306,6 +306,8 @@ MonoBehaviour:
   Range: 0
   RangeModifier: 0
   AreaModifier: 1
+  KnockbackForce: 2.5
+  KnockbackDuration: 0.3
   VFX: {fileID: 2146063966744521395, guid: 91c8670b32ecd4640acd702e5bb579f0, type: 3}
   playerInput: {fileID: 4304654060314443315}
   animator: {fileID: 1103390317966959686}
@@ -329,7 +331,7 @@ MonoBehaviour:
   Cooldown: 5
   CooldownModifier: 0
   CurrentCooldown: 0
-  CastTime: 2
+  CastTime: 0.3
   CurrentCastTime: 0
   IsCasting: 0
   Damage: 40
@@ -337,6 +339,8 @@ MonoBehaviour:
   Range: 0
   RangeModifier: 0
   AreaModifier: 0
+  KnockbackForce: 0
+  KnockbackDuration: 0
   VFX: {fileID: 5698038324825202569, guid: d03104768a9791140970bc9da3b86b7a, type: 3}
   playerInput: {fileID: 4304654060314443315}
   animator: {fileID: 1103390317966959686}
@@ -621,7 +625,7 @@ MonoBehaviour:
   Cooldown: 1
   CooldownModifier: 0
   CurrentCooldown: 0
-  CastTime: 0.2
+  CastTime: 0.1
   CurrentCastTime: 0
   IsCasting: 0
   Damage: 10
@@ -629,6 +633,8 @@ MonoBehaviour:
   Range: 15
   RangeModifier: 0
   AreaModifier: 1
+  KnockbackForce: 0
+  KnockbackDuration: 0
   VFX: {fileID: 1940409667107805121, guid: 13eea155b472b584a856e43a459a9a00, type: 3}
   playerInput: {fileID: 1666470629442572161}
   animator: {fileID: 78488472762371152}
@@ -652,7 +658,7 @@ MonoBehaviour:
   Cooldown: 8
   CooldownModifier: 0
   CurrentCooldown: 0
-  CastTime: 2
+  CastTime: 0.5
   CurrentCastTime: 0
   IsCasting: 0
   Damage: 10
@@ -660,6 +666,8 @@ MonoBehaviour:
   Range: 0
   RangeModifier: 0
   AreaModifier: 0
+  KnockbackForce: 0
+  KnockbackDuration: 0
   VFX: {fileID: 2662469021460602016, guid: 7cb5879bfadb46a41866eafb141a6df6, type: 3}
   playerInput: {fileID: 1666470629442572161}
   animator: {fileID: 78488472762371152}

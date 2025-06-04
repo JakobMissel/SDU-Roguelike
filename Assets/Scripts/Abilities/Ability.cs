@@ -17,6 +17,10 @@ public class Ability : MonoBehaviour {
     [SerializeField] internal float Range;
     [SerializeField] internal float RangeModifier;
     [SerializeField] internal float AreaModifier;
+
+    [SerializeField] internal float KnockbackForce;
+    [SerializeField] internal float KnockbackDuration;
+
     [SerializeField] internal GameObject VFX;
 
     [SerializeField] internal PlayerInput playerInput;
