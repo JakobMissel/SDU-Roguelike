@@ -21,7 +21,7 @@ public class AbilityInstance : MonoBehaviour {
         }
         if (other.gameObject.CompareTag("Player") && !SourceAbility.PlayerAbility)
         {
-            other.gameObject.GetComponentInParent<Health>().TakeDamage(SourceAbility.CalculateDamage());
+            other.gameObject.GetComponent<DamageTaker>().TakeDamage(SourceAbility.CalculateDamage());
             OnHit();
         }
     }

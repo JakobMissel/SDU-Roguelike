@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     [Header("Player")]
     [SerializeField] bool isPlayer;
     [SerializeField] GameObject[] players;
+    Animator[] animators = new Animator[2];
     [Header("Health")]
     [SerializeField] GameObject healingEffect;
     [SerializeField] [Tooltip("Maximum health of entity.")] public float maxHealth;
@@ -23,9 +24,9 @@ public class Health : MonoBehaviour
     [SerializeField][Tooltip("Audio clip played when the entity is healed.")] AudioClip healAudioClip;
     AudioSource audioSource;
     Animator animator;
-    Animator[] animators = new Animator[2];
     [Header("GodMode")] 
     [SerializeField] [Tooltip("Checking this box disallows subtraction of health for entity")] bool isInvulnerable;
+
     [HideInInspector] public bool canBeHealed;
     [HideInInspector] public bool isDead;
     Coroutine updateHealthBar;
@@ -94,7 +95,7 @@ public class Health : MonoBehaviour
         StartHealthUpdate();
         if (isPlayer)
         {
-            CameraShake.Instance.ShakeCamera(0.1f, .5f, 0.1f);
+            CameraShake.Instance.ShakeCamera(0.1f, 0.5f, 0.1f);
             if(audioSource != null && damageTakenAudioClip != null)
                 audioSource.PlayOneShot(damageTakenAudioClip);
         }
