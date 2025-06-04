@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 555036652531943167}
   - component: {fileID: 4304654060314443315}
   - component: {fileID: 6421673481058833465}
+  - component: {fileID: 7923596930857480024}
   - component: {fileID: 4341919448114668710}
   - component: {fileID: 6818766569470961884}
   - component: {fileID: 4861094189835595566}
@@ -109,7 +110,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.57, y: 1, z: 1.6}
+  m_Size: {x: 0.57, y: 1.27, z: 1.6}
   m_Center: {x: -0.03, y: 0.11, z: 0}
 --- !u!114 &4304654060314443315
 MonoBehaviour:
@@ -244,6 +245,21 @@ MonoBehaviour:
   rotateToMouse: 0
   rotationSpeed: 750
   gamepadSensitivity: 0.3
+--- !u!114 &7923596930857480024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207213724004639898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61dd8c95f42b2f240ad8f9d81e458781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageMultiplier: 0.5
+  health: {fileID: 2470076045488823840}
+  dashAbility: {fileID: 4341919448114668710}
 --- !u!114 &4341919448114668710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +309,7 @@ MonoBehaviour:
   VFX: {fileID: 2146063966744521395, guid: 91c8670b32ecd4640acd702e5bb579f0, type: 3}
   playerInput: {fileID: 4304654060314443315}
   animator: {fileID: 1103390317966959686}
+  CastAnimation: Basic
   ActivateActionName: Attack
   ProjectileSpeed: 0
   PlayerAbility: 1
@@ -312,7 +329,7 @@ MonoBehaviour:
   Cooldown: 5
   CooldownModifier: 0
   CurrentCooldown: 0
-  CastTime: 0
+  CastTime: 2
   CurrentCastTime: 0
   IsCasting: 0
   Damage: 40
@@ -323,6 +340,7 @@ MonoBehaviour:
   VFX: {fileID: 5698038324825202569, guid: d03104768a9791140970bc9da3b86b7a, type: 3}
   playerInput: {fileID: 4304654060314443315}
   animator: {fileID: 1103390317966959686}
+  CastAnimation: Special
   ActivateActionName: Special
   ProjectileSpeed: 0
   PlayerAbility: 1
@@ -339,6 +357,7 @@ GameObject:
   - component: {fileID: 6300523625169722413}
   - component: {fileID: 1666470629442572161}
   - component: {fileID: 6947404304574318771}
+  - component: {fileID: 472835444913217513}
   - component: {fileID: 7019161240203701662}
   - component: {fileID: 4876171395304231533}
   - component: {fileID: 8798122168824381901}
@@ -521,6 +540,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 5a82561d-8916-49ab-8336-21d774a6f5d6
     m_ActionName: 'PlayerDefault/Special[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast,/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c00b6140-b6af-4bd2-a0dc-084399bb1828
+    m_ActionName: 'PlayerDefault/SouthButton[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: PlayerDefault
@@ -545,6 +568,21 @@ MonoBehaviour:
   rotateToMouse: 0
   rotationSpeed: 750
   gamepadSensitivity: 0.1
+--- !u!114 &472835444913217513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546906308975252551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61dd8c95f42b2f240ad8f9d81e458781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageMultiplier: 1
+  health: {fileID: 2470076045488823840}
+  dashAbility: {fileID: 7019161240203701662}
 --- !u!114 &7019161240203701662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,6 +632,7 @@ MonoBehaviour:
   VFX: {fileID: 1940409667107805121, guid: 13eea155b472b584a856e43a459a9a00, type: 3}
   playerInput: {fileID: 1666470629442572161}
   animator: {fileID: 78488472762371152}
+  CastAnimation: Basic
   ActivateActionName: Attack
   ProjectileSpeed: 15
   PlayerAbility: 1
@@ -613,7 +652,7 @@ MonoBehaviour:
   Cooldown: 8
   CooldownModifier: 0
   CurrentCooldown: 0
-  CastTime: 0
+  CastTime: 2
   CurrentCastTime: 0
   IsCasting: 0
   Damage: 10
@@ -624,6 +663,7 @@ MonoBehaviour:
   VFX: {fileID: 2662469021460602016, guid: 7cb5879bfadb46a41866eafb141a6df6, type: 3}
   playerInput: {fileID: 1666470629442572161}
   animator: {fileID: 78488472762371152}
+  CastAnimation: Special
   ActivateActionName: Special
   ProjectileSpeed: 0
   PlayerAbility: 1
