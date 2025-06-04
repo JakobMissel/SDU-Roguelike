@@ -204,6 +204,7 @@ MonoBehaviour:
   DefaultColor: {r: 0.8018868, g: 0.1595955, b: 0.06430225, a: 1}
   ActiveColor: {r: 0.020729426, g: 0.8490566, b: 0, a: 1}
   CompletedColor: {r: 0.2540495, g: 0.31132078, b: 0.25656945, a: 1}
+  HighlightedColor: {r: 0.8468528, g: 0.9056604, b: 0.08116765, a: 0}
   type: 0
 --- !u!1 &4896114193963542296
 GameObject:

@@ -6,12 +6,13 @@ using System;
 public class NodeUI : MonoBehaviour {
     public MapNode NodeData;
     [SerializeField] Button Button;
-    [SerializeField] Image Image;
+    public Image Image;
     [SerializeField] Image IconImage;
     [SerializeField] List<Sprite> Sprites;
-    [SerializeField] Color DefaultColor;
-    [SerializeField] Color ActiveColor;
-    [SerializeField] Color CompletedColor;
+    public Color DefaultColor;
+    public  Color ActiveColor;
+    public  Color CompletedColor;
+    public  Color HighlightedColor;
     [SerializeField] NodeType type;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
