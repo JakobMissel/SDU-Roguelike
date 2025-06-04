@@ -3,20 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Enemy Spawner")]
     public GameObject[] enemyPrefabs;
-    public int numberOfEnemiesToSpawn = 5;
+    public List<GameObject> spawnedEnemies = new();
+    public int totalWaves = 1;
+    public int completedWaves = 0;
+    public int enemiesPerWave = 5;
     public int zoneLevel = 1;
-    [SerializeField] Transform spawnArea;
+    [SerializeField] Transform[] spawnAreas;
     [SerializeField] float spawnRadius = 5f;
     [SerializeField] [TextArea] string spawnText1 = "ATTENTION!";
     [SerializeField] [TextArea] string spawnText2 = "CLEANS THE CORRUPTION!";
     [SerializeField] [TextArea] string waveCompletedText = "PROCEED FURTHER INTO THE FOREST";
     TextMeshProUGUI spawnMessage;
+    int playersInZone = 0;
 
     [Header("Light")]
     [SerializeField] Color openColor;
@@ -28,10 +31,12 @@ public class EnemySpawner : MonoBehaviour
 
     bool hasActiveEnemies = false;
     bool isActive = true;
-    int slainEnemies = 0;
+    int waveEnemiesSlain = 0;
 
     void Awake()
     {
+        completedWaves = 0;
+        playersInZone = 0;
         GetComponent<Collider>().isTrigger = true;
         spawnMessage = GameObject.Find("SpawnMessage").GetComponent<TextMeshProUGUI>();
         spawnMessage.text = "";
@@ -52,26 +57,44 @@ public class EnemySpawner : MonoBehaviour
     {
         if (other.CompareTag("Player") && !hasActiveEnemies && isActive)
         {
-            SpawnEnemies();
+            playersInZone++;
+            if (playersInZone > 2) // spirit has two colliders on it, so it counts as two players, therefore to check for both players it needs to be more  than 2 
+            {
+                BeginEncounter();
+            }
         }
     }
 
-    public void SpawnEnemies()
+    void OnTriggerExit(Collider other)
     {
-        ChangeDoorsAndLight(false);
-        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        if (other.CompareTag("Player") && !hasActiveEnemies && isActive)
         {
-            var randomPosition = spawnArea.position + Random.insideUnitSphere * spawnRadius;
-            randomPosition.y = 0; // Keep the spawn position on the ground
-            int randomIndex = Random.Range(0, enemyPrefabs.Length);
-            var enemy = Instantiate(enemyPrefabs[randomIndex], randomPosition, Quaternion.identity);
-            enemy.GetComponent<Enemy>().SetLevel(zoneLevel);
+            playersInZone--;
         }
+    }
+
+    public void BeginEncounter()
+    {
+        if (hasActiveEnemies || !isActive) return;
+        ChangeDoorsAndLight(false);
+        SpawnEnemies();
         spawnMessage.gameObject.SetActive(true);
         StartCoroutine(SetText(spawnText1, spawnText2));
         hasActiveEnemies = true;
     }
 
+    void SpawnEnemies()
+    {
+        for (int i = 0; i < enemiesPerWave; i++)
+        {
+            var randomPosition = spawnAreas[Random.Range(0, spawnAreas.Length)].position + Random.insideUnitSphere * spawnRadius;
+            randomPosition.y = 0; // Keep the spawn position on the ground
+            int randomIndex = Random.Range(0, enemyPrefabs.Length);
+            var enemy = Instantiate(enemyPrefabs[randomIndex], randomPosition, Quaternion.identity);
+            spawnedEnemies.Add(enemy);
+            enemy.GetComponent<Enemy>().SetLevel(zoneLevel);
+        }
+    }
     void ChangeDoorsAndLight(bool isOpen)
     {
         for (int i = 0; i < pointLight.Length; i++)
@@ -101,26 +124,39 @@ public class EnemySpawner : MonoBehaviour
     void EnemySlain()
     {
         if(!hasActiveEnemies || !isActive) return;
-        slainEnemies++;
-        if (slainEnemies == numberOfEnemiesToSpawn) 
+        waveEnemiesSlain++;
+        if(waveEnemiesSlain >= spawnedEnemies.Count)
         {
-            WaveCompleted();
+            spawnedEnemies.Clear();
+            waveEnemiesSlain = 0;
+            completedWaves++;
+            if (completedWaves >= totalWaves)
+            {
+                EncounterCompleted();
+            }
+            else
+            {
+                SpawnEnemies();
+            }
         }
     }
 
-    private void WaveCompleted()
+    private void EncounterCompleted()
     {
         hasActiveEnemies = false;
         isActive = false;
         ChangeDoorsAndLight(true);
         spawnMessage.gameObject.SetActive(true);
         StartCoroutine(SetText("", waveCompletedText));
-        slainEnemies = 0;
+        waveEnemiesSlain = 0;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(spawnArea.position, spawnRadius);
+        for (int i = 0; i < spawnAreas.Length; i++)
+        {
+            Gizmos.DrawWireSphere(spawnAreas[i].position, spawnRadius);
+        }
     }
 }
