@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Ability : MonoBehaviour {
     [SerializeField] internal Image CooldownImage;
+    [SerializeField] internal string CooldownImageName;
     [SerializeField] internal float Cooldown;
     [SerializeField] internal float CooldownModifier;
     [SerializeField] internal float CurrentCooldown;
@@ -34,13 +35,21 @@ public class Ability : MonoBehaviour {
         if (!PlayerAbility) return;
         playerInput = GetComponent<PlayerInput>();
     }
-    protected void OnEnable() {
+    public void GetCooldownImage() {
+        CooldownImage = GameObject.Find(CooldownImageName)?.GetComponent<Image>();
+    }
+    protected void OnEnable()
+    {
         if (!PlayerAbility) return;
-        if (!string.IsNullOrEmpty(ActivateActionName)){
+        if (!string.IsNullOrEmpty(ActivateActionName))
+        {
             var action = playerInput.actions[ActivateActionName];
-            if (action != null) {
+            if (action != null)
+            {
                 action.started += ActivateAbility;
-            } else {
+            }
+            else
+            {
                 Debug.LogError($"Action '{ActivateActionName}' not found!");
             }
         }
@@ -76,9 +85,12 @@ public class Ability : MonoBehaviour {
         }
     }
     internal void RunCooldown(){
-        if (CurrentCastTime <= 0) {
+        if (CurrentCastTime <= 0)
+        {
             CurrentCooldown = Mathf.Clamp(CurrentCooldown - Time.deltaTime, 0, Cooldown);
-        } else {
+        }
+        else
+        {
             CurrentCastTime -= Time.deltaTime;
         }
         if (CooldownImage != null) {

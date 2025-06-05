@@ -7,6 +7,7 @@ public class SpiritBasic : Ability {
     {
         playerInput = GetComponent<PlayerInput>();
         animator = GetComponentInChildren<Animator>();
+        GetCooldownImage();
     }
     void Update()
     {

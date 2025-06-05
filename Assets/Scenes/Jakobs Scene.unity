@@ -10788,6 +10788,17 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &191533063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2417389491799845396, guid: bb50961c18691d242884ad2ed957c0ed, type: 3}
+  m_PrefabInstance: {fileID: 1569536615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &209422948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11918,6 +11929,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307604102}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &317719642 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8206341801357586619, guid: bb50961c18691d242884ad2ed957c0ed, type: 3}
+  m_PrefabInstance: {fileID: 1569536615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &320580234
 GameObject:
   m_ObjectHideFlags: 0
@@ -32614,6 +32636,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
+    - target: {fileID: 7723862375378128924, guid: c2b69137402127240aa72f753d867434, type: 3}
+      propertyPath: mapUIComponent
+      value: 
+      objectReference: {fileID: 1757396290}
     - target: {fileID: 9150866893486643418, guid: c2b69137402127240aa72f753d867434, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -42922,6 +42948,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2067053199}
   m_LocalEulerAnglesHint: {x: 0, y: -7.08, z: 0}
+--- !u!114 &707040192 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1227808772906492926, guid: bb50961c18691d242884ad2ed957c0ed, type: 3}
+  m_PrefabInstance: {fileID: 1569536615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &710802133 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8066836367901846030, guid: 8f4ee5d57a286aa4b901d2af6514b876, type: 3}
@@ -55221,6 +55258,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2067053199}
   m_LocalEulerAnglesHint: {x: 0, y: -42.5, z: 0}
+--- !u!114 &991716181 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4535978834561166036, guid: bb50961c18691d242884ad2ed957c0ed, type: 3}
+  m_PrefabInstance: {fileID: 1569536615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &991726562
 GameObject:
   m_ObjectHideFlags: 0
@@ -76196,6 +76244,30 @@ PrefabInstance:
       propertyPath: cooldownImage
       value: 
       objectReference: {fileID: 1532460734}
+    - target: {fileID: 4861094189835595566, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CooldownImage
+      value: 
+      objectReference: {fileID: 317719642}
+    - target: {fileID: 4861094189835595566, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CooldownImageName
+      value: SpecialCooldownImageBeast
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876171395304231533, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CooldownImage
+      value: 
+      objectReference: {fileID: 191533063}
+    - target: {fileID: 4876171395304231533, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CooldownImageName
+      value: BasicCooldownImageTamer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6818766569470961884, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CooldownImage
+      value: 
+      objectReference: {fileID: 707040192}
+    - target: {fileID: 6818766569470961884, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CooldownImageName
+      value: BasicCooldownImageBeast
+      objectReference: {fileID: 0}
     - target: {fileID: 7019161240203701662, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
       propertyPath: maxCharges
       value: 
@@ -76204,6 +76276,14 @@ PrefabInstance:
       propertyPath: cooldownImage
       value: 
       objectReference: {fileID: 64719415}
+    - target: {fileID: 8798122168824381901, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CooldownImage
+      value: 
+      objectReference: {fileID: 991716181}
+    - target: {fileID: 8798122168824381901, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
+      propertyPath: CooldownImageName
+      value: SpecialCooldownImageTamer
+      objectReference: {fileID: 0}
     - target: {fileID: 8962051280081333606, guid: 83666a4ec78e4e74d9c12a4c424f0067, type: 3}
       propertyPath: m_Name
       value: 'Players(Health, PDM) '
@@ -79295,6 +79375,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1025168726}
     m_Modifications:
+    - target: {fileID: 834092571796476022, guid: bb50961c18691d242884ad2ed957c0ed, type: 3}
+      propertyPath: m_Name
+      value: BasicCooldownImageBeast
+      objectReference: {fileID: 0}
+    - target: {fileID: 1524864053667894746, guid: bb50961c18691d242884ad2ed957c0ed, type: 3}
+      propertyPath: m_Name
+      value: BasicCooldownImageTamer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4012301238132522120, guid: bb50961c18691d242884ad2ed957c0ed, type: 3}
+      propertyPath: m_Name
+      value: SpecialCooldownImageBeast
+      objectReference: {fileID: 0}
     - target: {fileID: 5015011560716212321, guid: bb50961c18691d242884ad2ed957c0ed, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -79374,6 +79466,10 @@ PrefabInstance:
     - target: {fileID: 5015011560716212321, guid: bb50961c18691d242884ad2ed957c0ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375605174801153505, guid: bb50961c18691d242884ad2ed957c0ed, type: 3}
+      propertyPath: m_Name
+      value: SpecialCooldownImageTamer
       objectReference: {fileID: 0}
     - target: {fileID: 8552886480438688015, guid: bb50961c18691d242884ad2ed957c0ed, type: 3}
       propertyPath: m_Name
@@ -95448,6 +95544,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756682225}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1757396290 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8798685253539658781, guid: c2b69137402127240aa72f753d867434, type: 3}
+  m_PrefabInstance: {fileID: 557782063}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3c410ab58e55d46855355b523a48de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1766392578 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3976349700024363820, guid: f65f591f0b4020842a833d2412ddfb17, type: 3}

@@ -4,21 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using Unity.Behavior;
-public class NodeUI : MonoBehaviour {
+using System.Collections;
+public class NodeUI : MonoBehaviour
+{
     public MapNode NodeData;
     [SerializeField] Button Button;
     public Image Image;
     [SerializeField] Image IconImage;
     [SerializeField] List<Sprite> Sprites;
     public Color DefaultColor;
-    public  Color ActiveColor;
-    public  Color CompletedColor;
-    public  Color HighlightedColor;
+    public Color ActiveColor;
+    public Color CompletedColor;
+    public Color HighlightedColor;
     [SerializeField] NodeType type;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start() {
+    void Start()
+    {
         type = NodeData.Type;
-        switch (NodeData.Type) {
+        switch (NodeData.Type)
+        {
             case NodeType.Currency:
                 IconImage.sprite = Sprites[0];
                 break;
@@ -36,7 +40,8 @@ public class NodeUI : MonoBehaviour {
                 break;
         }
     }
-    void Update() {
+    void Update()
+    {
         UpdateUI();
     }
     // void start() {
@@ -49,13 +54,16 @@ public class NodeUI : MonoBehaviour {
     //     Map.CompleteNode -= UpdateUI;
     // }
 
-    void UpdateUI() {
-        if (NodeData.Completed) {
+    void UpdateUI()
+    {
+        if (NodeData.Completed)
+        {
             Image.color = CompletedColor;
             Button.enabled = false;
             return;
         }
-        if (NodeData.SelectedNode){
+        if (NodeData.SelectedNode)
+        {
             Image.color = HighlightedColor;
             Button.enabled = true;
             return;
@@ -74,5 +82,10 @@ public class NodeUI : MonoBehaviour {
         Map.OnCompleteNode(NodeData);
         WarpToNextFloor.OnWarpToFloor((NodeType)NodeData.Floor);
         ToggleMap.OnToggleMapUI(false);
+        // StartCoroutine(DelayCloseMap());
     }
+    // IEnumerator DelayCloseMap() {
+    //     yield return null; // wait 1 frame
+    //     ToggleMap.OnToggleMapUI(false);
+    // }
 }

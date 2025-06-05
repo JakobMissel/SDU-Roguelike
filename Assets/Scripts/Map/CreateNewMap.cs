@@ -16,6 +16,7 @@ public class CreateNewMap : MonoBehaviour
     }
     public void GenerateNewMap()
     {
+        // ToggleMap.OnToggleMapUI(false);
         DestroyMap();
         var map = Instantiate(PrefabMap, transform);
         currentMap = map;

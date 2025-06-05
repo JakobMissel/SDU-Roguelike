@@ -32,6 +32,5 @@ public class MapNode {
         ConnectedNodes = new List<MapNode>();
         CURRENTID += 1;
         ID = CURRENTID;
-        Debug.Log("MapNode ID: " + ID + " Type: " + Type + " Floor: " + Floor);
     }
 }

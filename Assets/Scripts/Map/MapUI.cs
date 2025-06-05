@@ -13,6 +13,7 @@ public class MapUI : MonoBehaviour
     [SerializeField] GameObject LineContainer;
     [SerializeField] RectTransform CanvasRoot;
     PlayerInput playerInput;
+    private Action<InputAction.CallbackContext> selectCallback;
     public static event Action<MapNode> UpdateActiveNodes;
     public static void OnUpdateActiveNodes(MapNode value) => UpdateActiveNodes?.Invoke(value);
 
@@ -21,23 +22,21 @@ public class MapUI : MonoBehaviour
     void Awake()
     {
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        selectCallback = OnSelect;
         activeNodeUIs = new List<NodeUI>();
     }
+
     void OnEnable()
     {
         if (playerInput == null)
             playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
 
         UpdateActiveNodes += ChangeActiveNodes;
-        playerInput.actions["MapSwitch"].performed += ctx => SwitchActiveNodeUI(ctx);
-        playerInput.actions["Select"].performed += ctx => TriggerActiveNode();
-        
+
     }
     void OnDisable()
     {
         UpdateActiveNodes -= ChangeActiveNodes;
-        playerInput.actions["MapSwitch"].performed -= ctx => SwitchActiveNodeUI(ctx);
-        playerInput.actions["Select"].performed -= ctx => TriggerActiveNode();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,9 +48,28 @@ public class MapUI : MonoBehaviour
         activeNodeUIs.Clear();
         ChangeActiveNodes(MapData.StartNode);
         ChangeHighlightedNode(0);
-        
+
     }
-    void SwitchActiveNodeUI(InputAction.CallbackContext context) {
+    public void ToggleMapMapInput(bool value)
+    {
+        if (playerInput == null) return;
+        if (value)
+        {
+            playerInput.actions["MapSwitch"].Enable();
+            playerInput.actions["Select"].Enable();
+            playerInput.actions["MapSwitch"].performed += SwitchActiveNodeUI;
+            playerInput.actions["Select"].performed += selectCallback;
+        }
+        else
+        {
+            playerInput.actions["MapSwitch"].Disable();
+            playerInput.actions["Select"].Disable();
+            playerInput.actions["MapSwitch"].performed -= SwitchActiveNodeUI;
+            playerInput.actions["Select"].performed -= selectCallback;
+        }
+    }
+    void SwitchActiveNodeUI(InputAction.CallbackContext context)
+    {
         if (activeNodeUIs.Count == 0 || selectedNodeIndex >= activeNodeUIs.Count || activeNodeUIs[selectedNodeIndex] == null)
             return;
         float input = context.ReadValue<float>();
@@ -59,53 +77,68 @@ public class MapUI : MonoBehaviour
         int index;
 
         // Cycle right
-        if (input > 0) {
+        if (input > 0)
+        {
             index = (selectedNodeIndex + 1) % activeNodeUIs.Count;
             ChangeHighlightedNode(index);
         }
         // Cycle left
-        else if (input < 0) {
+        else if (input < 0)
+        {
             index = (selectedNodeIndex - 1 + activeNodeUIs.Count) % activeNodeUIs.Count;
             ChangeHighlightedNode(index);
         }
     }
-    void TriggerActiveNode() {
+    private void OnSelect(InputAction.CallbackContext context)
+    {
+        TriggerActiveNode(context);
+    }
+    void TriggerActiveNode(InputAction.CallbackContext context)
+    {
+        if (!gameObject.activeInHierarchy || !enabled)
+        {
+            Debug.Log("TriggerActiveNode blocked because map is inactive.");
+            return;
+        }
         if (activeNodeUIs.Count == 0 || selectedNodeIndex >= activeNodeUIs.Count || activeNodeUIs[selectedNodeIndex] == null)
             return;
         var nodeUI = activeNodeUIs[selectedNodeIndex];
         if (nodeUI != null)
             nodeUI.OnClick();
+        playerInput.actions["Select"].performed -= TriggerActiveNode;
     }
 
-    void ChangeActiveNodes(MapNode node) {
-        if (activeNodeUIs.Count != 0) {
+    void ChangeActiveNodes(MapNode node)
+    {
+        if (activeNodeUIs.Count != 0)
+        {
             activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().NodeData.SelectedNode = false;
         }
         activeNodeUIs.Clear();
-        foreach (MapNode connectedNode in node.ConnectedNodes) {
+        foreach (MapNode connectedNode in node.ConnectedNodes)
+        {
             activeNodeUIs.Add(connectedNode.NodeUI);
         }
         selectedNodeIndex = 0;
         activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().NodeData.SelectedNode = true;
     }
-    void ChangeHighlightedNode(int index) {
+    void ChangeHighlightedNode(int index)
+    {
         if (index < 0 || index >= activeNodeUIs.Count)
             return;
 
         activeNodeUIs = activeNodeUIs.Where(n => n != null).ToList();
-        if (selectedNodeIndex >= 0 && selectedNodeIndex < activeNodeUIs.Count && activeNodeUIs[selectedNodeIndex] != null){
+        if (selectedNodeIndex >= 0 && selectedNodeIndex < activeNodeUIs.Count && activeNodeUIs[selectedNodeIndex] != null)
+        {
             activeNodeUIs[selectedNodeIndex].NodeData.SelectedNode = false;
         }
 
         selectedNodeIndex = index;
 
-        if (selectedNodeIndex >= 0 && selectedNodeIndex < activeNodeUIs.Count && activeNodeUIs[selectedNodeIndex] != null) {
+        if (selectedNodeIndex >= 0 && selectedNodeIndex < activeNodeUIs.Count && activeNodeUIs[selectedNodeIndex] != null)
+        {
             activeNodeUIs[selectedNodeIndex].NodeData.SelectedNode = true;
         }
-        // activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().NodeData.SelectedNode = false;
-        // selectedNodeIndex = index;
-        // activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().NodeData.SelectedNode = true;
-        // activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().Image.color = activeNodeUIs[selectedNodeIndex].ActiveColor;
     }
 
     public void UpdateMapUI()
@@ -116,7 +149,6 @@ public class MapUI : MonoBehaviour
             Instantiate(FloorPrefab, transform);
         }
         GenerateNodesUI(MapData.StartNode);
-        // MapNode currentNode = MapData.StartNode;
         GenerateNodesUI(MapData.HealingNode);
         GenerateNodesUI(MapData.EndNode);
         GenerateLinesUI();
@@ -130,7 +162,8 @@ public class MapUI : MonoBehaviour
         node.NodeUI = nodeGameObject.GetComponent<NodeUI>();
         if (node.Floor == MapData.Floors - 1 || node.Floor == MapData.Floors - 2)
             return;
-        foreach (MapNode connectedNode in node.ConnectedNodes) {
+        foreach (MapNode connectedNode in node.ConnectedNodes)
+        {
             GenerateNodesUI(connectedNode);
         }
         Canvas.ForceUpdateCanvases();
@@ -162,5 +195,11 @@ public class MapUI : MonoBehaviour
         line.StartObject = start;
         line.EndObject = end;
         line.Initialize();
+    }
+    void OnDestroy() {
+        if (playerInput != null){
+            playerInput.actions["MapSwitch"].performed -= SwitchActiveNodeUI;
+            playerInput.actions["Select"].performed -= selectCallback;
+        }
     }
 }

@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MapUI: {fileID: 2662451450909416456}
+  mapUIComponent: {fileID: 8798685253539658781}
   MapUI2: {fileID: 6752793959410822582}
   MapBackground: {fileID: 6031731702511134498}
 --- !u!1 &2662451450909416456

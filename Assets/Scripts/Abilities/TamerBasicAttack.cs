@@ -2,9 +2,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TamerBasicAttack : Ability {
-    void Awake() {
+    void Awake()
+    {
         playerInput = GetComponent<PlayerInput>();
         animator = GetComponentInChildren<Animator>();
+        GetCooldownImage();
     }
 
     void Update() {
