@@ -15,10 +15,10 @@ public class EnemySpawner : MonoBehaviour
     public int zoneLevel = 1;
     [SerializeField] Transform[] spawnAreas;
     [SerializeField] float spawnRadius = 5f;
+    [SerializeField] TextMeshProUGUI spawnMessage;
     [SerializeField] [TextArea] string spawnText1 = "ATTENTION!";
     [SerializeField] [TextArea] string spawnText2 = "CLEANS THE CORRUPTION!";
     [SerializeField] [TextArea] string waveCompletedText = "PROCEED FURTHER INTO THE FOREST";
-    TextMeshProUGUI spawnMessage;
     int playersInZone = 0;
 
     [Header("Light")]
@@ -38,7 +38,6 @@ public class EnemySpawner : MonoBehaviour
         completedWaves = 0;
         playersInZone = 0;
         GetComponent<Collider>().isTrigger = true;
-        spawnMessage = GameObject.Find("SpawnMessage").GetComponent<TextMeshProUGUI>();
         spawnMessage.text = "";
         zoneLevel = GameEvents.FloorLevel;
     }
@@ -78,7 +77,7 @@ public class EnemySpawner : MonoBehaviour
         if (hasActiveEnemies || !isActive) return;
         ChangeDoorsAndLight(false);
         SpawnEnemies();
-        spawnMessage.gameObject.SetActive(true);
+        spawnMessage?.gameObject.SetActive(true);
         StartCoroutine(SetText(spawnText1, spawnText2));
         hasActiveEnemies = true;
     }
