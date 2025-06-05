@@ -106,12 +106,12 @@
                 },
                 {
                     "name": "MapSwitch",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "1d54b064-5dd4-43a1-b6d9-fea64ce5c74a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Select",

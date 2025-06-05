@@ -14,6 +14,9 @@ public class MapNode {
     [SerializeField] public List<MapNode> ConnectedNodes;
     [SerializeField] public bool ActiveNode;
     [SerializeField] public bool Completed;
+    [SerializeField] public bool SelectedNode;
+    [SerializeField] MapUI MapUI;
+    public NodeUI NodeUI;
     public int Floor;
     public int ID;
     public static int CURRENTID;
@@ -21,7 +24,7 @@ public class MapNode {
     public MapNode(NodeType type, int floor) {
         this.Type = type;
         this.Floor = floor;
-        if (floor == 1) {
+        if (floor == 2) {
             ActiveNode = true;
         } else {
             ActiveNode = false;

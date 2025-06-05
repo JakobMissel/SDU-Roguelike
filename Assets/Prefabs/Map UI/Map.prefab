@@ -103,8 +103,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3031967731978159670}
   - component: {fileID: 2354195333565353391}
-  - component: {fileID: 8798685253539658781}
   - component: {fileID: 2136591875284476435}
+  - component: {fileID: 8798685253539658781}
   m_Layer: 5
   m_Name: Main Grid
   m_TagString: Untagged
@@ -155,6 +155,23 @@ MonoBehaviour:
   m_Spacing: {x: 50, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &2136591875284476435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2662451450909416456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6575c302f45244bb348426b94309f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LineContainer: {fileID: 0}
+  Floors: 6
+  StartingBranches: 3
+  BranchChance: 50
+  MapUI: {fileID: 0}
 --- !u!114 &8798685253539658781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,23 +190,6 @@ MonoBehaviour:
   LinePrefab: {fileID: 4118601961123977534, guid: e3ca2f245e8f9d84e9134e429cd6b6cd, type: 3}
   LineContainer: {fileID: 6752793959410822582}
   CanvasRoot: {fileID: 0}
---- !u!114 &2136591875284476435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2662451450909416456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa6575c302f45244bb348426b94309f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LineContainer: {fileID: 0}
-  Floors: 6
-  StartingBranches: 3
-  BranchChance: 50
-  MapUI: {fileID: 0}
 --- !u!1 &6752793959410822582
 GameObject:
   m_ObjectHideFlags: 0

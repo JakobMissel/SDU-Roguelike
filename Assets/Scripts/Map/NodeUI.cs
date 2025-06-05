@@ -3,6 +3,7 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Unity.Behavior;
 public class NodeUI : MonoBehaviour {
     public MapNode NodeData;
     [SerializeField] Button Button;
@@ -38,14 +39,29 @@ public class NodeUI : MonoBehaviour {
     void Update() {
         UpdateUI();
     }
+    // void start() {
+    //     UpdateUI(NodeData);
+    // }
+    // void OnEnable() {
+    //     Map.CompleteNode += UpdateUI;
+    // }
+    // void OnDisable() {
+    //     Map.CompleteNode -= UpdateUI;
+    // }
 
-    void UpdateUI(){
+    void UpdateUI() {
         if (NodeData.Completed) {
             Image.color = CompletedColor;
             Button.enabled = false;
             return;
         }
-        if (NodeData.ActiveNode){
+        if (NodeData.SelectedNode){
+            Image.color = HighlightedColor;
+            Button.enabled = true;
+            return;
+        }
+        if (NodeData.ActiveNode)
+        {
             Image.color = ActiveColor;
             Button.enabled = true;
             return;

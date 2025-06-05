@@ -48,6 +48,8 @@ public class Map : MonoBehaviour
         {
             nextNodes.ActiveNode = true;
         }
+        if (node != StartNode)
+            MapUI.OnUpdateActiveNodes(node);
     }
 
     void GenerateMap()

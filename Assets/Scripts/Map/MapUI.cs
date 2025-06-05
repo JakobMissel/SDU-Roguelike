@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.InputSystem;
+using System;
 public class MapUI : MonoBehaviour
 {
     [SerializeField] public Map MapData;
@@ -12,23 +13,29 @@ public class MapUI : MonoBehaviour
     [SerializeField] GameObject LineContainer;
     [SerializeField] RectTransform CanvasRoot;
     PlayerInput playerInput;
-    
+    public static event Action<MapNode> UpdateActiveNodes;
+    public static void OnUpdateActiveNodes(MapNode value) => UpdateActiveNodes?.Invoke(value);
+
     List<NodeUI> activeNodeUIs = new List<NodeUI>();
     int selectedNodeIndex;
     void Awake()
     {
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        activeNodeUIs = new List<NodeUI>();
     }
     void OnEnable()
     {
-        Map.CompleteNode += ChangeActiveNodes;
+        if (playerInput == null)
+            playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+
+        UpdateActiveNodes += ChangeActiveNodes;
         playerInput.actions["MapSwitch"].performed += ctx => SwitchActiveNodeUI(ctx);
         playerInput.actions["Select"].performed += ctx => TriggerActiveNode();
         
     }
     void OnDisable()
     {
-        Map.CompleteNode -= ChangeActiveNodes;
+        UpdateActiveNodes -= ChangeActiveNodes;
         playerInput.actions["MapSwitch"].performed -= ctx => SwitchActiveNodeUI(ctx);
         playerInput.actions["Select"].performed -= ctx => TriggerActiveNode();
     }
@@ -38,52 +45,67 @@ public class MapUI : MonoBehaviour
         Canvas canvas = FindFirstObjectByType<Canvas>();
         CanvasRoot = canvas.GetComponent<RectTransform>();
         UpdateMapUI();
+        selectedNodeIndex = 0;
+        activeNodeUIs.Clear();
         ChangeActiveNodes(MapData.StartNode);
         ChangeHighlightedNode(0);
+        
     }
     void SwitchActiveNodeUI(InputAction.CallbackContext context) {
+        if (activeNodeUIs.Count == 0 || selectedNodeIndex >= activeNodeUIs.Count || activeNodeUIs[selectedNodeIndex] == null)
+            return;
         float input = context.ReadValue<float>();
         if (activeNodeUIs.Count == 0) return;
+        int index;
 
         // Cycle right
-        if (input > 0)
-        {
-            selectedNodeIndex = (selectedNodeIndex + 1) % activeNodeUIs.Count;
-            ChangeHighlightedNode(selectedNodeIndex);
+        if (input > 0) {
+            index = (selectedNodeIndex + 1) % activeNodeUIs.Count;
+            ChangeHighlightedNode(index);
         }
         // Cycle left
-        else if (input < 0)
-        {
-            selectedNodeIndex = (selectedNodeIndex - 1 + activeNodeUIs.Count) % activeNodeUIs.Count;
-            ChangeHighlightedNode(selectedNodeIndex);
-        }   
-    }
-    void TriggerActiveNode() {
-        activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().OnClick();
-    }
-
-    void ChangeActiveNodes(MapNode node){
-        foreach (Transform floor in transform) {
-            foreach (Transform nodeObj in floor) {
-                NodeUI nodeUI = nodeObj.GetComponent<NodeUI>();
-                if (nodeUI != null && nodeUI.NodeData.ActiveNode) {
-                    activeNodeUIs.Add(nodeUI);
-                }
-            }
+        else if (input < 0) {
+            index = (selectedNodeIndex - 1 + activeNodeUIs.Count) % activeNodeUIs.Count;
+            ChangeHighlightedNode(index);
         }
     }
-    void ChangeHighlightedNode(int index)
-    {
+    void TriggerActiveNode() {
+        if (activeNodeUIs.Count == 0 || selectedNodeIndex >= activeNodeUIs.Count || activeNodeUIs[selectedNodeIndex] == null)
+            return;
+        var nodeUI = activeNodeUIs[selectedNodeIndex];
+        if (nodeUI != null)
+            nodeUI.OnClick();
+    }
+
+    void ChangeActiveNodes(MapNode node) {
+        if (activeNodeUIs.Count != 0) {
+            activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().NodeData.SelectedNode = false;
+        }
+        activeNodeUIs.Clear();
+        foreach (MapNode connectedNode in node.ConnectedNodes) {
+            activeNodeUIs.Add(connectedNode.NodeUI);
+        }
+        selectedNodeIndex = 0;
+        activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().NodeData.SelectedNode = true;
+    }
+    void ChangeHighlightedNode(int index) {
         if (index < 0 || index >= activeNodeUIs.Count)
             return;
 
-        if (selectedNodeIndex >= 0 && selectedNodeIndex < activeNodeUIs.Count)
-        {
-            activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().Image.color = activeNodeUIs[selectedNodeIndex].DefaultColor;
+        activeNodeUIs = activeNodeUIs.Where(n => n != null).ToList();
+        if (selectedNodeIndex >= 0 && selectedNodeIndex < activeNodeUIs.Count && activeNodeUIs[selectedNodeIndex] != null){
+            activeNodeUIs[selectedNodeIndex].NodeData.SelectedNode = false;
         }
 
         selectedNodeIndex = index;
-        activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().Image.color = activeNodeUIs[selectedNodeIndex].ActiveColor;
+
+        if (selectedNodeIndex >= 0 && selectedNodeIndex < activeNodeUIs.Count && activeNodeUIs[selectedNodeIndex] != null) {
+            activeNodeUIs[selectedNodeIndex].NodeData.SelectedNode = true;
+        }
+        // activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().NodeData.SelectedNode = false;
+        // selectedNodeIndex = index;
+        // activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().NodeData.SelectedNode = true;
+        // activeNodeUIs[selectedNodeIndex].GetComponent<NodeUI>().Image.color = activeNodeUIs[selectedNodeIndex].ActiveColor;
     }
 
     public void UpdateMapUI()
@@ -105,10 +127,10 @@ public class MapUI : MonoBehaviour
             return;
         var nodeGameObject = Instantiate(NodePrefab, transform.GetChild(node.Floor - 1));
         nodeGameObject.GetComponent<NodeUI>().NodeData = node;
+        node.NodeUI = nodeGameObject.GetComponent<NodeUI>();
         if (node.Floor == MapData.Floors - 1 || node.Floor == MapData.Floors - 2)
             return;
-        foreach (MapNode connectedNode in node.ConnectedNodes)
-        {
+        foreach (MapNode connectedNode in node.ConnectedNodes) {
             GenerateNodesUI(connectedNode);
         }
         Canvas.ForceUpdateCanvases();
