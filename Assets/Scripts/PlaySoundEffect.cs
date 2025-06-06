@@ -10,7 +10,10 @@ public class PlaySoundEffect : MonoBehaviour
         if(audioSource != null)
             audioSource = GetComponent<AudioSource>();
         else
+        {
             audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.volume = 0.15f;
+        }
     }
 
     public void PlaySound()
