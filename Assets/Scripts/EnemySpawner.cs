@@ -16,9 +16,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Transform[] spawnAreas;
     [SerializeField] float spawnRadius = 5f;
     [SerializeField] TextMeshProUGUI spawnMessage;
-    [SerializeField] [TextArea] string spawnText1 = "ATTENTION!";
-    [SerializeField] [TextArea] string spawnText2 = "CLEANS THE CORRUPTION!";
-    [SerializeField] [TextArea] string waveCompletedText = "PROCEED FURTHER INTO THE FOREST";
+    [SerializeField][TextArea] string spawnText1 = "ATTENTION!";
+    [SerializeField][TextArea] string spawnText2 = "CLEANS THE CORRUPTION!";
+    [SerializeField][TextArea] string waveCompletedText = "PROCEED FURTHER INTO THE FOREST";
     int playersInZone = 0;
 
     [Header("Light")]
@@ -35,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Awake()
     {
+        spawnMessage = GameObject.Find("SpawnMessage").GetComponent<TextMeshProUGUI>();
         completedWaves = 0;
         playersInZone = 0;
         GetComponent<Collider>().isTrigger = true;
@@ -122,9 +123,9 @@ public class EnemySpawner : MonoBehaviour
 
     void EnemySlain()
     {
-        if(!hasActiveEnemies || !isActive) return;
+        if (!hasActiveEnemies || !isActive) return;
         waveEnemiesSlain++;
-        if(waveEnemiesSlain >= spawnedEnemies.Count)
+        if (waveEnemiesSlain >= spawnedEnemies.Count)
         {
             spawnedEnemies.Clear();
             waveEnemiesSlain = 0;
@@ -157,5 +158,9 @@ public class EnemySpawner : MonoBehaviour
         {
             Gizmos.DrawWireSphere(spawnAreas[i].position, spawnRadius);
         }
+    }
+    void OnDestroy()
+    {
+        spawnMessage.gameObject.SetActive(true);
     }
 }

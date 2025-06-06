@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DontDestroy : MonoBehaviour {
+public class DontDestroyCanvas : MonoBehaviour {
     void Awake()
     {
         if (FindObjectsByType<Canvas>(FindObjectsSortMode.None).Length > 1)

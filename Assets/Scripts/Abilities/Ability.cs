@@ -12,7 +12,7 @@ public class Ability : MonoBehaviour {
     [SerializeField] internal float CurrentCastTime;
     [SerializeField] internal bool IsCasting;
     
-    [SerializeField] internal int Damage;
+    [SerializeField] internal float Damage;
     [SerializeField] internal float DamageModifier;
 
     [SerializeField] internal float Range;

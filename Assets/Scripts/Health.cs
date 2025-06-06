@@ -33,6 +33,13 @@ public class Health : MonoBehaviour
 
     void Awake()
     {
+        if (isPlayer) {
+            healthBar = new Image[] {
+                GameObject.Find("CurrentPlayerHealth (1)").GetComponent<Image>(),
+                GameObject.Find("CurrentPlayerHealth (2)").GetComponent<Image>()
+            };
+            currentHealthText = GameObject.Find("CurrentPlayerHealthText").GetComponentsInChildren<TMP_Text>();
+        }
         currentHealth = maxHealth;
         canBeHealed = false;
         UpdateHealthUI();

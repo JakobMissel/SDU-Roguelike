@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class BreathInstance : AbilityInstance {
     [SerializeField] List<Health> ObjectsInZone;
-    [SerializeField] int damageleft;
+    [SerializeField] float damageleft;
     void Start() {
         damageleft = SourceAbility.Damage;
         ObjectsInZone = new List<Health>();

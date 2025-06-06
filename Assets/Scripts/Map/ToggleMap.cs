@@ -3,6 +3,7 @@ public class ToggleMap : MonoBehaviour {
     public GameObject MapUI;
     public MapUI mapUIComponent;
     public GameObject MapUI2;
+    public GameObject MapUI3;
     public UnityEngine.UI.Image MapBackground;
     public static event System.Action<bool> ToggleMapUI;
     public static void OnToggleMapUI(bool value) => ToggleMapUI?.Invoke(value);
@@ -25,6 +26,7 @@ public class ToggleMap : MonoBehaviour {
         mapUIComponent.ToggleMapMapInput(value);
         MapUI.SetActive(value);
         MapUI2.SetActive(value);
+        MapUI3.SetActive(value);
         MapBackground.enabled = value;
 
     }
