@@ -42,8 +42,10 @@ public class PlayerDeathScreen : MonoBehaviour
 
     public void RestartGame()
     {
-        if(!gameOver) return;
+        if (!gameOver) return;
         deathScreen.SetActive(false);
+        gameOver = false;
+        CreateNewMap.OnCreateMap();
         GameEvents.GameRestart();
         SceneManager.LoadScene(sceneToLoad);
     }

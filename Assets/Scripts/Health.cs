@@ -120,7 +120,7 @@ public class Health : MonoBehaviour
         canBeHealed = false;
         isInvulnerable = true;
         currentHealth = 0;
-        DestrotUI();
+        // DestrotUI();
         if (isPlayer)
         {
             for (int i = 0; i < players.Length; i++)
