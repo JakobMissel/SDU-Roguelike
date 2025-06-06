@@ -17,6 +17,9 @@ public class GameEvents : MonoBehaviour
     public static event Action OnEnemyDeath;
     public static void EnemyDeath() => OnEnemyDeath?.Invoke();
 
+    public static event Action OnExitMenu;
+    public static void ExitMenu() => OnExitMenu?.Invoke();
+
     public static int FloorLevel = 1;
 
     public static int EnemyKillCount = 0;

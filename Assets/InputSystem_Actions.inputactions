@@ -121,6 +121,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ExitMenu",
+                    "type": "Button",
+                    "id": "b79d187f-20e2-4235-a0e6-b1b7523bc25a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -616,6 +625,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46272199-5b46-4f4b-845f-9d27136432bf",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "011f63c6-5885-42d9-8a91-bf3e60e77fbe",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

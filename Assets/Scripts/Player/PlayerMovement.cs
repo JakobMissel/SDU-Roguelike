@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput.actions["Move"].canceled += OnMove;
         playerInput.actions["Look"].performed += OnLook;
         playerInput.actions["Dash"].started += OnDash;
+        playerInput.actions["ExitMenu"].started += OnExitMenu;
 
         GameEvents.OnPlayerDeath += OnGameOver;
         playerInput.actions["SouthButton"].started += OnSouthButton;
@@ -54,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput.actions["Move"].canceled -= OnMove;
         playerInput.actions["Look"].performed -= OnLook;
         playerInput.actions["Dash"].started -= OnDash;
+        playerInput.actions["ExitMenu"].started -= OnExitMenu;
 
         GameEvents.OnPlayerDeath -= OnGameOver;
         playerInput.actions["SouthButton"].started -= OnSouthButton;
@@ -65,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput.actions["Move"].canceled -= OnMove;
         playerInput.actions["Look"].performed -= OnLook;
         playerInput.actions["Dash"].started -= OnDash;
+        playerInput.actions["ExitMenu"].started -= OnExitMenu;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.isKinematic = true;
@@ -117,6 +120,10 @@ public class PlayerMovement : MonoBehaviour
         GameEvents.SouthButton();
     }
 
+    void OnExitMenu(InputAction.CallbackContext context)
+    {
+        GameEvents.ExitMenu();
+    }
     /// <summary>
     /// Gets the players input values from the left joystick or WASD keys.
     /// </summary>
