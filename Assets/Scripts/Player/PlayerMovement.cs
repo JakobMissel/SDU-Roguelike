@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
         GameEvents.OnPlayerDeath += OnGameOver;
         playerInput.actions["SouthButton"].started += OnSouthButton;
+        playerInput.actions["EastButton"].started += OnEastButton;
     }
 
     void OnDisable()
@@ -59,7 +60,9 @@ public class PlayerMovement : MonoBehaviour
 
         GameEvents.OnPlayerDeath -= OnGameOver;
         playerInput.actions["SouthButton"].started -= OnSouthButton;
+        playerInput.actions["EastButton"].started += OnEastButton;
     }
+
 
     void OnGameOver()
     {
@@ -117,7 +120,20 @@ public class PlayerMovement : MonoBehaviour
 
     void OnSouthButton(InputAction.CallbackContext context)
     {
-        GameEvents.SouthButton();
+        if (ExitMenuManager.Instance.exitMenuActive)
+        {
+            ExitMenuManager.Instance.OnResumeGame();
+        }
+        else
+            GameEvents.SouthButton();
+    }
+
+    void OnEastButton(InputAction.CallbackContext context)
+    {
+        if (ExitMenuManager.Instance.exitMenuActive)
+        {
+            ExitMenuManager.Instance.OnExitGame();
+        }
     }
 
     void OnExitMenu(InputAction.CallbackContext context)

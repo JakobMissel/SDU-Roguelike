@@ -2,7 +2,24 @@ using UnityEngine;
 
 public class ExitMenuManager : MonoBehaviour
 {
+    public static ExitMenuManager Instance;
+
     [SerializeField] GameObject exitMenuUI;
+    public bool exitMenuActive = false;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 
     void Start()
     {
@@ -25,6 +42,7 @@ public class ExitMenuManager : MonoBehaviour
             if(!exitMenuUI.activeSelf)
             {
                 exitMenuUI.SetActive(true);
+                exitMenuActive = true;
                 Time.timeScale = 0f; 
             }
             else
@@ -50,6 +68,7 @@ public class ExitMenuManager : MonoBehaviour
         {
             exitMenuUI.SetActive(false);
             Time.timeScale = 1f;
+            exitMenuActive = false;
         }
         else
         {
