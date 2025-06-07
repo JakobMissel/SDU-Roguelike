@@ -38,6 +38,7 @@ public class EnemySpawner : MonoBehaviour
         spawnMessage = GameObject.Find("SpawnMessage").GetComponent<TextMeshProUGUI>();
         completedWaves = 0;
         playersInZone = 0;
+        enemiesPerWave += GameEvents.FloorLevel; // Adjust enemies per wave based on the floor level
         GetComponent<Collider>().isTrigger = true;
         spawnMessage.text = "";
         zoneLevel = GameEvents.FloorLevel;
