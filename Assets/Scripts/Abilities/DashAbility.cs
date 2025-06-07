@@ -19,6 +19,7 @@ public class DashAbility : MonoBehaviour
     [SerializeField][Tooltip("The base speed of the entity's dash. \nDefault: 20")] public float speed = 20;
     [SerializeField][Tooltip("How long the dash lasts. \nDefault: 0.15")] public float duration = 0.15f;
     [SerializeField][Tooltip("UI Image that visualizes the remaining cooldown.")] public Image cooldownImage;
+    [SerializeField] internal string CooldownImageName;
     [SerializeField][Tooltip("How long the entity must wait before they can dash again. \nDefault: 4")] public float cooldown = 4;
     [SerializeField][Tooltip("Dash charge image prefab that will be instantiated as charges are gained.")] public GameObject dashChargeImagePrefab;
     [SerializeField][Tooltip("Dash charge visualizer parent.")] public GridLayoutGroup maxCharges;
@@ -31,6 +32,7 @@ public class DashAbility : MonoBehaviour
     void Awake()
     {
         availableDashes = maxDashes;
+        cooldownImage = GameObject.Find(CooldownImageName)?.GetComponent<Image>();
         if (GetComponent<Rigidbody>() != null)
             rb = GetComponent<Rigidbody>();
         if(GetComponent<PlayerMovement>() != null)
