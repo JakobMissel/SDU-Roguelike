@@ -105,6 +105,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "EastButton",
+                    "type": "Button",
+                    "id": "34dffd5c-82cc-4528-ab43-de8c03ab4d08",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "MapSwitch",
                     "type": "Value",
                     "id": "1d54b064-5dd4-43a1-b6d9-fea64ce5c74a",
@@ -581,6 +590,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SouthButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "27894503-a1f9-43b2-9206-bf8fbf76affb",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EastButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f71e9c0-e885-4041-a346-f025fa4d8c21",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EastButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

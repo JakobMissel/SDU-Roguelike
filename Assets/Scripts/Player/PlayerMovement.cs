@@ -120,19 +120,19 @@ public class PlayerMovement : MonoBehaviour
 
     void OnSouthButton(InputAction.CallbackContext context)
     {
-        if (ExitMenuManager.Instance.exitMenuActive)
+        if (!ExitMenuManager.Instance.exitMenuActive)
         {
-            ExitMenuManager.Instance.OnResumeGame();
+            GameEvents.SouthButton();
         }
         else
-            GameEvents.SouthButton();
+            ExitMenuManager.Instance.OnExitGame();
     }
 
     void OnEastButton(InputAction.CallbackContext context)
     {
         if (ExitMenuManager.Instance.exitMenuActive)
         {
-            ExitMenuManager.Instance.OnExitGame();
+            ExitMenuManager.Instance.OnResumeGame();
         }
     }
 
