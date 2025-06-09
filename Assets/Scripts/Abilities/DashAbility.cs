@@ -23,6 +23,7 @@ public class DashAbility : MonoBehaviour
     [SerializeField][Tooltip("How long the entity must wait before they can dash again. \nDefault: 4")] public float cooldown = 4;
     [SerializeField][Tooltip("Dash charge image prefab that will be instantiated as charges are gained.")] public GameObject dashChargeImagePrefab;
     [SerializeField][Tooltip("Dash charge visualizer parent.")] public GridLayoutGroup maxCharges;
+    [SerializeField] internal string maxChargesName;
     [SerializeField][Tooltip("How many charges of dash this entity has. \nDefault: 1")] public int maxDashes = 1;
     [SerializeField][Tooltip("Is this attached to a player entity?")] public bool isPlayer;
     [HideInInspector] public int availableDashes;
@@ -32,7 +33,15 @@ public class DashAbility : MonoBehaviour
     void Awake()
     {
         availableDashes = maxDashes;
-        cooldownImage = GameObject.Find(CooldownImageName)?.GetComponent<Image>();
+        if (isPlayer) {
+            cooldownImage = GameObject.Find(CooldownImageName)?.GetComponent<Image>();
+            maxCharges = GameObject.Find(maxChargesName)?.GetComponent<GridLayoutGroup>();
+            if (maxCharges.transform.childCount != 0) {
+                foreach (Transform child in maxCharges.transform) {
+                    Destroy(child.gameObject);
+                }
+            }
+        }
         if (GetComponent<Rigidbody>() != null)
             rb = GetComponent<Rigidbody>();
         if(GetComponent<PlayerMovement>() != null)
