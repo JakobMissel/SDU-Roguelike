@@ -77222,6 +77222,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
+      propertyPath: openColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
       propertyPath: spawnRadius
       value: 10.7
       objectReference: {fileID: 0}
@@ -77229,6 +77233,10 @@ PrefabInstance:
       propertyPath: spawnMessage
       value: 
       objectReference: {fileID: 1071782072}
+    - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
+      propertyPath: closedColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
       propertyPath: enemiesPerWave
       value: 6
@@ -86239,6 +86247,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
+      propertyPath: openColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
       propertyPath: spawnRadius
       value: 8.14
       objectReference: {fileID: 0}
@@ -86246,6 +86258,10 @@ PrefabInstance:
       propertyPath: spawnMessage
       value: 
       objectReference: {fileID: 1071782072}
+    - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
+      propertyPath: closedColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
       propertyPath: doors.Array.size
       value: 2
@@ -96963,6 +96979,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
+      propertyPath: openColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
       propertyPath: spawnRadius
       value: 8.82
       objectReference: {fileID: 0}
@@ -96970,6 +96990,10 @@ PrefabInstance:
       propertyPath: spawnMessage
       value: 
       objectReference: {fileID: 1071782072}
+    - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
+      propertyPath: closedColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1682738946979715442, guid: 3e3ec212424e6a74183ffb11a9f7e4b7, type: 3}
       propertyPath: enemiesPerWave
       value: 3
